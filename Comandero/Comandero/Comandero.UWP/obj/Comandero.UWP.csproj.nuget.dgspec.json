@@ -1,0 +1,182 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero.UWP\\Comandero.UWP.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero.UWP\\Comandero.UWP.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero.UWP\\Comandero.UWP.csproj",
+        "projectName": "Comandero.UWP",
+        "projectPath": "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero.UWP\\Comandero.UWP.csproj",
+        "packagesPath": "C:\\Users\\landr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero.UWP\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\landr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "uap10.0.16299"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "uap10.0.16299": {
+            "projectReferences": {
+              "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero\\Comandero.csproj": {
+                "projectPath": "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero\\Comandero.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "uap10.0.16299": {
+          "dependencies": {
+            "Microsoft.NETCore.UniversalWindowsPlatform": {
+              "target": "Package",
+              "version": "[6.2.13, )"
+            },
+            "Prism.DryIoc.Forms": {
+              "target": "Package",
+              "version": "[8.1.97, )"
+            },
+            "Xamarin.Essentials.Interfaces": {
+              "target": "Package",
+              "version": "[1.7.0, )"
+            },
+            "Xamarin.Forms": {
+              "target": "Package",
+              "version": "[5.0.0.2291, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      },
+      "runtimes": {
+        "win10-arm": {
+          "#import": []
+        },
+        "win10-arm-aot": {
+          "#import": []
+        },
+        "win10-arm64-aot": {
+          "#import": []
+        },
+        "win10-x64": {
+          "#import": []
+        },
+        "win10-x64-aot": {
+          "#import": []
+        },
+        "win10-x86": {
+          "#import": []
+        },
+        "win10-x86-aot": {
+          "#import": []
+        }
+      }
+    },
+    "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero\\Comandero.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero\\Comandero.csproj",
+        "projectName": "Comandero",
+        "projectPath": "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero\\Comandero.csproj",
+        "packagesPath": "C:\\Users\\landr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\landr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
+          "dependencies": {
+            "Com.Airbnb.Xamarin.Forms.Lottie": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "Prism.DryIoc.Forms": {
+              "target": "Package",
+              "version": "[8.1.97, )"
+            },
+            "Xamarin.Essentials.Interfaces": {
+              "target": "Package",
+              "version": "[1.7.0, )"
+            },
+            "Xamarin.FFImageLoading.Forms": {
+              "target": "Package",
+              "version": "[2.4.11.982, )"
+            },
+            "Xamarin.FFImageLoading.Transformations": {
+              "target": "Package",
+              "version": "[2.4.11.982, )"
+            },
+            "Xamarin.Forms": {
+              "target": "Package",
+              "version": "[5.0.0.2291, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

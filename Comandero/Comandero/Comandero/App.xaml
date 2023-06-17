@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:local ="clr-namespace:Comandero;assembly=Comandero"
+             xmlns:Renderers ="clr-namespace:Comandero.UI.Renderers"
+             x:Class="Comandero.App">
+  <Application.Resources>
+
+        <ResourceDictionary>
+            <!-- Themes -->
+            <ResourceDictionary.MergedDictionaries>
+                <local:Theme/>
+            </ResourceDictionary.MergedDictionaries>
+            <!-- Buttons Style -->
+
+            <Style TargetType="Button" x:Key="ButtonPrimary">
+                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="HeightRequest" Value="{DynamicResource HeightButtonDouble}" />
+                <Setter Property="CornerRadius" Value="10" />
+            </Style>
+            <Style TargetType="Button" x:Key="ButtonSecondary">
+                <Setter Property="BackgroundColor" Value="{DynamicResource SecondaryColor}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="HeightRequest" Value="{DynamicResource HeightButtonDouble}" />
+                <Setter Property="CornerRadius" Value="10" />
+            </Style>
+
+
+            <Style TargetType="Entry" x:Key="EntryPrimary">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="PlaceholderColor" Value="{DynamicResource PrimaryColor}"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="FlexLayout.Basis" Value="60%"/>
+            </Style>
+
+            <Style TargetType="Button" x:Key="TransparentButtonPrimary">
+                <Setter Property="BackgroundColor" Value="{DynamicResource TransparentColor}" />
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
+                <Setter Property="HeightRequest" Value="{DynamicResource HeightButton}" />
+            </Style>
+            <Style TargetType="Button" x:Key="IconAwesomeButtonPrimary">
+                <Setter Property="BackgroundColor" Value="{DynamicResource TransparentColor}" />
+                <Setter Property="CornerRadius" Value="30" />
+                <Setter Property="FontSize" Value="{DynamicResource FontSizeIconAwesomeButton}" />
+                <Setter Property="WidthRequest" Value="{DynamicResource WidthIconAwesome}" />
+                <Setter Property="HeightRequest" Value="{DynamicResource HeightIconAwesome}" />
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
+            </Style>
+            <!-- End Buttons Style -->
+            <!-- Entry Styles -->
+            <Style TargetType="Entry" x:Key="PrimaryEntry">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="HeightRequest" Value="{DynamicResource HeightEntry}" />
+            </Style>
+            <!-- End Entry Styles -->
+            <!-- Label Styles -->
+            <Style TargetType="Renderers:IconAwesomeLabelBase" x:Key="IconAwesomeLabelPrimary">
+                <Setter Property="HeightRequest" Value="{DynamicResource HeightIconAwesomeLabel}" />
+                <Setter Property="WidthRequest" Value="{DynamicResource WidthIconAwesomeLabel}" />
+                <Setter Property="FontSize" Value="{DynamicResource FontSizeIconAwesomeLabel}" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+            </Style>
+            <Style TargetType="Label" x:Key="LabelPrimary">
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
+                <Setter Property="FontSize" Value="Small" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="LabelTitle">
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="HorizontalTextAlignment" Value="Start" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="LabelSubTitle">
+                <Setter Property="TextColor" Value="{DynamicResource TertiaryTextColor}" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="FontAttributes" Value="None" />
+                <Setter Property="HorizontalTextAlignment" Value="Start" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            </Style>
+            <!-- End Label Styles -->
+            <Style TargetType="BoxView" x:Key="BoxViewPrimary">
+                <Setter Property="HeightRequest" Value="{DynamicResource BoxViewHeightPrimary}" />
+                <Setter Property="WidthRequest" Value="{DynamicResource BoxViewWidthPrimary}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+            </Style>
+            <Style TargetType="Button" x:Key="ButtonUser">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}"/>
+                <Setter Property="HeightRequest" Value="80"/>
+                <Setter Property="WidthRequest" Value="80"/>
+            </Style>
+            <Style TargetType="Button" x:Key="ButtonBack">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="HeightRequest" Value="80"/>
+                <Setter Property="WidthRequest" Value="80"/>
+            </Style>
+
+        </ResourceDictionary>
+
+    </Application.Resources>
+</prism:PrismApplication>

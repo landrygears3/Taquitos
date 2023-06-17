@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Renderers="clr-namespace:Comandero.UI.Renderers"
+             xmlns:Customs="clr-namespace:Comandero.UI.Customs"
+             xmlns:Items="clr-namespace:Comandero.UI.ItemsCollectionView"
+             BackgroundColor="{DynamicResource BGColor}"
+             x:Class="Comandero.Views.Menu.CustomersView">
+    <ContentPage.Content>
+        <Grid
+            RowSpacing="10">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <BoxView
+                Grid.Row="0"
+                Grid.Column="0"
+                VerticalOptions="Start"
+                BackgroundColor="{DynamicResource PrimaryColor}"
+                HeightRequest="60"
+                ></BoxView>
+            <Image
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    VerticalOptions="Start"
+                    HorizontalOptions="Center"
+                    WidthRequest="120" 
+                    HeightRequest="120"
+                    Source="http://www.coatltest.somee.com/resources/Blogin.png" />
+            <Renderers:IconAwesomeButtonBase
+                    Style="{StaticResource ButtonBack}"
+                    Command="{Binding BackToPreviousPageCommand}"
+                    Icon="Back"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="30"
+                    HeightRequest="60"
+                    Margin="0"
+                    Grid.Column="0"
+                    Grid.Row="0"/>
+            <Grid
+                Grid.Row="1" 
+                Grid.Column="0"
+                VerticalOptions="Start"
+                HorizontalOptions="Start"
+                ColumnSpacing="10">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="350"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Renderers:ButtonBase
+                    Command="{Binding QuickCommand}"
+                    Style="{StaticResource ButtonPrimary}"
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Margin="20,0,0,0"
+                    WidthRequest="100"
+                    Text="Para llevar"/>
+                <Renderers:ButtonBase
+                    x:Name="NewTableButton"
+                    Command="{Binding TableCommand}"
+                    Style="{StaticResource ButtonPrimary}"                    
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    WidthRequest="100"
+                    Text="Nueva mesa"/>
+            </Grid>
+            <CollectionView
+                Grid.Column="0"
+                Grid.Row="1"
+                Margin="20,43,20,5"
+                ItemsSource="{Binding Tables}">
+                <CollectionView.EmptyView>
+                    <Customs:EmptyTextCollectionView/>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Items:ItemTableCollectionView
+                    HeightRequest="70"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

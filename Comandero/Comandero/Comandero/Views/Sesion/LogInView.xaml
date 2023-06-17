@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="{DynamicResource BGColor}"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="Comandero.Views.Sesion.LogInView">
+
+<ScrollView>
+            <Grid
+                RowSpacing="30"
+                VerticalOptions="Center"
+                Margin="36,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+
+                <Image  Grid.Row="0"
+                    Grid.Column="0"
+                    HorizontalOptions="Center"
+                    WidthRequest="200" 
+                    HeightRequest="200"
+                    Source="http://www.coatltest.somee.com/resources/Blogin.png"/>
+                <Label
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    TextColor="Black"
+                    FontSize="18"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Text="Inicia sesión"/>
+                <Entry
+                    Placeholder="Usuario"
+                    Style="{StaticResource EntryPrimary}"
+                    Grid.Column="0"
+                    Grid.Row="2"/>
+                <Entry
+                    IsPassword="True"
+                    Placeholder="Contraseña"
+                    Style="{StaticResource EntryPrimary}"
+                    Grid.Column="0"
+                    Grid.Row="3"/>
+                <Button
+                    Style="{StaticResource ButtonPrimary}"
+                    Text="Iniciar sesión"
+                    Grid.Column="0"
+                    Grid.Row="4"
+                    Command="{Binding LogInCommand}"/>
+            </Grid>
+        </ScrollView>
+
+</ContentPage>
