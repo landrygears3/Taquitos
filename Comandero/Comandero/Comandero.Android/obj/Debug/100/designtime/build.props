@@ -25,11 +25,11 @@ androidgeneratejnimarshalmethods=false
 os=windows_nt
 androidincludedebugsymbols=true
 androidpackagenamingpolicy=lowercasecrc64
-_nugetassetstimestamp=638224738533946562
+_nugetassetstimestamp=638225451326380649
 typemapkind=strings-asm
 androidsupportedabis=arm64-v8a
 armeabi-v7a
 x86
 x86_64
 androidmanifestplaceholders=
-projectfullpath=d:\repos\comandero\comandero\comandero.android\comandero.android.csproj
+projectfullpath=c:\users\landr\onedrive\documentos\github\taquitos\comandero\comandero\comandero.android\comandero.android.csproj
