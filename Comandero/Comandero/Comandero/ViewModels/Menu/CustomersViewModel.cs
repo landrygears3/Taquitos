@@ -1,6 +1,5 @@
 ﻿using Comandero.Models.Catalogs;
 using Comandero.Services.Api;
-using Comandero.Testing;
 using Comandero.Utils.Commands;
 using Newtonsoft.Json;
 using Prism.Navigation;
@@ -34,27 +33,32 @@ namespace Comandero.ViewModels.Menu
             Title = "Customers";
             Tables = new ObservableCollection<TableModel>();
             timer = new System.Timers.Timer();
-            timer.Interval = 5000; // Intervalo de actualización en milisegundos (en este caso, 5 segundos)
+            timer.Interval = 10; // Intervalo de actualización en milisegundos (en este caso, 5 segundos)
             timer.Elapsed += TimerElapsed;
-
+            
         }
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
-            // Actualiza el contenido del Label o de otro elemento visual en el hilo principal
-            Device.BeginInvokeOnMainThread(async ()  =>
+            timer.Interval = 3000;
+            llenaMesas();
+        }
+
+        private void llenaMesas()
+        {
+            Device.BeginInvokeOnMainThread(async () =>
             {
                 timer.Stop();
                 try
                 {
                     // Realiza una solicitud GET al servicio web
                     HttpResponseMessage response = await httpClient.GetAsync("http://www.Coatltest.somee.com/Table?sucursal=" + SesionModel.sucursal);
-                    
+
                     // Verifica si la solicitud fue exitosa
                     if (response.IsSuccessStatusCode)
                     {
                         // Lee la respuesta como una cadena JSON
                         string json = await response.Content.ReadAsStringAsync();
-                        
+
                         // Deserializa la cadena JSON en un objeto o modelo
                         var data = JsonConvert.DeserializeObject<List<TableModel>>(json);
                         Tables.Clear();
@@ -82,6 +86,7 @@ namespace Comandero.ViewModels.Menu
         {
             PageAppearing?.Invoke(this, EventArgs.Empty);
             timer.Start();
+            //llenaMesas();
         }        
         
         public virtual void OnPageDisappearing()

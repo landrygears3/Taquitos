@@ -8,9 +8,9 @@ namespace Comandero.Models.Catalogs
     {
         public static bool status = true;
 
-        public static int Mesa = 0;
-
         public static int sucursal = 1;
+
+        public static string NombreUser = "";
 
         public static bool typeUser = true;
     }
