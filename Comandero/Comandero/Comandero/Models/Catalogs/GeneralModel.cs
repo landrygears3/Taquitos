@@ -9,24 +9,25 @@ namespace Comandero.Models.Catalogs
     {
         public long Id { get; set; }
         public double Current { get; set; }
+        public int CurrentCommand { get; set; }
         public string Icon { get; set; }
         public string Name { get; set; }
-        public List<Customer> Customer { get; set; }
+        //public List<CustomerModel> Customer { get; set; }
         public Color BgColor { get; set; }
 
     }
-    public partial class Customer
+    public partial class CustomerModel
     {
 
         public long Id { get; set; }
         public double Current { get; set; }
-        public List<Product> Products { get; set; }
+        public List<ProductModel> Products { get; set; }
 
         public Color BgColor { get; set; }
 
     }
 
-    public partial class Product
+    public partial class ProductModel
     {
         public ProductsModel Type { get; set; }
         public int Quantity { get; set; }
@@ -36,11 +37,11 @@ namespace Comandero.Models.Catalogs
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public Type SelectProduct { get; set; }
+        public Types SelectProduct { get; set; }
         public double Price { get; set; }
         public Color BgColor { get; set; }
     }
-    public partial class Type
+    public class Types
     {
         /*
          1 = carne, 2=otro

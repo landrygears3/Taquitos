@@ -1,4 +1,5 @@
 ﻿using Comandero.Models.Catalogs;
+using Comandero.ViewModels.Menu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,17 @@ namespace Comandero.Views.Menu
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             NewTableButton.IsVisible = SesionModel.typeUser;
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ((CustomersViewModel)BindingContext).OnPageAppearing();
+        }        
+        
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            ((CustomersViewModel)BindingContext).OnPageDisappearing();
         }
     }
 }

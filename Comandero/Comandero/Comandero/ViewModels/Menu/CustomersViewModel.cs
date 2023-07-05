@@ -1,12 +1,17 @@
 ﻿using Comandero.Models.Catalogs;
+using Comandero.Services.Api;
 using Comandero.Testing;
 using Comandero.Utils.Commands;
+using Newtonsoft.Json;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Design;
+using System.Net.Http;
 using System.Text;
+using System.Threading;
+using System.Timers;
 using Xamarin.Forms;
 
 namespace Comandero.ViewModels.Menu
@@ -16,25 +21,84 @@ namespace Comandero.ViewModels.Menu
         public AsyncCommand TableCommand { get; set; }
         public AsyncCommand QuickCommand { get; set; }
 
+        private HttpClient httpClient;
+
+        private System.Timers.Timer timer;
+
         public ObservableCollection<TableModel> Tables { get; set; }
 
-        TestClass test;
 
         public CustomersViewModel(INavigationService navigationService) : base(navigationService)
         {
+            httpClient = new HttpClient();
             Title = "Customers";
             Tables = new ObservableCollection<TableModel>();
-            Testing();
+            timer = new System.Timers.Timer();
+            timer.Interval = 5000; // Intervalo de actualización en milisegundos (en este caso, 5 segundos)
+            timer.Elapsed += TimerElapsed;
+
         }
-        private void Testing()
+        private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
-            test = new TestClass();
+            // Actualiza el contenido del Label o de otro elemento visual en el hilo principal
+            Device.BeginInvokeOnMainThread(async ()  =>
+            {
+                timer.Stop();
+                try
+                {
+                    // Realiza una solicitud GET al servicio web
+                    HttpResponseMessage response = await httpClient.GetAsync("http://www.Coatltest.somee.com/Table?sucursal=" + SesionModel.sucursal);
+                    
+                    // Verifica si la solicitud fue exitosa
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Lee la respuesta como una cadena JSON
+                        string json = await response.Content.ReadAsStringAsync();
+                        
+                        // Deserializa la cadena JSON en un objeto o modelo
+                        var data = JsonConvert.DeserializeObject<List<TableModel>>(json);
+                        Tables.Clear();
+                        foreach (var item in data)
+                        {
+                            Tables.Add(item);
+                        }
+                        // Utiliza los datos recibidos como desees
+                        // ...
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Maneja cualquier error que pueda ocurrir
+                }
+                colores();
+                timer.Start();
+            });
+        }
+
+        public event EventHandler PageAppearing;
+        public event EventHandler Disappearing;
+
+        public virtual void OnPageAppearing()
+        {
+            PageAppearing?.Invoke(this, EventArgs.Empty);
+            timer.Start();
+        }        
+        
+        public virtual void OnPageDisappearing()
+        {
+            PageAppearing?.Invoke(this, EventArgs.Empty);
+            timer.Stop();
+        }
+
+
+        private void colores()
+        {
             Color c1 = new Color();
             Color c2 = new Color();
             c1 = Color.FromRgb(222, 222, 222);
             c2 = Color.FromRgb(243, 243, 243);
             var aux = true;
-            foreach (var item in test.tablesTest)
+            foreach (var item in Tables)
             {
                 if (aux)
                 {
@@ -45,8 +109,10 @@ namespace Comandero.ViewModels.Menu
                     item.BgColor = c2;
                 }
                 aux = !aux;
-                Tables.Add(item);
+                
             }
         }
+
+       
     }
 }

@@ -16,21 +16,21 @@ namespace Comandero.Testing
 
         public List<TableModel> tablesTest;
 
-        public List<Customer> customersTest;
+        public List<CustomerModel> customersTest;
 
-        public List<Product> productsTest;
+        public List<ProductModel> productsTest;
 
         public ProductsModel productsModelsTest;
 
-        public Models.Catalogs.Type typesTest;
+        public Models.Catalogs.Types typesTest;
         public TestClass()
         {
             usrsTest = new List<UsersModel>();
             tablesTest = new List<TableModel>();
-            customersTest = new List<Customer>();
-            productsTest = new List<Product>();
+            customersTest = new List<CustomerModel>();
+            productsTest = new List<ProductModel>();
             productsModelsTest = new ProductsModel();
-            typesTest = new Models.Catalogs.Type();
+            typesTest = new Models.Catalogs.Types();
             initVars();
         }
         private void initVars()
@@ -84,7 +84,7 @@ namespace Comandero.Testing
                 UrlImage = "DefaultUserImage.png"
             });
 
-            typesTest = new Models.Catalogs.Type()
+            typesTest = new Models.Catalogs.Types()
             {
                 Id = 1,
                 Name = "Carne"
@@ -98,13 +98,13 @@ namespace Comandero.Testing
                 Price = 150
             };
 
-            productsTest.Add(new Product()
+            productsTest.Add(new ProductModel()
             {
                 Type = productsModelsTest,
                 Quantity = 2
             });
 
-            customersTest.Add(new Customer()
+            customersTest.Add(new CustomerModel()
             {
                 Id = 12,
                 Current = 109.12,
@@ -116,7 +116,7 @@ namespace Comandero.Testing
                 Id = 1,
                 Current = 850.50,
                 Name = "Mesa 1",
-                Customer = customersTest,
+                //Customer = customersTest,
                 Icon = "Food"
 
             });
@@ -127,7 +127,7 @@ namespace Comandero.Testing
                 Id = 2,
                 Current = 450.50,
                 Name = "Mesa 2",
-                Customer = customersTest,
+                //Customer = customersTest,
                 Icon = "Food"
             });
         }

@@ -10,6 +10,8 @@ namespace Comandero.Models.Catalogs
 
         public static int Mesa = 0;
 
+        public static int sucursal = 1;
+
         public static bool typeUser = true;
     }
 }

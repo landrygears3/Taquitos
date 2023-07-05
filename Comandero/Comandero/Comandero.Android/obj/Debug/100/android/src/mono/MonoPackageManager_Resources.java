@@ -14,6 +14,7 @@ public class MonoPackageManager_Resources {
 		"FormsViewGroup.dll",
 		"Lottie.Android.dll",
 		"Lottie.Forms.dll",
+		"Newtonsoft.Json.dll",
 		"Prism.dll",
 		"Prism.DryIoc.Forms.dll",
 		"Prism.Forms.dll",

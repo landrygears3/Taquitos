@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "6ECpbzgyUv4Zx3nO9s9AIy5vTPVw+4DiKO6fVtKtCcXK6WVQJgqJl3ieA7IAwLIvXyIPCbcceU4z4nCzzr/j9g==",
+  "dgSpecHash": "ttWH+AgfafUWl+umZjbtTW/S/BSY4CH7uvXv3OQwmSYeBNlUdhSHm7YjcGnqiJdtb6dNtV5FIDN518XD82FP5Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero.Android\\Comandero.Android.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\landr\\.nuget\\packages\\com.airbnb.android.lottie\\4.2.2\\com.airbnb.android.lottie.4.2.2.nupkg.sha512",
     "C:\\Users\\landr\\.nuget\\packages\\com.airbnb.xamarin.forms.lottie\\4.1.0\\com.airbnb.xamarin.forms.lottie.4.1.0.nupkg.sha512",
     "C:\\Users\\landr\\.nuget\\packages\\dryioc.dll\\4.7.7\\dryioc.dll.4.7.7.nupkg.sha512",
+    "C:\\Users\\landr\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\landr\\.nuget\\packages\\prism.core\\8.1.97\\prism.core.8.1.97.nupkg.sha512",
     "C:\\Users\\landr\\.nuget\\packages\\prism.dryioc.forms\\8.1.97\\prism.dryioc.forms.8.1.97.nupkg.sha512",
     "C:\\Users\\landr\\.nuget\\packages\\prism.forms\\8.1.97\\prism.forms.8.1.97.nupkg.sha512",

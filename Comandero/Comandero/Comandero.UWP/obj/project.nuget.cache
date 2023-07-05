@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZfwSeT0Sgc40YHY7KwGxXfnn2saCrRTIpFFgzgUxThcnicaCX/oytmr7pvhVa3qXfuLVmkZvUIMS31uUAwR7Ig==",
+  "dgSpecHash": "psMXd7Om2w8rhwaQ6PF6UMfL5SHGcqwMGdA1Ep9VWCjZbL8UoFpT3t3+abePmPLTJbwv/vEMuHpSETlLGgEmEw==",
   "success": true,
   "projectFilePath": "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero.UWP\\Comandero.UWP.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "C:\\Users\\landr\\.nuget\\packages\\microsoft.netcore.universalwindowsplatform\\6.2.13\\microsoft.netcore.universalwindowsplatform.6.2.13.nupkg.sha512",
     "C:\\Users\\landr\\.nuget\\packages\\microsoft.ui.xaml\\2.4.3\\microsoft.ui.xaml.2.4.3.nupkg.sha512",
     "C:\\Users\\landr\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\landr\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\landr\\.nuget\\packages\\prism.core\\8.1.97\\prism.core.8.1.97.nupkg.sha512",
     "C:\\Users\\landr\\.nuget\\packages\\prism.dryioc.forms\\8.1.97\\prism.dryioc.forms.8.1.97.nupkg.sha512",
     "C:\\Users\\landr\\.nuget\\packages\\prism.forms\\8.1.97\\prism.forms.8.1.97.nupkg.sha512",
