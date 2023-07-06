@@ -43,6 +43,7 @@ namespace Comandero
 
             #region customers
             containerRegistry.RegisterForNavigation<CustomersView, CustomersViewModel>("Customers");
+            containerRegistry.RegisterForNavigation<DishesView, DishesViewModel>("Comanda");
             #endregion
         }
     }

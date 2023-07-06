@@ -39,6 +39,7 @@
         Style="{StaticResource LabelSubTitle}"/>
 
     <Renderers:IconAwesomeButtonBase
+        Pressed="TapGestureRecognizer_Tapped"
         Grid.Row="0"
         Grid.RowSpan="2"
         Grid.Column="3"

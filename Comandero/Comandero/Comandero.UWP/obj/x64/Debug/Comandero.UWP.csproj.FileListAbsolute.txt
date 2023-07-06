@@ -1,0 +1,11 @@
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.UWP\obj\x64\Debug\Comandero.UWP.csproj.AssemblyReference.cache
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.UWP\obj\x64\Debug\App.g.i.cs
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.UWP\obj\x64\Debug\App.g.cs
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.UWP\obj\x64\Debug\MainPage.g.i.cs
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.UWP\obj\x64\Debug\MainPage.g.cs
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.UWP\obj\x64\Debug\XamlTypeInfo.g.cs
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.UWP\obj\x64\Debug\App.xaml
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.UWP\obj\x64\Debug\MainPage.xaml
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.UWP\obj\x64\Debug\App.xbf
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.UWP\obj\x64\Debug\MainPage.xbf
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.UWP\obj\x64\Debug\XamlSaveStateFile.xml

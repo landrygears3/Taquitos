@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Renderers="clr-namespace:Comandero.UI.Renderers"
+             BackgroundColor="{DynamicResource BGColor}"
+             x:Class="Comandero.Views.Menu.DishesView">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <BoxView
+                Grid.Row="0"
+                Grid.Column="0"
+                VerticalOptions="Start"
+                BackgroundColor="{DynamicResource PrimaryColor}"
+                HeightRequest="60"
+                ></BoxView>
+            <Image
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    VerticalOptions="Start"
+                    HorizontalOptions="Center"
+                    WidthRequest="120" 
+                    HeightRequest="120"
+                    Source="http://www.coatltest.somee.com/resources/Blogin.png" />
+            <Renderers:IconAwesomeButtonBase
+                    Style="{StaticResource ButtonBack}"
+                    Command="{Binding BackToPreviousPageCommand}"
+                    Icon="Back"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="30"
+                    HeightRequest="60"
+                    Margin="0"
+                    Grid.Column="0"
+                    Grid.Row="0"/>
+            <Grid Grid.Row="1"
+                  Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="60"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Frame BackgroundColor="{DynamicResource BGColor}"
+                       BorderColor="Black"
+                       
+                       CornerRadius="10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Renderers:LabelBase
+                            Text="{Binding Mesa}"
+                            Style="{StaticResource LabelTitle}"/>
+                    </Grid>
+                </Frame>
+                <Renderers:IconAwesomeButtonBase
+                    Icon="Back"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="30"
+                    HeightRequest="60"
+                    Margin="0"
+                    Grid.Column="1"
+                    Grid.Row="0"/>
+            </Grid>
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

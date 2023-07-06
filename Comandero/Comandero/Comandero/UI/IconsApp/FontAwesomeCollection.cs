@@ -34,6 +34,7 @@ namespace Comandero.UI.IconsApp
             Icons.Add(new Icon("Food", '\ue4c6'));
             Icons.Add(new Icon("CirclePlus", '\uf055'));
             Icons.Add(new Icon("NextArrow", '\uf101'));
+            Icons.Add(new Icon("cookie", '\uf563'));
 
         }
 

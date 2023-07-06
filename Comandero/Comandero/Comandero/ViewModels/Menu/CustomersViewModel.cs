@@ -2,6 +2,7 @@
 using Comandero.Services.Api;
 using Comandero.Utils.Commands;
 using Newtonsoft.Json;
+using Prism.Common;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
@@ -10,19 +11,22 @@ using System.ComponentModel.Design;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Timers;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Comandero.ViewModels.Menu
 {
     internal class CustomersViewModel : ViewModelBase
     {
-        public AsyncCommand TableCommand { get; set; }
         public AsyncCommand QuickCommand { get; set; }
 
         private HttpClient httpClient;
 
         private System.Timers.Timer timer;
+
+        public ICommand SelectedItemCommand => new Command(async (item) => await SelectedItemCommandExecute(item));
 
         public ObservableCollection<TableModel> Tables { get; set; }
 
@@ -62,9 +66,10 @@ namespace Comandero.ViewModels.Menu
                         // Deserializa la cadena JSON en un objeto o modelo
                         var data = JsonConvert.DeserializeObject<List<TableModel>>(json);
                         Tables.Clear();
-                        foreach (var item in data)
+                        foreach (var items in data)
                         {
-                            Tables.Add(item);
+                            items.SelectedItemCommand = new Command(async (item) => await SelectedItemCommandExecute(item));
+                            Tables.Add(items);
                         }
                         // Utiliza los datos recibidos como desees
                         // ...
@@ -118,6 +123,13 @@ namespace Comandero.ViewModels.Menu
             }
         }
 
-       
+        private async Task SelectedItemCommandExecute(object item)
+        {
+            if (item is TableModel itemMenu)
+            {
+                NavigationParameters param = new NavigationParameters{ { "IdMesa", itemMenu.Id } };
+                await NavigationService.NavigateAsync("Comanda",param);
+            }
+        }
     }
 }
