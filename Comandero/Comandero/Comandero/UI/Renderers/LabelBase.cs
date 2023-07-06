@@ -25,5 +25,14 @@ namespace Comandero.UI.Renderers
             get => (Fonts)GetValue(TypeFontProperty);
             set => SetValue(TypeFontProperty, value);
         }
+
+        public static readonly BindableProperty CustomTextProperty =
+    BindableProperty.Create(nameof(CustomText), typeof(string), typeof(LabelBase), string.Empty);
+
+        public string CustomText
+        {
+            get { return (string)GetValue(CustomTextProperty); }
+            set { SetValue(CustomTextProperty, value); }
+        }
     }
 }

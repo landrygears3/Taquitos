@@ -20,8 +20,6 @@ namespace Comandero.ViewModels.Menu
 {
     internal class CustomersViewModel : ViewModelBase
     {
-        public AsyncCommand QuickCommand { get; set; }
-
         private HttpClient httpClient;
 
         private System.Timers.Timer timer;
@@ -55,7 +53,7 @@ namespace Comandero.ViewModels.Menu
                 try
                 {
                     // Realiza una solicitud GET al servicio web
-                    HttpResponseMessage response = await httpClient.GetAsync("http://www.Coatltest.somee.com/Table?sucursal=" + SesionModel.sucursal);
+                    HttpResponseMessage response = await httpClient.GetAsync(SesionModel.Host + "/Table?sucursal=" + SesionModel.sucursal);
 
                     // Verifica si la solicitud fue exitosa
                     if (response.IsSuccessStatusCode)

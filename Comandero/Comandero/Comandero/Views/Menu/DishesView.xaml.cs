@@ -25,5 +25,11 @@ namespace Comandero.Views.Menu
             base.OnAppearing();
             ((DishesViewModel)BindingContext).OnPageAppearing();
         }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            ((DishesViewModel)BindingContext).OnPageDisappearing();
+        }
     }
 }

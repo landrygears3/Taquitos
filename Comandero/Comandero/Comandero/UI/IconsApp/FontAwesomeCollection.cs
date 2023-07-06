@@ -36,6 +36,7 @@ namespace Comandero.UI.IconsApp
             Icons.Add(new Icon("NextArrow", '\uf101'));
             Icons.Add(new Icon("cookie", '\uf563'));
             Icons.Add(new Icon("Money", '\uf0d6'));
+            Icons.Add(new Icon("user", '\uf007'));
 
         }
 
