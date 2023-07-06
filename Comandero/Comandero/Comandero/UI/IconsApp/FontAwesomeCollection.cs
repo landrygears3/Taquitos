@@ -14,7 +14,7 @@ namespace Comandero.UI.IconsApp
             Icons.Add(new Icon("Ticket", '\uf3ff'));
             Icons.Add(new Icon("Bell", '\uf0f3'));
             Icons.Add(new Icon("Minus", '\uf068'));
-            Icons.Add(new Icon("Plus", '\uf067'));
+            Icons.Add(new Icon("Plus", '\ue494'));
             Icons.Add(new Icon("Times", '\uf00d'));
             Icons.Add(new Icon("Bars", '\uf0c9'));
             Icons.Add(new Icon("ChevronLeft", '\uf053'));
@@ -35,6 +35,7 @@ namespace Comandero.UI.IconsApp
             Icons.Add(new Icon("CirclePlus", '\uf055'));
             Icons.Add(new Icon("NextArrow", '\uf101'));
             Icons.Add(new Icon("cookie", '\uf563'));
+            Icons.Add(new Icon("Money", '\uf0d6'));
 
         }
 

@@ -32,7 +32,7 @@
                     HorizontalOptions="Center"
                     WidthRequest="120" 
                     HeightRequest="120"
-                    Source="http://www.coatltest.somee.com/resources/Blogin.png" />
+                    Style="{DynamicResource IconBrand}" />
             <Renderers:IconAwesomeButtonBase
                     Style="{StaticResource ButtonBack}"
                     Command="{Binding BackToPreviousPageCommand}"

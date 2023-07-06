@@ -27,10 +27,9 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     VerticalOptions="Start"
-                    HorizontalOptions="Center"
                     WidthRequest="120" 
                     HeightRequest="120"
-                    Source="http://www.coatltest.somee.com/resources/Blogin.png" />
+                    Style="{DynamicResource IconBrand}" />
             <Grid
                 Grid.Row="1" 
                 Grid.Column="0"
