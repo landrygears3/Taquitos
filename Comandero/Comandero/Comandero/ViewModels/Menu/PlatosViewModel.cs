@@ -1,39 +1,37 @@
 ﻿using Comandero.Models.Catalogs;
-using Comandero.UI.IconsApp;
-using Comandero.UI.ItemsCollectionView;
-using Comandero.UI.Renderers;
-using Comandero.Utils.Commands;
 using DryIoc;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Input;
 using Xamarin.Forms;
+using static Xamarin.Essentials.Permissions;
 
 namespace Comandero.ViewModels.Menu
 {
-    internal class DishesViewModel : ViewModelBase
+    class PlatosViewModel : ViewModelBase
     {
+        private int mesa;
         private HttpClient httpClient;
-
+        public ObservableCollection<PlatoModel> Platos { get; set; }
+        private int plato;
+        public event EventHandler PageAppearing;
+        public event EventHandler PageDisappearing;
         private System.Timers.Timer timer;
-
         private string myTextProperty;
 
         public string MyTextProperty
         {
             get { return myTextProperty; }
             set { SetProperty(ref myTextProperty, value); }
-        }      
-        
+        }
+
         private decimal currentTotal;
 
         public decimal CurrentTotal
@@ -43,41 +41,22 @@ namespace Comandero.ViewModels.Menu
         }
 
         public ICommand SelectedItemCommand => new Command(async (item) => await SelectedItemCommandExecute(item));
-
-        public ObservableCollection<PlatoModel> Platos { get; set; }
-
-        private int mesa = 0;
-
-        public event EventHandler PageAppearing;
-        public event EventHandler PageDisappearing;
-
-
-        public virtual void OnPageAppearing()
+        public PlatosViewModel(INavigationService navigationService) : base(navigationService)
         {
-            timer.Start();
-            PageAppearing?.Invoke(this, EventArgs.Empty);
-        }        
-        
-        public virtual void OnPageDisappearing()
-        {
-            timer.Stop();
-            PageDisappearing?.Invoke(this, EventArgs.Empty);
-        }
-        public DishesViewModel(INavigationService navigationService ) : base(navigationService)
-        {
-            Title = "Comanda";
+            Title = "Plato";
             httpClient = new HttpClient();
             Platos = new ObservableCollection<PlatoModel>();
             timer = new System.Timers.Timer();
             timer.Interval = 10; // Intervalo de actualización en milisegundos (en este caso, 5 segundos)
             timer.Elapsed += TimerElapsed;
-
         }
+
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
             timer.Interval = 3000;
             llenaPlatos();
         }
+
         private void llenaPlatos()
         {
             Device.BeginInvokeOnMainThread(async () =>
@@ -85,13 +64,13 @@ namespace Comandero.ViewModels.Menu
                 timer.Stop();
                 try
                 {
-                    decimal auxCurrentTotal = 0;
                     // Realiza una solicitud GET al servicio web
-                    HttpResponseMessage response = await httpClient.GetAsync(SesionModel.Host + "/Plato?sucursal="+ SesionModel.sucursal + "&mesa=" + mesa);
+                    HttpResponseMessage response = await httpClient.GetAsync(SesionModel.Host + "/Platos?sucursal=" + SesionModel.sucursal +"&mesa=" + mesa + "&plato=" + plato);
 
                     // Verifica si la solicitud fue exitosa
                     if (response.IsSuccessStatusCode)
                     {
+                        decimal auxtotal = 0;
                         // Lee la respuesta como una cadena JSON
                         string json = await response.Content.ReadAsStringAsync();
 
@@ -101,11 +80,11 @@ namespace Comandero.ViewModels.Menu
                         foreach (var items in data)
                         {
                             items.SelectedItemCommand = new Command(async (item) => await SelectedItemCommandExecute(item));
-                            items.Name = "Comensal " + items.Id;
+                            
                             Platos.Add(items);
-                            auxCurrentTotal += items.subtotal;
+                            auxtotal += items.subtotal;
                         }
-                        CurrentTotal = auxCurrentTotal;
+                        CurrentTotal = auxtotal;
                         // Utiliza los datos recibidos como desees
                         // ...
                     }
@@ -117,14 +96,6 @@ namespace Comandero.ViewModels.Menu
                 colores();
                 timer.Start();
             });
-        }
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            if (parameters.TryGetValue("IdMesa", out int idMesa))
-            {
-                mesa = idMesa;
-                MyTextProperty = "Mesa " + idMesa;
-             }
         }
 
         private void colores()
@@ -148,13 +119,42 @@ namespace Comandero.ViewModels.Menu
 
             }
         }
+        public virtual void OnPageAppearing()
+        {
+            timer.Start();
+            PageAppearing?.Invoke(this, EventArgs.Empty);
+        }
+
+        public virtual void OnPageDisappearing()
+        {
+            timer.Stop();
+            PageDisappearing?.Invoke(this, EventArgs.Empty);
+        }
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            if (parameters.TryGetValue("IdMesa", out int idMesa))
+            {
+                mesa = idMesa;
+            }
+
+            if (parameters.TryGetValue("IdPlato", out int idPlato))
+            {
+                plato = idPlato;
+                MyTextProperty = "Comensal " + plato;
+            }
+        }
 
         private async Task SelectedItemCommandExecute(object item)
         {
             if (item is PlatoModel itemMenu)
             {
-                NavigationParameters param = new NavigationParameters { { "IdPlato", itemMenu.Id }, { "IdMesa", mesa } };
-                await NavigationService.NavigateAsync("Plato", param);
+                if (itemMenu.estatus.Equals("Enviado"))
+                {                    
+                    NavigationParameters param = new NavigationParameters { { "IdPlato", itemMenu.Id }, { "IdMesa", mesa } };
+                    await NavigationService.NavigateAsync("Plato", param);
+                }
+
             }
         }
     }

@@ -44,6 +44,7 @@ namespace Comandero
             #region customers
             containerRegistry.RegisterForNavigation<CustomersView, CustomersViewModel>("Customers");
             containerRegistry.RegisterForNavigation<DishesView, DishesViewModel>("Comanda");
+            containerRegistry.RegisterForNavigation<PlatosView, PlatosViewModel>("Plato");
             #endregion
         }
     }

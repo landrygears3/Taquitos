@@ -29,7 +29,7 @@ namespace Comandero.UI.ItemsCollectionView
 
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            if (BindingContext is TableModel item)
+            if (BindingContext is PlatoModel item)
             {
                 SelectedItemCommand?.Execute(item);
             }
