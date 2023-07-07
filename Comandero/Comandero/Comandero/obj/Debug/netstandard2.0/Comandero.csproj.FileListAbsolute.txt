@@ -21,7 +21,6 @@ C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Comandero.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\App.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\Customs\EmptyTextCollectionView.xaml.g.cs
-C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\ItemsCollectionView\ItemMenuCollectionView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\ItemsCollectionView\ItemTableCollectionView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\Theme\Theme.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Views\Home\HomeView.xaml.g.cs
