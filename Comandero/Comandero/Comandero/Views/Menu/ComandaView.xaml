@@ -67,7 +67,7 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Text="Agregar"
-                Margin="30,0"
+                Margin="30,20"
                 Style="{StaticResource ButtonPrimary}"/>
         </Grid>
     </ContentPage.Content>

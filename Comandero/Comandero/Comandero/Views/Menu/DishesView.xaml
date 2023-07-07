@@ -92,6 +92,7 @@
                 </Frame>
                 <Renderers:IconAwesomeButtonBase
                     BackgroundColor="{DynamicResource PrimaryColor}"
+                    Command="{Binding AgregarNewDataCommand}"
                     Icon="Plus"
                     CornerRadius="10"
                     FontFamily="fa-solid"

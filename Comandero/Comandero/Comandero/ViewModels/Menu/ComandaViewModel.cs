@@ -25,12 +25,20 @@ namespace Comandero.ViewModels.Menu
             if (parameters.TryGetValue("IdMesa", out int idMesa))
             {
                 mesa = idMesa;
+            }            
+            
+            if (parameters.TryGetValue("idPlato", out int idPlato))
+            {
+                idplato = idPlato;
             }
         }
 
         private int mesa;
+        private int idplato;
 
         public AsyncCommand AgregarDataCommand { get; set; }
+
+
         public ObservableCollection<ProductoModel> Productos { get; set; }
         public ICommand MasCommand => new Command(async (item) => await MasCommandExecute(item));
         public ICommand MenosCommand => new Command(async (item) => await MenosCommandExecute(item));
@@ -38,11 +46,16 @@ namespace Comandero.ViewModels.Menu
         public ComandaViewModel(INavigationService navigationService) : base(navigationService)
         {
             AgregarDataCommand = new AsyncCommand(AgregarDataCommandExecute);
+            
             Productos = new ObservableCollection<ProductoModel>();
             Title = "Comandero";
             httpClient = new HttpClient();
             llenaProductos();
         }
+
+        
+
+
 
         private async Task AgregarDataCommandExecute()
         {
@@ -56,9 +69,9 @@ namespace Comandero.ViewModels.Menu
                     if (model.Cantidad > 0)
                     {
                         momdelosubida.Add(new PlatoPostModel());
-                        momdelosubida.Last().Id = model.Id;
+                        momdelosubida.Last().Id = idplato;
                         momdelosubida.Last().IdMesa = mesa;
-                        momdelosubida.Last().idProducto = model.IdTipoProducto;
+                        momdelosubida.Last().idProducto = model.Id;
                         momdelosubida.Last().Cantidad = model.Cantidad;
                         momdelosubida.Last().Estatus = "Enviado";
                     }
@@ -78,6 +91,11 @@ namespace Comandero.ViewModels.Menu
                 {
                     // Maneja cualquier error que pueda ocurrir
                 }
+            finally
+            {
+                httpClient.Dispose();
+                
+            }
 
 
         }

@@ -6,6 +6,7 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ namespace Comandero.ViewModels.Menu
         private int mesa;
         private HttpClient httpClient;
         public ObservableCollection<PlatoModel> Platos { get; set; }
+
+
         public AsyncCommand AgregarPlato { get; set; }
         private int plato;
         public event EventHandler PageAppearing;
@@ -45,6 +48,7 @@ namespace Comandero.ViewModels.Menu
         public ICommand SelectedItemCommand => new Command(async (item) => await SelectedItemCommandExecute(item));
         public PlatosViewModel(INavigationService navigationService) : base(navigationService)
         {
+            
             Title = "Plato";
             AgregarPlato = new AsyncCommand(AgregarPlatoExecute);
             httpClient = new HttpClient();
@@ -55,7 +59,12 @@ namespace Comandero.ViewModels.Menu
         }
         private async Task AgregarPlatoExecute()
         {
-            NavigationParameters param = new NavigationParameters {{ "IdMesa", mesa } };
+            long auxplato = 0;
+            if(Platos.Count> 0)
+            {
+                auxplato = Platos[0].Id;
+            }
+            NavigationParameters param = new NavigationParameters {{ "IdMesa", mesa },{ "idPlato", auxplato } };
             await NavigationService.NavigateAsync("Comandero",param);
 
         }
@@ -64,6 +73,10 @@ namespace Comandero.ViewModels.Menu
             timer.Interval = 3000;
             llenaPlatos();
         }
+
+
+
+
 
         private void llenaPlatos()
         {
@@ -159,8 +172,8 @@ namespace Comandero.ViewModels.Menu
             {
                 if (itemMenu.estatus.Equals("Enviado"))
                 {                    
-                    NavigationParameters param = new NavigationParameters { { "IdPlato", itemMenu.Id }, { "IdMesa", mesa } };
-                    await NavigationService.NavigateAsync("Plato", param);
+                    //NavigationParameters param = new NavigationParameters { { "IdPlato", itemMenu.Id }, { "IdMesa", mesa } };
+                    //await NavigationService.NavigateAsync("Plato", param);
                 }
 
             }

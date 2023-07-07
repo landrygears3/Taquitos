@@ -27,6 +27,8 @@ namespace Comandero.ViewModels.Menu
         private System.Timers.Timer timer;
 
         private string myTextProperty;
+        public AsyncCommand AgregarNewDataCommand { get; set; }
+       
 
         public string MyTextProperty
         {
@@ -65,12 +67,22 @@ namespace Comandero.ViewModels.Menu
         }
         public DishesViewModel(INavigationService navigationService ) : base(navigationService)
         {
+            AgregarNewDataCommand = new AsyncCommand(AgregarNewDataCommandExecute);
             Title = "Comanda";
             httpClient = new HttpClient();
             Platos = new ObservableCollection<PlatoModel>();
             timer = new System.Timers.Timer();
             timer.Interval = 10; // Intervalo de actualización en milisegundos (en este caso, 5 segundos)
             timer.Elapsed += TimerElapsed;
+
+        }
+
+        private async Task AgregarNewDataCommandExecute()
+        {
+
+            NavigationParameters param = new NavigationParameters { { "IdPlato", 0 }, { "IdMesa", mesa } };
+            await NavigationService.NavigateAsync("Plato", param);
+
 
         }
         private void TimerElapsed(object sender, ElapsedEventArgs e)
