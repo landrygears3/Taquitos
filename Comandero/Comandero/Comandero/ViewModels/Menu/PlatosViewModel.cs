@@ -1,4 +1,5 @@
 ﻿using Comandero.Models.Catalogs;
+using Comandero.Utils.Commands;
 using DryIoc;
 using Newtonsoft.Json;
 using Prism.Navigation;
@@ -20,6 +21,7 @@ namespace Comandero.ViewModels.Menu
         private int mesa;
         private HttpClient httpClient;
         public ObservableCollection<PlatoModel> Platos { get; set; }
+        public AsyncCommand AgregarPlato { get; set; }
         private int plato;
         public event EventHandler PageAppearing;
         public event EventHandler PageDisappearing;
@@ -44,13 +46,19 @@ namespace Comandero.ViewModels.Menu
         public PlatosViewModel(INavigationService navigationService) : base(navigationService)
         {
             Title = "Plato";
+            AgregarPlato = new AsyncCommand(AgregarPlatoExecute);
             httpClient = new HttpClient();
             Platos = new ObservableCollection<PlatoModel>();
             timer = new System.Timers.Timer();
             timer.Interval = 10; // Intervalo de actualización en milisegundos (en este caso, 5 segundos)
             timer.Elapsed += TimerElapsed;
         }
+        private async Task AgregarPlatoExecute()
+        {
+            NavigationParameters param = new NavigationParameters {{ "IdMesa", mesa } };
+            await NavigationService.NavigateAsync("Comandero",param);
 
+        }
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
             timer.Interval = 3000;

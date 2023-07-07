@@ -97,7 +97,7 @@
                     <DataTemplate>
                         <Items:ItemDishCollectionView
                             SelectedCommand ="{Binding SelectedItemCommand}"
-                    HeightRequest="70"/>
+                    HeightRequest="90"/>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -107,6 +107,7 @@
                 Grid.Column="0"
                 Text="Agregar"
                 Margin="30,0"
+                Command="{Binding AgregarPlato}"
                 Style="{StaticResource ButtonPrimary}"
                 />
         </Grid>

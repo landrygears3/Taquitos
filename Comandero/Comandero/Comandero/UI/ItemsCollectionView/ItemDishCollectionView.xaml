@@ -20,6 +20,7 @@
                 Grid.RowSpan="2"
                 Icon="{Binding Icon}" 
                 TypeIcon="Solid" 
+        VerticalOptions="Center"
                 Style="{StaticResource IconAwesomeLabelPrimary}" />
     <Renderers:LabelBase
         Text="{Binding Name}"
@@ -34,7 +35,7 @@
         Grid.Column="1"
         Grid.Row="1"
         Grid.ColumnSpan="2"
-        VerticalTextAlignment="Center"
+        VerticalTextAlignment="End"
         VerticalOptions="Start"
         HorizontalOptions="Start"
         Style="{StaticResource LabelSubTitle}"/>
@@ -45,7 +46,7 @@
         Grid.Row="1"
         Grid.ColumnSpan="2"
         VerticalOptions="End"
-        VerticalTextAlignment="Start"
+        VerticalTextAlignment="End"
         HorizontalOptions="End"
         Style="{StaticResource LabelSubTitle}"/>
 

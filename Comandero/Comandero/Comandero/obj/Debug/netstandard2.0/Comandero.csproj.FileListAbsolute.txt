@@ -39,3 +39,4 @@ C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\ItemsCollectionView\ItemDishCollectionView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Views\Menu\PlatosView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\ItemsCollectionView\ItemProductosComandaView.xaml.g.cs
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Views\Menu\ComandaView.xaml.g.cs
