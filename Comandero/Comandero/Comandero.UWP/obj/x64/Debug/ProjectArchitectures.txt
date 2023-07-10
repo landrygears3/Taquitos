@@ -1,0 +1,1 @@
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.UWP\Comandero.UWP.csproj;x64

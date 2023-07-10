@@ -39,6 +39,7 @@ namespace Comandero.UI.IconsApp
             Icons.Add(new Icon("user", '\uf007'));
             Icons.Add(new Icon("SquarePlus", '\uf0fe'));
             Icons.Add(new Icon("SquareMinus", '\uf146'));
+            Icons.Add(new Icon("Kitchen", '\ue4f1'));
 
         }
 

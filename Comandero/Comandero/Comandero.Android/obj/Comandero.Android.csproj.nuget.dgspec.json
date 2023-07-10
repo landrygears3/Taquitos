@@ -103,6 +103,10 @@
               "target": "Package",
               "version": "[4.1.0, )"
             },
+            "Microsoft.AspNetCore.SignalR.Client": {
+              "target": "Package",
+              "version": "[7.0.8, )"
+            },
             "NETStandard.Library": {
               "suppressParent": "All",
               "target": "Package",
