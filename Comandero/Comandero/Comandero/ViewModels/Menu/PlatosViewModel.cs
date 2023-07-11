@@ -164,6 +164,16 @@ namespace Comandero.ViewModels.Menu
                 plato = idPlato;
                 MyTextProperty = "Comensal " + plato;
             }
+            if (parameters.TryGetValue("back", out bool ret))
+            {
+                if (ret)
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await NavigationService.GoBackAsync();
+                    });
+                }
+            }
         }
 
         private async Task SelectedItemCommandExecute(object item)

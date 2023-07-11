@@ -85,6 +85,9 @@ namespace Comandero.ViewModels.Menu
                     var jsonData = JsonConvert.SerializeObject(momdelosubida);
                     var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
                     HttpResponseMessage message = await httpClient.PostAsync(SesionModel.Host + "/Platos", content);
+                    NavigationParameters param = new NavigationParameters { { "back", true }};
+                    await NavigationService.GoBackAsync(param);
+
                 }
 
 
@@ -95,11 +98,6 @@ namespace Comandero.ViewModels.Menu
                 {
                     // Maneja cualquier error que pueda ocurrir
                 }
-            finally
-            {
-                httpClient.Dispose();
-                
-            }
 
 
         }
