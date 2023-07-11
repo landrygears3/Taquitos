@@ -1,6 +1,8 @@
 ﻿using Comandero.Models.Catalogs;
+using Comandero.UI.ItemsCollectionView;
 using Comandero.Utils.Commands;
 using DryIoc;
+using ImTools;
 using Newtonsoft.Json;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -32,6 +34,8 @@ namespace Comandero.ViewModels.Menu
                 idplato = idPlato;
             }
         }
+
+
 
         private int mesa;
         private int idplato;
@@ -162,7 +166,13 @@ namespace Comandero.ViewModels.Menu
             {
                 try
                 {
-                    itemMenu.Cantidad++;
+                    for (int i = 0; i < Productos.Count; i++)
+                    {
+                        if (Productos[i].Id.Equals(itemMenu.Id))
+                        {
+                            Productos[i].Cantidad = itemMenu.Cantidad;
+                        }
+                    }
                 }
                 catch
                 {
@@ -177,12 +187,14 @@ namespace Comandero.ViewModels.Menu
             {
                 try
                 {
-                    int cantidad = itemMenu.Cantidad;
-                    if (cantidad > 0)
+                    for (int i = 0; i < Productos.Count; i++)
                     {
-                        cantidad--;
+                        if (Productos[i].Id.Equals(itemMenu.Id))
+                        {
+                            Productos[i].Cantidad = itemMenu.Cantidad;
+                        }
                     }
-                    itemMenu.Cantidad = cantidad;
+                   
                 }
                 catch
                 {

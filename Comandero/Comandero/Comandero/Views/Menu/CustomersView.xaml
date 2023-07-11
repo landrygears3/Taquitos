@@ -72,7 +72,7 @@
                     Text="Para llevar"/>
                 <Renderers:ButtonBase
                     x:Name="NewTableButton"
-                    Command="{Binding TableCommand}"
+                    Command="{Binding HubCommand}"
                     Style="{StaticResource ButtonPrimary}"                    
                     Grid.Column="1"
                     Grid.Row="0"

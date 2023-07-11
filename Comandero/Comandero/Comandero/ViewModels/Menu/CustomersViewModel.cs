@@ -1,6 +1,7 @@
 ﻿using Comandero.Models.Catalogs;
 using Comandero.Services.Api;
 using Comandero.Utils.Commands;
+using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
 using Prism.Common;
 using Prism.Navigation;
@@ -20,6 +21,18 @@ namespace Comandero.ViewModels.Menu
 {
     internal class CustomersViewModel : ViewModelBase
     {
+        private HubConnection _connection;
+
+        #region Hub
+        private void initHub()
+        {
+            _connection = new HubConnectionBuilder().WithUrl("").Build();
+        }
+        #endregion
+
+        #region Windo
+
+
         private HttpClient httpClient;
 
         private System.Timers.Timer timer;
@@ -34,10 +47,12 @@ namespace Comandero.ViewModels.Menu
             httpClient = new HttpClient();
             Title = "Customers";
             Tables = new ObservableCollection<TableModel>();
+            //initHub();
+            //llenaMesas();
             timer = new System.Timers.Timer();
-            timer.Interval = 10; // Intervalo de actualización en milisegundos (en este caso, 5 segundos)
+            timer.Interval = 1; // Intervalo de actualización en milisegundos (en este caso, 5 segundos)
             timer.Elapsed += TimerElapsed;
-            
+
         }
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
@@ -129,5 +144,6 @@ namespace Comandero.ViewModels.Menu
                 await NavigationService.NavigateAsync("Comanda",param);
             }
         }
+        #endregion
     }
 }
