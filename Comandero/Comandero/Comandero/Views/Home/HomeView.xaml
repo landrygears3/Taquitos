@@ -27,10 +27,9 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     VerticalOptions="Start"
-                    HorizontalOptions="Center"
                     WidthRequest="120" 
                     HeightRequest="120"
-                    Source="http://www.coatltest.somee.com/resources/Blogin.png" />
+                    Style="{DynamicResource IconBrand}" />
             <Grid
                 Grid.Row="1" 
                 Grid.Column="0"
@@ -91,7 +90,7 @@
                     FontSize="70"
                     TextColor="{DynamicResource PrimaryColor}"
                     Grid.Column="0"
-                    Grid.ColumnSpan="2"
+                    Grid.ColumnSpan="1"
                     Grid.Row="2"/>
                 <Renderers:LabelBase
                     Text="Corte"
@@ -99,7 +98,29 @@
                     Grid.Row="3"
                     Style="{StaticResource LabelPrimary}"
                     Grid.Column="0"
-                    Grid.ColumnSpan="2"
+                    Grid.ColumnSpan="1"
+                    VerticalOptions="Start"
+                    HorizontalOptions="Center"
+                    />
+
+                <Renderers:IconAwesomeButtonBase
+                    Command="{Binding KitchenCommand}"
+                    Style="{StaticResource ButtonSecondary}"
+                    Margin="10,10,10,0"
+                    Icon="Kitchen"
+                    TypeIcon="Solid"
+                    FontSize="70"
+                    TextColor="{DynamicResource PrimaryColor}"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="1"
+                    Grid.Row="2"/>
+                <Renderers:LabelBase
+                    Text="Cocina"
+                    Margin="0"
+                    Grid.Row="3"
+                    Style="{StaticResource LabelPrimary}"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="1"
                     VerticalOptions="Start"
                     HorizontalOptions="Center"
                     />

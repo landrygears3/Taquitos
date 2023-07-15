@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Comandero.UI.ItemsCollectionView.ItemDishCollectionView"
+             xmlns:Renderers ="clr-namespace:Comandero.UI.Renderers"   
+             BackgroundColor="{Binding BgColor}">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="30" />
+        <RowDefinition Height="30" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="70" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="60" />
+    </Grid.ColumnDefinitions>
+    <Renderers:IconAwesomeLabelBase                 
+                Grid.Column="0" 
+                Grid.Row="0" 
+                Grid.RowSpan="2"
+                Icon="{Binding Icon}" 
+                TypeIcon="Solid" 
+        VerticalOptions="Center"
+                Style="{StaticResource IconAwesomeLabelPrimary}" />
+    <Renderers:LabelBase
+        Text="{Binding Name}"
+        Grid.Column="1"
+        Grid.Row="0"
+        Grid.ColumnSpan="2"
+        VerticalTextAlignment="End"
+        Style="{StaticResource LabelTitle}"/>
+
+    <Renderers:LabelBase
+        Text="{Binding subtotal , StringFormat='${0:F2}'}"
+        Grid.Column="1"
+        Grid.Row="1"
+        Grid.ColumnSpan="2"
+        VerticalTextAlignment="End"
+        VerticalOptions="Start"
+        HorizontalOptions="Start"
+        Style="{StaticResource LabelSubTitle}"/>
+
+    <Renderers:LabelBase
+        Text="{Binding cantidad , StringFormat='Items: {0:F0}'}"
+        Grid.Column="1"
+        Grid.Row="1"
+        Grid.ColumnSpan="2"
+        VerticalOptions="End"
+        VerticalTextAlignment="End"
+        HorizontalOptions="End"
+        Style="{StaticResource LabelSubTitle}"/>
+
+    <Renderers:IconAwesomeButtonBase
+        Pressed="TapGestureRecognizer_Tapped"
+        Grid.Row="0"
+        Grid.RowSpan="2"
+        Grid.Column="3"
+        TypeIcon="Solid"
+        Icon="NextArrow"
+        FontSize="Large"
+        Style="{StaticResource ButtonUser}"/>
+
+
+</Grid>
