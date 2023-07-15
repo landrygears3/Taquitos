@@ -21,42 +21,63 @@ namespace Comandero.ViewModels.Menu
 {
     internal class CustomersViewModel : ViewModelBase
     {
-        private HubConnection _connection;
+
 
         #region Hub
-        private void initHub()
-        {
-            _connection = new HubConnectionBuilder().WithUrl("").Build();
-        }
+
         #endregion
 
         #region Windo
 
 
         private HttpClient httpClient;
+        private HttpClient httpClientNew;
 
-        private System.Timers.Timer timer;
+        //private System.Timers.Timer timer;
 
         public ICommand SelectedItemCommand => new Command(async (item) => await SelectedItemCommandExecute(item));
 
         public ObservableCollection<TableModel> Tables { get; set; }
 
+        public AsyncCommand NuevaMesaCommand { get; set; }
+        
 
         public CustomersViewModel(INavigationService navigationService) : base(navigationService)
         {
-            httpClient = new HttpClient();
+            
+            httpClientNew = new HttpClient();
             Title = "Customers";
             Tables = new ObservableCollection<TableModel>();
-            //initHub();
-            //llenaMesas();
-            timer = new System.Timers.Timer();
-            timer.Interval = 1; // Intervalo de actualización en milisegundos (en este caso, 5 segundos)
-            timer.Elapsed += TimerElapsed;
+            
+            llenaMesas();
+            //timer = new System.Timers.Timer();
+            //timer.Interval = 1; // Intervalo de actualización en milisegundos (en este caso, 5 segundos)
+            //timer.Elapsed += TimerElapsed;
+            NuevaMesaCommand = new AsyncCommand(NuevaMesaCommandExecute);
 
         }
+
+        private async Task NuevaMesaCommandExecute()
+        {
+            try
+            {
+                List<int> list = new List<int> {SesionModel.sucursal };
+                var jsonData = JsonConvert.SerializeObject(list);
+                var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                HttpResponseMessage message = await httpClientNew.PostAsync(SesionModel.Host + "/Table", content);
+                // Verifica si la solicitud fue exitosa
+               
+            }
+            catch (Exception ex)
+            {
+                // Maneja cualquier error que pueda ocurrir
+            }
+
+        }
+
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
-            timer.Interval = 3000;
+            //timer.Interval = 3000;
             llenaMesas();
         }
 
@@ -64,10 +85,12 @@ namespace Comandero.ViewModels.Menu
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
-                timer.Stop();
+                //timer.Stop();
                 try
                 {
                     // Realiza una solicitud GET al servicio web
+                    httpClient = new HttpClient();
+                    httpClient.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
                     HttpResponseMessage response = await httpClient.GetAsync(SesionModel.Host + "/Table?sucursal=" + SesionModel.sucursal);
 
                     // Verifica si la solicitud fue exitosa
@@ -92,8 +115,13 @@ namespace Comandero.ViewModels.Menu
                 {
                     // Maneja cualquier error que pueda ocurrir
                 }
+                finally
+                {
+                    httpClient.Dispose();
+                    llenaMesas();
+                }
                 colores();
-                timer.Start();
+                //timer.Start();
             });
         }
 
@@ -103,14 +131,14 @@ namespace Comandero.ViewModels.Menu
         public virtual void OnPageAppearing()
         {
             PageAppearing?.Invoke(this, EventArgs.Empty);
-            timer.Start();
+            //timer.Start();
             //llenaMesas();
         }        
         
         public virtual void OnPageDisappearing()
         {
             PageAppearing?.Invoke(this, EventArgs.Empty);
-            timer.Stop();
+            //timer.Stop();
         }
 
 

@@ -18,7 +18,6 @@ namespace Comandero.ViewModels.Home
         }
         private async Task MenuCommandExecute()
         {
-
             //Customers
             await NavigationService.NavigateAsync("Customers");
         }
