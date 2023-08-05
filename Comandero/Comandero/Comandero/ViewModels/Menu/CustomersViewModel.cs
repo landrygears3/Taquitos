@@ -23,9 +23,6 @@ namespace Comandero.ViewModels.Menu
     {
 
 
-        #region Hub
-
-        #endregion
 
         #region Windo
 
@@ -40,7 +37,7 @@ namespace Comandero.ViewModels.Menu
         public ObservableCollection<TableModel> Tables { get; set; }
 
         public AsyncCommand NuevaMesaCommand { get; set; }
-        
+        private bool inicial = true;
 
         public CustomersViewModel(INavigationService navigationService) : base(navigationService)
         {
@@ -91,7 +88,7 @@ namespace Comandero.ViewModels.Menu
                     // Realiza una solicitud GET al servicio web
                     httpClient = new HttpClient();
                     httpClient.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
-                    HttpResponseMessage response = await httpClient.GetAsync(SesionModel.Host + "/Table?sucursal=" + SesionModel.sucursal);
+                    HttpResponseMessage response = await httpClient.GetAsync(SesionModel.Host + "/Table?sucursal=" + SesionModel.sucursal + "&inicial=" + inicial.ToString());
 
                     // Verifica si la solicitud fue exitosa
                     if (response.IsSuccessStatusCode)
@@ -118,6 +115,7 @@ namespace Comandero.ViewModels.Menu
                 finally
                 {
                     httpClient.Dispose();
+                    inicial = false;
                     llenaMesas();
                 }
                 colores();
