@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Input;
@@ -24,7 +25,6 @@ namespace Comandero.ViewModels.Menu
     {
         private HttpClient httpClient;
 
-        private System.Timers.Timer timer;
 
         private string myTextProperty;
         public AsyncCommand AgregarNewDataCommand { get; set; }
@@ -45,7 +45,7 @@ namespace Comandero.ViewModels.Menu
         }
 
         public ICommand SelectedItemCommand => new Command(async (item) => await SelectedItemCommandExecute(item));
-
+        private bool inicial = true;
         public ObservableCollection<PlatoModel> Platos { get; set; }
 
         private int mesa = 0;
@@ -56,13 +56,11 @@ namespace Comandero.ViewModels.Menu
 
         public virtual void OnPageAppearing()
         {
-            timer.Start();
             PageAppearing?.Invoke(this, EventArgs.Empty);
         }        
         
         public virtual void OnPageDisappearing()
         {
-            timer.Stop();
             PageDisappearing?.Invoke(this, EventArgs.Empty);
         }
         public DishesViewModel(INavigationService navigationService ) : base(navigationService)
@@ -71,10 +69,7 @@ namespace Comandero.ViewModels.Menu
             Title = "Comanda";
             httpClient = new HttpClient();
             Platos = new ObservableCollection<PlatoModel>();
-            timer = new System.Timers.Timer();
-            timer.Interval = 10; // Intervalo de actualización en milisegundos (en este caso, 5 segundos)
-            timer.Elapsed += TimerElapsed;
-
+            
         }
 
         private async Task AgregarNewDataCommandExecute()
@@ -87,19 +82,20 @@ namespace Comandero.ViewModels.Menu
         }
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
-            timer.Interval = 3000;
             llenaPlatos();
         }
         private void llenaPlatos()
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
-                timer.Stop();
                 try
                 {
+                    httpClient = new HttpClient();
+                    httpClient.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
                     decimal auxCurrentTotal = 0;
                     // Realiza una solicitud GET al servicio web
-                    HttpResponseMessage response = await httpClient.GetAsync(SesionModel.Host + "/Plato?sucursal="+ SesionModel.sucursal + "&mesa=" + mesa);
+                    string query = SesionModel.Host + "/Plato?sucursal=" + SesionModel.sucursal + "&mesa=" + mesa + "&inicial=" + inicial.ToString();
+                    HttpResponseMessage response = await httpClient.GetAsync(query);
 
                     // Verifica si la solicitud fue exitosa
                     if (response.IsSuccessStatusCode)
@@ -126,8 +122,13 @@ namespace Comandero.ViewModels.Menu
                 {
                     // Maneja cualquier error que pueda ocurrir
                 }
+                finally
+                {
+                    httpClient.Dispose();
+                    inicial = false;
+                    llenaPlatos();
+                }
                 colores();
-                timer.Start();
             });
         }
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -136,7 +137,8 @@ namespace Comandero.ViewModels.Menu
             {
                 mesa = idMesa;
                 MyTextProperty = "Mesa " + idMesa;
-             }
+                llenaPlatos();
+            }
         }
 
         private void colores()
