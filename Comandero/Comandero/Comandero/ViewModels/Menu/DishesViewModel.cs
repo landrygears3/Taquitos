@@ -5,6 +5,7 @@ using Comandero.UI.ItemsCollectionView;
 using Comandero.UI.Renderers;
 using Comandero.Utils.Commands;
 using DryIoc;
+using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Prism.Navigation;
@@ -12,11 +13,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.Common;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -24,19 +26,45 @@ namespace Comandero.ViewModels.Menu
 {
     internal class DishesViewModel : ViewModelBase
     {
+
+        #region modal
+        private bool _isLoading;
+        public bool IsLoading
+        {
+            get => _isLoading;
+            set
+            {
+                if (_isLoading != value)
+                {
+                    _isLoading = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+
+
+        #region Inits
         private HttpClient httpClient;
 
 
         private string myTextProperty;
         public AsyncCommand AgregarNewDataCommand { get; set; }
-       
 
         public string MyTextProperty
         {
             get { return myTextProperty; }
             set { SetProperty(ref myTextProperty, value); }
-        }      
-        
+        }
+
         private decimal currentTotal;
 
         public decimal CurrentTotal
@@ -46,7 +74,7 @@ namespace Comandero.ViewModels.Menu
         }
 
         public ICommand SelectedItemCommand => new Command(async (item) => await SelectedItemCommandExecute(item));
-        private bool inicial = true;
+
         public ObservableCollection<PlatoModel> Platos { get; set; }
 
         private int mesa = 0;
@@ -54,52 +82,55 @@ namespace Comandero.ViewModels.Menu
         public event EventHandler PageAppearing;
         public event EventHandler PageDisappearing;
 
-
-        public virtual void OnPageAppearing()
-        {
-            PageAppearing?.Invoke(this, EventArgs.Empty);
-        }        
-        
-        public virtual void OnPageDisappearing()
-        {
-
-            httpClient.CancelPendingRequests();
-            httpClient.Dispose();
-            PageDisappearing?.Invoke(this, EventArgs.Empty);
-
-        }
-        public DishesViewModel(INavigationService navigationService ) : base(navigationService)
+        public DishesViewModel(INavigationService navigationService) : base(navigationService)
         {
             AgregarNewDataCommand = new AsyncCommand(AgregarNewDataCommandExecute);
             Title = "Comanda";
             httpClient = new HttpClient();
             Platos = new ObservableCollection<PlatoModel>();
-            
-        }
 
-        private async Task AgregarNewDataCommandExecute()
+        }
+        #endregion
+
+
+        #region methods
+        private void colores()
         {
+            Color c1 = new Color();
+            Color c2 = new Color();
+            c1 = Color.FromRgb(222, 222, 222);
+            c2 = Color.FromRgb(243, 243, 243);
+            var aux = true;
+            foreach (var item in Platos)
+            {
+                if (aux)
+                {
+                    item.BgColor = c1;
+                }
+                else
+                {
+                    item.BgColor = c2;
+                }
+                aux = !aux;
 
-            NavigationParameters param = new NavigationParameters { { "IdPlato", 0 }, { "IdMesa", mesa } };
-            await NavigationService.NavigateAsync("Plato", param);
-
-
+            }
         }
-        private void TimerElapsed(object sender, ElapsedEventArgs e)
-        {
-            llenaPlatos();
-        }
+        #endregion
+
+
+        #region get
         private void llenaPlatos()
         {
+            IsLoading = true;
             Device.BeginInvokeOnMainThread(async () =>
             {
+                
                 try
                 {
                     httpClient = new HttpClient();
-                    httpClient.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
                     decimal auxCurrentTotal = 0;
                     // Realiza una solicitud GET al servicio web
-                    string query = SesionModel.Host + "/Plato?sucursal=" + SesionModel.sucursal + "&mesa=" + mesa + "&inicial=" + inicial.ToString();
+                    string query = SesionModel.Host + "/ResumenPlatos?sucursal=" + SesionModel.sucursal + "&mesa=" + mesa;
                     HttpResponseMessage response = await httpClient.GetAsync(query);
 
                     // Verifica si la solicitud fue exitosa
@@ -130,44 +161,15 @@ namespace Comandero.ViewModels.Menu
                 finally
                 {
                     //httpClient.Dispose();
-                    inicial = false;
-                    llenaPlatos();
+                    IsLoading = false;
                 }
                 colores();
             });
         }
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            if (parameters.TryGetValue("IdMesa", out int idMesa))
-            {
-                mesa = idMesa;
-                MyTextProperty = "Mesa " + idMesa;
-                llenaPlatos();
-            }
-        }
+        #endregion
 
-        private void colores()
-        {
-            Color c1 = new Color();
-            Color c2 = new Color();
-            c1 = Color.FromRgb(222, 222, 222);
-            c2 = Color.FromRgb(243, 243, 243);
-            var aux = true;
-            foreach (var item in Platos)
-            {
-                if (aux)
-                {
-                    item.BgColor = c1;
-                }
-                else
-                {
-                    item.BgColor = c2;
-                }
-                aux = !aux;
 
-            }
-        }
-
+        #region events
         private async Task SelectedItemCommandExecute(object item)
         {
             if (item is PlatoModel itemMenu)
@@ -176,5 +178,38 @@ namespace Comandero.ViewModels.Menu
                 await NavigationService.NavigateAsync("Plato", param);
             }
         }
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            if (parameters.TryGetValue("IdMesa", out int idMesa))
+            {
+                mesa = idMesa;
+                MyTextProperty = "Mesa " + idMesa;
+                
+            }
+        }
+
+        public virtual void OnPageAppearing()
+        {
+            llenaPlatos();
+            PageAppearing?.Invoke(this, EventArgs.Empty);
+        }
+
+        public virtual void OnPageDisappearing()
+        {
+            PageDisappearing?.Invoke(this, EventArgs.Empty);
+
+        }
+
+
+        private async Task AgregarNewDataCommandExecute()
+        {
+
+            NavigationParameters param = new NavigationParameters { { "IdPlato", 0 }, { "IdMesa", mesa } };
+            await NavigationService.NavigateAsync("Plato", param);
+
+
+        }
+        #endregion
     }
 }

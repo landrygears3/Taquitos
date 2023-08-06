@@ -41,23 +41,20 @@ namespace Comandero.ViewModels.Menu
             }
         }
 
-        // Resto del código de la clase...
 
-        #region INotifyPropertyChanged implementation
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        #endregion
 
         #endregion
+
 
         #region Inits
 
 
         private HttpClient httpClient;
-        private HttpClient httpClientnew;
         private readonly HubConnection _connection;
 
         public ICommand SelectedItemCommand => new Command(async (item) => await SelectedItemCommandExecute(item));
@@ -77,26 +74,31 @@ namespace Comandero.ViewModels.Menu
 
             _connection.On<List<MesaModel>>("RecibeMesa", (list) =>
             {
-                Tables.Clear();
-                foreach (MesaModel items in list)
-                {
-                    Tables.Add(new TableModel());
-                    Tables.Last().Icon = items.Icon; 
-                    Tables.Last().Name = items.Name;
-                    Tables.Last().Id = items.Id;
-                    Tables.Last().Current = items.Current;
-                    Tables.Last().CurrentCommand = items.CurrentCommand;
-                    Tables.Last().SelectedItemCommand = new Command(async (item) => await SelectedItemCommandExecute(item));
-                    //Tables.Add(items);
-                    IsLoading = false;
-                }
-                colores();
+                llenadoMesasHub(list);
             });
             NuevaMesaCommand = new AsyncCommand(NuevaMesaCommandExecute);
             
         }
-        #endregion
 
+        private void llenadoMesasHub(List<MesaModel> list)
+        {
+            IsLoading = true;
+            Tables.Clear();
+            foreach (MesaModel items in list)
+            {
+                Tables.Add(new TableModel());
+                Tables.Last().Icon = items.Icon;
+                Tables.Last().Name = items.Name;
+                Tables.Last().Id = items.Id;
+                Tables.Last().Current = items.Current;
+                Tables.Last().CurrentCommand = items.CurrentCommand;
+                Tables.Last().SelectedItemCommand = new Command(async (item) => await SelectedItemCommandExecute(item));
+                //Tables.Add(items);                
+            }            
+            colores();
+            IsLoading = false;
+        }
+        #endregion
 
 
         #region methods
@@ -141,6 +143,7 @@ namespace Comandero.ViewModels.Menu
 
         }
         #endregion
+
 
         #region post
         private async Task NuevaMesaCommandExecute()
