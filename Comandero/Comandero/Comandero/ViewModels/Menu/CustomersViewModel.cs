@@ -56,6 +56,7 @@ namespace Comandero.ViewModels.Menu
 
         private HttpClient httpClient;
         private readonly HubConnection _connection;
+        private readonly HubConnection _connection1;
 
         public ICommand SelectedItemCommand => new Command(async (item) => await SelectedItemCommandExecute(item));
 
@@ -75,6 +76,15 @@ namespace Comandero.ViewModels.Menu
             _connection.On<List<MesaModel>>("RecibeMesa", (list) =>
             {
                 llenadoMesasHub(list);
+            });
+
+            _connection1 = new HubConnectionBuilder()
+            .WithUrl(SesionModel.Host + "/platoHub")
+            .Build();
+
+            _connection1.On<List<ResumenPlatoModel>>("RecibePlato", (list) =>
+            {
+                llenaMesas();
             });
             NuevaMesaCommand = new AsyncCommand(NuevaMesaCommandExecute);
             
@@ -109,6 +119,7 @@ namespace Comandero.ViewModels.Menu
                 if (_connection.State != HubConnectionState.Connected)
                 {
                     await _connection.StartAsync();
+                    await _connection1.StartAsync();
                 }
 
                 // Conexión exitosa
@@ -126,6 +137,7 @@ namespace Comandero.ViewModels.Menu
                 if (_connection.State != HubConnectionState.Disconnected)
                 {
                     await _connection.StopAsync();
+                    await _connection1.StopAsync();
                 }
 
                 // Conexión exitosa

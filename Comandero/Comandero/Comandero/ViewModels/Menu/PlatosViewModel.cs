@@ -1,14 +1,18 @@
 ﻿using Comandero.Models.Catalogs;
+using Comandero.Models.Negociantes;
 using Comandero.Services.Api;
 using Comandero.Utils.Commands;
 using DryIoc;
+using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,16 +25,41 @@ namespace Comandero.ViewModels.Menu
 {
     class PlatosViewModel : ViewModelBase
     {
+        #region modal
+        private bool _isLoading;
+        public bool IsLoading
+        {
+            get => _isLoading;
+            set
+            {
+                if (_isLoading != value)
+                {
+                    _isLoading = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+
+
+        #region Inits
         private int mesa;
         private HttpClient httpClient;
-        public ObservableCollection<PlatoModel> Platos { get; set; }
-        private bool inicial = true;
+        private readonly HubConnection _connection;
+        public ObservableCollection<Models.Catalogs.PlatoModel> Platos { get; set; }
 
         public AsyncCommand AgregarPlato { get; set; }
         private int plato;
         public event EventHandler PageAppearing;
         public event EventHandler PageDisappearing;
-        //private System.Timers.Timer timer;
         private string myTextProperty;
 
         public string MyTextProperty
@@ -50,83 +79,80 @@ namespace Comandero.ViewModels.Menu
         public ICommand SelectedItemCommand => new Command(async (item) => await SelectedItemCommandExecute(item));
         public PlatosViewModel(INavigationService navigationService) : base(navigationService)
         {
-            
+
             Title = "Plato";
             AgregarPlato = new AsyncCommand(AgregarPlatoExecute);
             httpClient = new HttpClient();
-            Platos = new ObservableCollection<PlatoModel>();
-            
-            //timer = new System.Timers.Timer();
-            //timer.Interval = 10; // Intervalo de actualización en milisegundos (en este caso, 5 segundos)
-            //timer.Elapsed += TimerElapsed;
-        }
-        private async Task AgregarPlatoExecute()
-        {
-            long auxplato = 0;
-            if(Platos.Count> 0)
+            Platos = new ObservableCollection<Models.Catalogs.PlatoModel>();
+            _connection = new HubConnectionBuilder()
+            .WithUrl(SesionModel.Host + "/platoHub")
+            .Build();
+
+            _connection.On<List<ResumenPlatoModel>>("RecibePlato", (list) =>
             {
-                auxplato = Platos[0].Id;
-            }
-            NavigationParameters param = new NavigationParameters {{ "IdMesa", mesa },{ "idPlato", auxplato } };
-            await NavigationService.NavigateAsync("Comandero",param);
-
-        }
-        private void TimerElapsed(object sender, ElapsedEventArgs e)
-        {
-            //timer.Interval = 3000;
-            llenaPlatos();
-        }
-
-
-
-
-
-        private void llenaPlatos()
-        {
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-                //timer.Stop();
-                try
-                {
-                    httpClient = new HttpClient();
-                    httpClient.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
-                    // Realiza una solicitud GET al servicio web
-                    HttpResponseMessage response = await httpClient.GetAsync(SesionModel.Host + "/Platos?sucursal=" + SesionModel.sucursal +"&mesa=" + mesa + "&plato=" + plato + "&inicial=" + inicial.ToString());
-
-                    // Verifica si la solicitud fue exitosa
-                    if (response.IsSuccessStatusCode)
-                    {
-                        decimal auxtotal = 0;
-                        // Lee la respuesta como una cadena JSON
-                        string json = await response.Content.ReadAsStringAsync();
-
-                        // Deserializa la cadena JSON en un objeto o modelo
-                        var data = JsonConvert.DeserializeObject<List<PlatoModel>>(json);
-                        Platos.Clear();
-                        foreach (var items in data)
-                        {
-                            items.SelectedItemCommand = new Command(async (item) => await SelectedItemCommandExecute(item));
-                            
-                            Platos.Add(items);
-                            auxtotal += items.subtotal;
-                        }
-                        CurrentTotal = auxtotal;
-                        // Utiliza los datos recibidos como desees
-                        // ...
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // Maneja cualquier error que pueda ocurrir
-                }
-                finally
-                {
-                    inicial = false;
-                    llenaPlatos();
-                }
-                colores();
-                //timer.Start();
+                llenadoPlatosHub(list);
             });
+
+        }
+        #endregion
+
+
+        #region methods
+        public async Task StartAsync()
+        {
+            try
+            {
+                if (_connection.State != HubConnectionState.Connected)
+                {
+                    await _connection.StartAsync();
+                }
+
+                // Conexión exitosa
+            }
+            catch (Exception ex)
+            {
+                // Manejar errores de conexión
+            }
+        }
+
+        public async Task StopAsync()
+        {
+            try
+            {
+                if (_connection.State != HubConnectionState.Disconnected)
+                {
+                    await _connection.StopAsync();
+                }
+
+                // Conexión exitosa
+            }
+            catch (Exception ex)
+            {
+                // Manejar errores de conexión
+            }
+        }
+        private void llenadoPlatosHub(List<ResumenPlatoModel> list)
+        {
+            IsLoading = true;
+            Platos.Clear();
+            CurrentTotal = 0;
+            foreach (ResumenPlatoModel items in list)
+            {
+                Platos.Add(new Models.Catalogs.PlatoModel());
+                Platos.Last().Id = items.Id;
+                Platos.Last().idComanda = items.idComanda;
+                Platos.Last().idProducto = items.idProducto;
+                Platos.Last().cantidad = items.cantidad;
+                Platos.Last().estatus = items.estatus;
+                Platos.Last().Icon = items.Icon;
+                Platos.Last().subtotal = items.subtotal;
+                Platos.Last().Name = items.Name;
+                Platos.Last().SelectedItemCommand = new Command(async (item) => await SelectedItemCommandExecute(item));
+                CurrentTotal += items.subtotal;
+                //Tables.Add(items);                
+            }
+            colores();
+            IsLoading = false;
         }
 
         private void colores()
@@ -150,17 +176,71 @@ namespace Comandero.ViewModels.Menu
 
             }
         }
+        #endregion
+
+
+        #region get
+        private void llenaPlatos()
+        {
+            IsLoading = true;
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                //timer.Stop();
+                try
+                {
+                    httpClient = new HttpClient();
+                    string query = SesionModel.Host + "/Platos?sucursal=" + SesionModel.sucursal + "&mesa=" + mesa + "&plato=" + plato;
+                    HttpResponseMessage response = await httpClient.GetAsync(query);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        decimal auxtotal = 0;
+                        string json = await response.Content.ReadAsStringAsync();
+                        List<ResumenPlatoModel> data = JsonConvert.DeserializeObject<List<ResumenPlatoModel>>(json);
+                        llenadoPlatosHub(data);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Maneja cualquier error que pueda ocurrir
+                }
+                finally
+                {
+                    IsLoading = false;
+                    StartAsync();
+                }
+            });
+        }
+
+        #endregion
+
+
+        #region events
+        private async Task AgregarPlatoExecute()
+        {
+            long auxplato = 0;
+            if (Platos.Count > 0)
+            {
+                auxplato = Platos[0].Id;
+            }
+            NavigationParameters param = new NavigationParameters { { "IdMesa", mesa }, { "idPlato", auxplato } };
+            await NavigationService.NavigateAsync("Comandero", param);
+
+        }
+
+
+
+
         public virtual void OnPageAppearing()
         {
             //timer.Start();
-            
+
             PageAppearing?.Invoke(this, EventArgs.Empty);
         }
 
         public virtual void OnPageDisappearing()
         {
-            httpClient.CancelPendingRequests();
-            httpClient.Dispose();
+            StopAsync();
             PageDisappearing?.Invoke(this, EventArgs.Empty);
         }
 
@@ -191,15 +271,17 @@ namespace Comandero.ViewModels.Menu
 
         private async Task SelectedItemCommandExecute(object item)
         {
-            if (item is PlatoModel itemMenu)
+            if (item is Models.Catalogs.PlatoModel itemMenu)
             {
                 if (itemMenu.estatus.Equals("Enviado"))
-                {                    
+                {
                     //NavigationParameters param = new NavigationParameters { { "IdPlato", itemMenu.Id }, { "IdMesa", mesa } };
                     //await NavigationService.NavigateAsync("Plato", param);
                 }
 
             }
         }
+        #endregion
+
     }
 }

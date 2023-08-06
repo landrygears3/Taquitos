@@ -1,4 +1,5 @@
 ﻿using Comandero.Models.Catalogs;
+using Comandero.Models.Negociantes;
 using Comandero.Services.Api;
 using Comandero.UI.IconsApp;
 using Comandero.UI.ItemsCollectionView;
@@ -54,7 +55,7 @@ namespace Comandero.ViewModels.Menu
 
         #region Inits
         private HttpClient httpClient;
-
+        private readonly HubConnection _connection;
 
         private string myTextProperty;
         public AsyncCommand AgregarNewDataCommand { get; set; }
@@ -75,7 +76,7 @@ namespace Comandero.ViewModels.Menu
 
         public ICommand SelectedItemCommand => new Command(async (item) => await SelectedItemCommandExecute(item));
 
-        public ObservableCollection<PlatoModel> Platos { get; set; }
+        public ObservableCollection<Models.Catalogs.PlatoModel> Platos { get; set; }
 
         private int mesa = 0;
 
@@ -87,13 +88,55 @@ namespace Comandero.ViewModels.Menu
             AgregarNewDataCommand = new AsyncCommand(AgregarNewDataCommandExecute);
             Title = "Comanda";
             httpClient = new HttpClient();
-            Platos = new ObservableCollection<PlatoModel>();
+            Platos = new ObservableCollection<Models.Catalogs.PlatoModel>();
+            _connection = new HubConnectionBuilder()
+            .WithUrl(SesionModel.Host + "/platoHub")
+            .Build();
+
+            _connection.On<List<ResumenPlatoModel>>("RecibePlato", (list) =>
+            {
+                llenaPlatos();
+            });
 
         }
         #endregion
 
 
         #region methods
+
+        public async Task StartAsync()
+        {
+            try
+            {
+                if (_connection.State != HubConnectionState.Connected)
+                {
+                    await _connection.StartAsync();
+                }
+
+                // Conexión exitosa
+            }
+            catch (Exception ex)
+            {
+                // Manejar errores de conexión
+            }
+        }
+
+        public async Task StopAsync()
+        {
+            try
+            {
+                if (_connection.State != HubConnectionState.Disconnected)
+                {
+                    await _connection.StopAsync();
+                }
+
+                // Conexión exitosa
+            }
+            catch (Exception ex)
+            {
+                // Manejar errores de conexión
+            }
+        }
         private void colores()
         {
             Color c1 = new Color();
@@ -140,7 +183,7 @@ namespace Comandero.ViewModels.Menu
                         string json = await response.Content.ReadAsStringAsync();
 
                         // Deserializa la cadena JSON en un objeto o modelo
-                        var data = JsonConvert.DeserializeObject<List<PlatoModel>>(json);
+                        var data = JsonConvert.DeserializeObject<List<Models.Catalogs.PlatoModel>>(json);
                         Platos.Clear();
                         foreach (var items in data)
                         {
@@ -162,8 +205,10 @@ namespace Comandero.ViewModels.Menu
                 {
                     //httpClient.Dispose();
                     IsLoading = false;
+                    colores();
+                    await StartAsync();
                 }
-                colores();
+               
             });
         }
         #endregion
@@ -172,7 +217,7 @@ namespace Comandero.ViewModels.Menu
         #region events
         private async Task SelectedItemCommandExecute(object item)
         {
-            if (item is PlatoModel itemMenu)
+            if (item is Models.Catalogs.PlatoModel itemMenu)
             {
                 NavigationParameters param = new NavigationParameters { { "IdPlato", itemMenu.Id }, { "IdMesa", mesa } };
                 await NavigationService.NavigateAsync("Plato", param);
@@ -198,7 +243,7 @@ namespace Comandero.ViewModels.Menu
         public virtual void OnPageDisappearing()
         {
             PageDisappearing?.Invoke(this, EventArgs.Empty);
-
+            StopAsync();
         }
 
 

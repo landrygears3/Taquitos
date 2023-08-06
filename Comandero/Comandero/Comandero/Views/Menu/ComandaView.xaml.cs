@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Comandero.ViewModels.Menu;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,5 +18,16 @@ namespace Comandero.Views.Menu
 			InitializeComponent ();
             NavigationPage.SetHasNavigationBar(this, false);
         }
-	}
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ((ComandaViewModel)BindingContext).OnPageAppearing();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            ((ComandaViewModel)BindingContext).OnPageDisappearing();
+        }
+    }
 }
