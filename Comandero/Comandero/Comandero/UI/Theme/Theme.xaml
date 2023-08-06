@@ -37,10 +37,12 @@
     <x:Double x:Key="HeightEntryDouble">35</x:Double>
 
     <Color x:Key="TransparentColor">Transparent</Color>
+    <Color x:Key="TransparentBlackColor">#80100000</Color>
     <Color x:Key="ButtonMessageTextColor">#f9f7f7</Color>
     <Color x:Key="ButtonMessageBackgroundColor">#F5833C</Color>
     <Color x:Key="TitleMessageTextColor">Black</Color>
     <Color x:Key="MessageTextColor">Black</Color>
+    
     <Color x:Key="MessageBackgroundColor">#f9f7f7</Color>
     <Color x:Key="MasterBackgroundColor">#F5833C</Color>
     <Color x:Key="PopupBackground">#60ffffff</Color>

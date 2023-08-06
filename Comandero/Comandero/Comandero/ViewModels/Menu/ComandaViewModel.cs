@@ -42,6 +42,8 @@ namespace Comandero.ViewModels.Menu
 
         public AsyncCommand AgregarDataCommand { get; set; }
 
+        public bool habilitado = true;
+
 
         public ObservableCollection<ProductoModel> Productos { get; set; }
         public ICommand MasCommand => new Command(async (item) => await MasCommandExecute(item));
@@ -84,6 +86,7 @@ namespace Comandero.ViewModels.Menu
                 {
                     var jsonData = JsonConvert.SerializeObject(momdelosubida);
                     var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                    habilitado = false;
                     HttpResponseMessage message = await httpClient.PostAsync(SesionModel.Host + "/Platos", content);
                     NavigationParameters param = new NavigationParameters { { "back", true }};
                     await NavigationService.GoBackAsync(param);

@@ -1,4 +1,5 @@
 ﻿using Comandero.Models.Catalogs;
+using Comandero.Services.Api;
 using Comandero.UI.IconsApp;
 using Comandero.UI.ItemsCollectionView;
 using Comandero.UI.Renderers;
@@ -61,7 +62,11 @@ namespace Comandero.ViewModels.Menu
         
         public virtual void OnPageDisappearing()
         {
+
+            httpClient.CancelPendingRequests();
+            httpClient.Dispose();
             PageDisappearing?.Invoke(this, EventArgs.Empty);
+
         }
         public DishesViewModel(INavigationService navigationService ) : base(navigationService)
         {
@@ -124,7 +129,7 @@ namespace Comandero.ViewModels.Menu
                 }
                 finally
                 {
-                    httpClient.Dispose();
+                    //httpClient.Dispose();
                     inicial = false;
                     llenaPlatos();
                 }

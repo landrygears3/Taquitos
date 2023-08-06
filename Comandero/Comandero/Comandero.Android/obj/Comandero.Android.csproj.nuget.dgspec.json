@@ -46,21 +46,9 @@
               "target": "Package",
               "version": "[8.1.97, )"
             },
-            "Prism.DryIoc.Forms": {
-              "target": "Package",
-              "version": "[8.1.97, )"
-            },
             "Xamarin.Essentials.Interfaces": {
               "target": "Package",
               "version": "[1.7.0, )"
-            },
-            "Xamarin.Essentials.Interfaces": {
-              "target": "Package",
-              "version": "[1.7.0, )"
-            },
-            "Xamarin.Forms": {
-              "target": "Package",
-              "version": "[5.0.0.2291, )"
             },
             "Xamarin.Forms": {
               "target": "Package",

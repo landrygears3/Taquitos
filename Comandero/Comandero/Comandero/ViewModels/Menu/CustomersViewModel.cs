@@ -1,4 +1,5 @@
 ﻿using Comandero.Models.Catalogs;
+using Comandero.Models.Negociantes;
 using Comandero.Services.Api;
 using Comandero.Utils.Commands;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -8,8 +9,11 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.Design;
+using System.Linq;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,76 +23,148 @@ using Xamarin.Forms;
 
 namespace Comandero.ViewModels.Menu
 {
-    internal class CustomersViewModel : ViewModelBase
+    internal class CustomersViewModel : ViewModelBase, INotifyPropertyChanged
     {
 
+        #region modal
+        private bool _isLoading;
+        public bool IsLoading
+        {
+            get => _isLoading;
+            set
+            {
+                if (_isLoading != value)
+                {
+                    _isLoading = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
+        // Resto del código de la clase...
 
-        #region Windo
+        #region INotifyPropertyChanged implementation
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+
+        #endregion
+
+        #region Inits
 
 
         private HttpClient httpClient;
-        private HttpClient httpClientNew;
-
-        //private System.Timers.Timer timer;
+        private HttpClient httpClientnew;
+        private readonly HubConnection _connection;
 
         public ICommand SelectedItemCommand => new Command(async (item) => await SelectedItemCommandExecute(item));
 
         public ObservableCollection<TableModel> Tables { get; set; }
 
         public AsyncCommand NuevaMesaCommand { get; set; }
-        private bool inicial = true;
 
         public CustomersViewModel(INavigationService navigationService) : base(navigationService)
         {
-            
-            httpClientNew = new HttpClient();
             Title = "Customers";
             Tables = new ObservableCollection<TableModel>();
             
-            llenaMesas();
-            //timer = new System.Timers.Timer();
-            //timer.Interval = 1; // Intervalo de actualización en milisegundos (en este caso, 5 segundos)
-            //timer.Elapsed += TimerElapsed;
+            _connection = new HubConnectionBuilder()
+               .WithUrl(SesionModel.Host + "/mesaHub")
+               .Build();
+
+            _connection.On<List<MesaModel>>("RecibeMesa", (list) =>
+            {
+                Tables.Clear();
+                foreach (MesaModel items in list)
+                {
+                    Tables.Add(new TableModel());
+                    Tables.Last().Icon = items.Icon; 
+                    Tables.Last().Name = items.Name;
+                    Tables.Last().Id = items.Id;
+                    Tables.Last().Current = items.Current;
+                    Tables.Last().CurrentCommand = items.CurrentCommand;
+                    Tables.Last().SelectedItemCommand = new Command(async (item) => await SelectedItemCommandExecute(item));
+                    //Tables.Add(items);
+                    IsLoading = false;
+                }
+                colores();
+            });
             NuevaMesaCommand = new AsyncCommand(NuevaMesaCommandExecute);
-
+            
         }
+        #endregion
 
-        private async Task NuevaMesaCommandExecute()
+
+
+        #region methods
+        public async Task StartAsync()
         {
             try
             {
-                List<int> list = new List<int> {SesionModel.sucursal };
-                var jsonData = JsonConvert.SerializeObject(list);
-                var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                HttpResponseMessage message = await httpClientNew.PostAsync(SesionModel.Host + "/Table", content);
-                // Verifica si la solicitud fue exitosa
-               
+                if (_connection.State != HubConnectionState.Connected)
+                {
+                    await _connection.StartAsync();
+                }
+
+                // Conexión exitosa
             }
             catch (Exception ex)
             {
-                // Maneja cualquier error que pueda ocurrir
+                // Manejar errores de conexión
             }
-
         }
 
-        private void TimerElapsed(object sender, ElapsedEventArgs e)
+        public async Task StopAsync()
         {
-            //timer.Interval = 3000;
-            llenaMesas();
+            try
+            {
+                if (_connection.State != HubConnectionState.Disconnected)
+                {
+                    await _connection.StopAsync();
+                }
+
+                // Conexión exitosa
+            }
+            catch (Exception ex)
+            {
+                // Manejar errores de conexión
+            }
         }
 
+        public async Task EnviarMesa()
+        {
+            IsLoading = true;
+            await _connection.InvokeAsync("EnviarMesa", SesionModel.sucursal);
+
+        }
+        #endregion
+
+        #region post
+        private async Task NuevaMesaCommandExecute()
+        {
+           await EnviarMesa();
+
+        }
+        #endregion
+
+
+        #region Get
         private void llenaMesas()
         {
+            
             Device.BeginInvokeOnMainThread(async () =>
             {
-                //timer.Stop();
+                
                 try
                 {
+                    IsLoading = true;
                     // Realiza una solicitud GET al servicio web
                     httpClient = new HttpClient();
-                    httpClient.Timeout = TimeSpan.FromMilliseconds(Timeout.Infinite);
-                    HttpResponseMessage response = await httpClient.GetAsync(SesionModel.Host + "/Table?sucursal=" + SesionModel.sucursal + "&inicial=" + inicial.ToString());
+                    string query = SesionModel.Host + "/Mesa?sucursal=" + SesionModel.sucursal;
+                    HttpResponseMessage response = await httpClient.GetAsync(query);
 
                     // Verifica si la solicitud fue exitosa
                     if (response.IsSuccessStatusCode)
@@ -106,7 +182,9 @@ namespace Comandero.ViewModels.Menu
                         }
                         // Utiliza los datos recibidos como desees
                         // ...
+
                     }
+
                 }
                 catch (Exception ex)
                 {
@@ -114,29 +192,29 @@ namespace Comandero.ViewModels.Menu
                 }
                 finally
                 {
-                    httpClient.Dispose();
-                    inicial = false;
-                    llenaMesas();
+                    IsLoading = false;
+                    StartAsync();                    
                 }
                 colores();
-                //timer.Start();
             });
         }
+        #endregion
 
+
+        #region Events
         public event EventHandler PageAppearing;
         public event EventHandler Disappearing;
 
         public virtual void OnPageAppearing()
         {
             PageAppearing?.Invoke(this, EventArgs.Empty);
-            //timer.Start();
-            //llenaMesas();
-        }        
-        
+            llenaMesas();
+        }
+
         public virtual void OnPageDisappearing()
         {
+            StopAsync();
             PageAppearing?.Invoke(this, EventArgs.Empty);
-            //timer.Stop();
         }
 
 
@@ -158,7 +236,7 @@ namespace Comandero.ViewModels.Menu
                     item.BgColor = c2;
                 }
                 aux = !aux;
-                
+
             }
         }
 
@@ -166,10 +244,12 @@ namespace Comandero.ViewModels.Menu
         {
             if (item is TableModel itemMenu)
             {
-                NavigationParameters param = new NavigationParameters{ { "IdMesa", itemMenu.Id } };
-                await NavigationService.NavigateAsync("Comanda",param);
+                NavigationParameters param = new NavigationParameters { { "IdMesa", itemMenu.Id } };
+                await NavigationService.NavigateAsync("Comanda", param);
             }
         }
         #endregion
+
+
     }
 }

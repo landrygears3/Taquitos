@@ -17,7 +17,6 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
             <BoxView
                 Grid.Row="0"
                 Grid.Column="0"
@@ -25,14 +24,7 @@
                 BackgroundColor="{DynamicResource PrimaryColor}"
                 HeightRequest="60"
                 ></BoxView>
-            <Image
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    VerticalOptions="Start"
-                    HorizontalOptions="Center"
-                    WidthRequest="120" 
-                    HeightRequest="120"
-                    Style="{DynamicResource IconBrand}" />
+
             <Renderers:IconAwesomeButtonBase
                     Style="{StaticResource ButtonBack}"
                     Command="{Binding BackToPreviousPageCommand}"
@@ -73,7 +65,7 @@
                 <Renderers:ButtonBase
                     x:Name="NewTableButton"
                     Command="{Binding NuevaMesaCommand}"
-                    Style="{StaticResource ButtonPrimary}"                    
+                    Style="{StaticResource ButtonPrimary}"  
                     Grid.Column="1"
                     Grid.Row="0"
                     WidthRequest="100"
@@ -99,6 +91,16 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <Customs:ModalCargandoCustom Grid.Column="0" Grid.Row="1" Grid.RowSpan="1" Margin="-70" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsLoading="{Binding IsLoading}" AbsoluteLayout.LayoutFlags="All"/>
+            <Image
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    VerticalOptions="Start"
+                    HorizontalOptions="Center"
+                    WidthRequest="120" 
+                    HeightRequest="120"
+                    Style="{DynamicResource IconBrand}" />
         </Grid>
+        
     </ContentPage.Content>
 </ContentPage>

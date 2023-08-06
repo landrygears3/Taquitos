@@ -1,4 +1,5 @@
 ﻿using Comandero.Models.Catalogs;
+using Comandero.Services.Api;
 using Comandero.Utils.Commands;
 using DryIoc;
 using Newtonsoft.Json;
@@ -120,7 +121,6 @@ namespace Comandero.ViewModels.Menu
                 }
                 finally
                 {
-                    httpClient.Dispose();
                     inicial = false;
                     llenaPlatos();
                 }
@@ -153,12 +153,14 @@ namespace Comandero.ViewModels.Menu
         public virtual void OnPageAppearing()
         {
             //timer.Start();
+            
             PageAppearing?.Invoke(this, EventArgs.Empty);
         }
 
         public virtual void OnPageDisappearing()
         {
-            //timer.Stop();
+            httpClient.CancelPendingRequests();
+            httpClient.Dispose();
             PageDisappearing?.Invoke(this, EventArgs.Empty);
         }
 

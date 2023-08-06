@@ -67,6 +67,7 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Text="Agregar"
+                IsVisible="{Binding habilitado}"
                 Margin="30,20"
                 Style="{StaticResource ButtonPrimary}"/>
         </Grid>
