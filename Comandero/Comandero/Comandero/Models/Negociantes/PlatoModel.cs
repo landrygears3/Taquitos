@@ -11,5 +11,7 @@ namespace Comandero.Models.Negociantes
         public int idProducto { get; set; }
         public int Cantidad { get; set; }
         public string Estatus { get; set; }
+        public string Nombre { get; set; }
+        public decimal Costo { get; set; }
     }
 }

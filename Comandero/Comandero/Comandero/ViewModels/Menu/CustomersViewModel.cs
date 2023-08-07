@@ -2,6 +2,7 @@
 using Comandero.Models.Negociantes;
 using Comandero.Services.Api;
 using Comandero.Utils.Commands;
+using DryIoc;
 using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
 using Prism.Common;
@@ -51,6 +52,7 @@ namespace Comandero.ViewModels.Menu
         public ObservableCollection<TableModel> Tables { get; set; }
 
         public AsyncCommand NuevaMesaCommand { get; set; }
+        public AsyncCommand LlevarCommand { get; set; }
 
         public CustomersViewModel(INavigationService navigationService) : base(navigationService)
         {
@@ -75,6 +77,7 @@ namespace Comandero.ViewModels.Menu
                 llenaMesas();
             });
             NuevaMesaCommand = new AsyncCommand(NuevaMesaCommandExecute);
+            LlevarCommand = new AsyncCommand(LlevarCommandExecute);
             
         }
 
@@ -149,6 +152,13 @@ namespace Comandero.ViewModels.Menu
         private async Task NuevaMesaCommandExecute()
         {
            await EnviarMesa();
+
+        }        
+        
+        private async Task LlevarCommandExecute()
+        {
+            NavigationParameters param = new NavigationParameters { { "Tipo", "Llevar" } };
+            await NavigationService.NavigateAsync("Comandero", param);
 
         }
         #endregion

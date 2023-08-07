@@ -64,6 +64,7 @@ namespace Comandero.ViewModels.Cobro
         public event EventHandler PageAppearing;
         public event EventHandler PageDisappearing;
         List<Models.Negociantes.PlatoModel> productos;
+        private readonly HubConnection _connection;
         public AsyncCommand CerrarCuentaCommand { get; set; }
 
         private HttpClient httpClient;
@@ -75,12 +76,49 @@ namespace Comandero.ViewModels.Cobro
             Productos = new ObservableCollection<CobroModel>();
             Pagorecibido = "";
             Title = "Cobro";
+            _connection = new HubConnectionBuilder()
+                .WithUrl(SesionModel.Host + "/platoHub")
+                .Build();
 
         }
         #endregion
 
 
         #region methods
+
+        public async Task StartAsync()
+        {
+            try
+            {
+                if (_connection.State != HubConnectionState.Connected)
+                {
+                    await _connection.StartAsync();
+                }
+
+                // Conexión exitosa
+            }
+            catch (Exception ex)
+            {
+                // Manejar errores de conexión
+            }
+        }
+
+        public async Task StopAsync()
+        {
+            try
+            {
+                if (_connection.State != HubConnectionState.Disconnected)
+                {
+                    await _connection.StopAsync();
+                }
+
+                // Conexión exitosa
+            }
+            catch (Exception ex)
+            {
+                // Manejar errores de conexión
+            }
+        }
         #endregion
 
         #region get
@@ -155,11 +193,16 @@ namespace Comandero.ViewModels.Cobro
         #endregion
 
         #region events
+        public async Task EnviarPlato(List<Models.Negociantes.PlatoModel> momdelosubida,string tipoE)
+        {
+            IsLoading = true;
+            await _connection.InvokeAsync("EnviarPlato", momdelosubida, SesionModel.sucursal, tipoE);
 
+        }
         private async Task CerrarCuentaCommandExecute()
         {
             string mensaje = "¿Desea cerrar la cuenta y cobrar productos?";
-            bool salir = false;
+            bool salir = true;
             if (!Pagorecibido.Trim().Equals(string.Empty))
             {   
                 try
@@ -202,6 +245,12 @@ namespace Comandero.ViewModels.Cobro
                     httpClient = new HttpClient();
                     string query = "/Cobro?mesa=" + mesa + "&sucursal=" + SesionModel.sucursal + "&tipo=" + Tipo;
                     HttpResponseMessage message = await httpClient.PostAsync(SesionModel.Host + query, content);
+
+                    if(Tipo != "Llevar")
+                    {
+                        await EnviarPlato(productos,"Tick");
+                    }
+                    
                 }
                 catch (Exception ex)
                 {
@@ -227,21 +276,55 @@ namespace Comandero.ViewModels.Cobro
             {
                 mesa = idMesa;
             }
-            if (parameters.TryGetValue("Productos", out List<Models.Negociantes.PlatoModel> Productos))
+            if (parameters.TryGetValue("Productos", out List<Models.Negociantes.PlatoModel> productos))
             {
-                productos = Productos;
+                Productos.Clear();
+                Dictionary<int, ResumenPlatoModel> resumenPlatos = new Dictionary<int, ResumenPlatoModel>();
+                foreach (var items in productos)
+                {
+                    if (!resumenPlatos.ContainsKey(items.idProducto))
+                    {
+                        resumenPlatos.Add(items.idProducto, new ResumenPlatoModel());
+                    }
+                    resumenPlatos[items.idProducto].Id = items.Id;
+                    resumenPlatos[items.idProducto].idComanda = 0;
+                    resumenPlatos[items.idProducto].idProducto = items.idProducto;
+                    resumenPlatos[items.idProducto].cantidad += items.Cantidad;
+                    resumenPlatos[items.idProducto].Sucursal = SesionModel.sucursal;
+                    resumenPlatos[items.idProducto].estatus = items.Estatus;
+                    resumenPlatos[items.idProducto].Name = items.Nombre;
+                    resumenPlatos[items.idProducto].subtotal += items.Costo * items.Cantidad;
+
+                }
+                decimal auxCurrentTotal = 0;
+                foreach (var item in resumenPlatos)
+                {
+                    Productos.Add(new CobroModel());
+                    Productos.Last().Name = item.Value.Name;
+                    Productos.Last().Total = item.Value.subtotal;
+                    Productos.Last().Cantidad = item.Value.cantidad;
+                    auxCurrentTotal += item.Value.subtotal;
+                }
+                CurrentTotal = auxCurrentTotal;
             }
 
         }
         public virtual void OnPageAppearing()
         {
-            llenaPlatos();
+            if(Tipo != "Llevar")
+            {
+                llenaPlatos();
+                StartAsync();
+            }
+
+            
             PageAppearing?.Invoke(this, EventArgs.Empty);
         }
 
         public virtual void OnPageDisappearing()
         {
-            PageAppearing?.Invoke(this, EventArgs.Empty);
+            StartAsync();
+            PageDisappearing?.Invoke(this, EventArgs.Empty);
         }
         #endregion
     }

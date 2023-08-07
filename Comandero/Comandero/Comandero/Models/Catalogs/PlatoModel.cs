@@ -15,6 +15,7 @@ namespace Comandero.Models.Catalogs
         public string estatus { get; set; }
         public string Icon { get; set; } = "user";
         public decimal subtotal { get; set; }
+        public string Nombre { get; set; }
         public Color BgColor { get; set; }
 
         public string Name { get; set; }

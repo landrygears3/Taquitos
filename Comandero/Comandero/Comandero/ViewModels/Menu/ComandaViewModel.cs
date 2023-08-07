@@ -43,7 +43,7 @@ namespace Comandero.ViewModels.Menu
         #region Inits
         private int mesa;
         private int idplato;
-
+        private string Tipo = "";
         public AsyncCommand AgregarDataCommand { get; set; }
 
         public bool habilitado = true;
@@ -132,7 +132,7 @@ namespace Comandero.ViewModels.Menu
         public async Task EnviarPlato(List<Models.Negociantes.PlatoModel> momdelosubida)
         {
             IsLoading = true;
-            await _connection.InvokeAsync("EnviarPlato", momdelosubida, SesionModel.sucursal);
+            await _connection.InvokeAsync("EnviarPlato", momdelosubida, SesionModel.sucursal,"");
 
         }
         #endregion
@@ -176,7 +176,11 @@ namespace Comandero.ViewModels.Menu
                 {
                     colores();
                     IsLoading = false;
-                    await StartAsync();
+                    if(Tipo!="Llevar")
+                    {
+                        await StartAsync();
+                    }
+                    
                 }
                 
             });
@@ -196,6 +200,10 @@ namespace Comandero.ViewModels.Menu
             {
                 idplato = idPlato;
             }
+            if (parameters.TryGetValue("Tipo", out string tipo))
+            {
+                Tipo = tipo;
+            }
         }
 
 
@@ -208,7 +216,7 @@ namespace Comandero.ViewModels.Menu
         public virtual void OnPageDisappearing()
         {
             StopAsync();
-            PageAppearing?.Invoke(this, EventArgs.Empty);
+            PageDisappearing?.Invoke(this, EventArgs.Empty);
         }
 
 
@@ -216,7 +224,73 @@ namespace Comandero.ViewModels.Menu
 
         private async Task AgregarDataCommandExecute()
         {
+            if (Tipo == "Llevar")
+            {
+                await TipoLlevar();
+            }
+            else
+            {
+               await TipoMesa();
+            }
+        }
 
+        private async Task TipoLlevar()
+        {
+            decimal CurrentTotal = 0;
+
+            try
+            {
+                IsLoading = true;
+                // Realiza una solicitud GET al servicio web
+                List<Models.Negociantes.PlatoModel> momdelosubida = new List<Models.Negociantes.PlatoModel>();
+                foreach (var model in Productos)
+                {
+                    if (model.Cantidad > 0)
+                    {
+                        momdelosubida.Add(new Models.Negociantes.PlatoModel());
+                        momdelosubida.Last().Id = idplato;
+                        momdelosubida.Last().IdMesa = mesa;
+                        momdelosubida.Last().idProducto = model.Id;
+                        momdelosubida.Last().Cantidad = model.Cantidad;
+                        momdelosubida.Last().Estatus = "Enviado";
+                        momdelosubida.Last().Costo = model.Costo;
+                        momdelosubida.Last().Nombre = model.NombreProducto;
+                    }
+                }
+                bool salir = false;
+                if (momdelosubida.Count() > 0)
+                {
+                    NavigationParameters param = new NavigationParameters { { "Tipo", "Llevar" }, { "IdMesa", 0 }, { "Productos", momdelosubida } };
+                    await NavigationService.NavigateAsync("Cobro", param);
+
+                }
+                else
+                {
+                    salir = await App.Current.MainPage.DisplayAlert("Atención", "¿Deseas salir sin agregar Productos?", "Si", "Seguir agregando");
+
+                }
+                if (salir)
+                {
+                    NavigationParameters param = new NavigationParameters { { "back", true } };
+                    await NavigationService.GoBackAsync(param);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                // Maneja cualquier error que pueda ocurrir
+            }
+            finally
+            {
+                IsLoading = false;
+                await StopAsync();
+            }
+
+        }
+
+        private async Task TipoMesa()
+        {
             try
             {
                 IsLoading = true;
@@ -261,12 +335,9 @@ namespace Comandero.ViewModels.Menu
             finally
             {
                 IsLoading = false;
-                StopAsync();
+                await StopAsync();
             }
-
-
         }
-
         private async Task MasCommandExecute(object item)
         {
             if (item is ProductoModel itemMenu)

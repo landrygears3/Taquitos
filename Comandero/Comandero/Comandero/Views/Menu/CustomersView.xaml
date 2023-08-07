@@ -55,7 +55,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Renderers:ButtonBase
-                    Command="{Binding QuickCommand}"
+                    Command="{Binding LlevarCommand}"
                     Style="{StaticResource ButtonPrimary}"
                     Grid.Column="0"
                     Grid.Row="0"
