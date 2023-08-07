@@ -47,7 +47,7 @@ namespace Comandero.ViewModels.Menu
         private readonly HubConnection _connection;
         private readonly HubConnection _connection1;
 
-        public ICommand SelectedItemCommand => new Command(async (item) => await SelectedItemCommandExecute(item));
+        //public ICommand SelectedItemCommand => new Command(async (item) => await SelectedItemCommandExecute(item));
 
         public ObservableCollection<TableModel> Tables { get; set; }
 

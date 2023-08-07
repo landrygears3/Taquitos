@@ -6,7 +6,7 @@
              x:Class="Comandero.UI.ItemsCollectionView.ItemCocinaCollectionView">
     <SwipeView.LeftItems>
         <SwipeItems>
-            <SwipeItemView Command="{Binding EnviarPlato}"
+            <SwipeItemView Command="{Binding SelectedItemCommand}"
                            BackgroundColor="{DynamicResource PrimaryColor}">
                 <Grid HeightRequest="100" WidthRequest="100">
                     <Grid.RowDefinitions>

@@ -50,6 +50,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Items:ItemCocinaCollectionView
+                            SelectedCommand="{Binding SelectedItemCommand}"
                     HeightRequest="90"/>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

@@ -13,6 +13,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Comandero.ViewModels.Cocina
@@ -36,7 +37,7 @@ namespace Comandero.ViewModels.Cocina
         public event EventHandler PageAppearing;
         public event EventHandler Disappearing;
         public ObservableCollection<Models.Catalogs.PlatoModel> Platos { get; set; }
-
+        //public ICommand SelectedItemCommand => new Command(async (item) => await SelectedItemCommandExecute(item));
         public CocinaViewModel(INavigationService navigationService) : base(navigationService)
         {
             Platos = new ObservableCollection<Models.Catalogs.PlatoModel>();
@@ -115,11 +116,9 @@ namespace Comandero.ViewModels.Cocina
         #endregion
 
         #region get
-        private void llenaPlatos()
+        private async Task llenaPlatos()
         {
             IsLoading = true;
-            Device.BeginInvokeOnMainThread(async () =>
-            {
 
                 try
                 {
@@ -141,16 +140,19 @@ namespace Comandero.ViewModels.Cocina
                         Platos.Clear();
                         foreach (ResumenPlatoModel items in data)
                         {
-                           // items.SelectedItemCommand = new Command(async (item) => await SelectedItemCommandExecute(item));
-                            Platos.Add(new Models.Catalogs.PlatoModel());
-                            Platos.Last().Id = items.Id;                                  
-                            Platos.Last().idComanda = items.idComanda;                               
-                            Platos.Last().idProducto = items.idProducto;                               
-                            Platos.Last().cantidad = items.cantidad;                               
-                            Platos.Last().estatus = items.estatus;                               
-                            Platos.Last().Nombre = items.Name;                                   
-                            Platos.Last().NombreMesa = items.Namemesa;                               
-                            auxCurrentTotal += items.subtotal;
+                        // items.SelectedItemCommand = new Command(async (item) => await SelectedItemCommandExecute(item));
+                            Models.Catalogs.PlatoModel plato = new Models.Catalogs.PlatoModel();
+                            
+                            plato.Id = items.Id;                                  
+                            plato.idComanda = items.idComanda;                               
+                            plato.idProducto = items.idProducto;                               
+                            plato.cantidad = items.cantidad;                               
+                            plato.estatus = items.estatus;                               
+                            plato.Nombre = items.Name;                                   
+                            plato.NombreMesa = items.Namemesa;                               
+                            plato.SelectedItemCommand = new Command(async (item) => await SelectedItemCommandExecute(plato));
+                        Platos.Add(plato);
+                        auxCurrentTotal += items.subtotal;
                         }
                         
                         // Utiliza los datos recibidos como desees
@@ -168,7 +170,6 @@ namespace Comandero.ViewModels.Cocina
                     colores();
                 }
 
-            });
         }
         #endregion
 
@@ -184,6 +185,29 @@ namespace Comandero.ViewModels.Cocina
         {
             StopAsync();
             Disappearing?.Invoke(this, EventArgs.Empty);
+        }
+
+        private async Task SelectedItemCommandExecute(object item)
+        {
+            if (item is Models.Catalogs.PlatoModel itemMenu)
+            {
+                try
+                {
+                    IsLoading = true;
+                    httpClient = new HttpClient();
+                    string query = "/Cocina?Id="+itemMenu.Id + "&comanda="+itemMenu.idComanda+"&producto="+itemMenu.idProducto;
+                    HttpResponseMessage message = await httpClient.PostAsync(SesionModel.Host + query,null);
+                    llenaPlatos();
+                }
+                catch (Exception ex)
+                {
+                    await App.Current.MainPage.DisplayAlert("Atención", "Ocurrió un error al actualizar", "Aceptar");
+                }
+                finally
+                {
+                    IsLoading = false;
+                }
+            }
         }
         #endregion
     }
