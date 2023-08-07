@@ -227,7 +227,7 @@ namespace Comandero.ViewModels.Menu
         public virtual void OnPageDisappearing()
         {
             StopAsync();
-            PageAppearing?.Invoke(this, EventArgs.Empty);
+            Disappearing?.Invoke(this, EventArgs.Empty);
         }
 
 

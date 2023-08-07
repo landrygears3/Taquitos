@@ -13,6 +13,7 @@ namespace Comandero.Models.Negociantes
         public int Sucursal { get; set; }
         public string estatus { get; set; } 
         public string Name { get; set; }
+        public string Namemesa { get; set; }
         public string Icon { get; set; }
         public decimal subtotal { get; set; } = decimal.Zero;
     }

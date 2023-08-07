@@ -10,6 +10,8 @@ namespace Comandero.Models.Catalogs
     {
         public long Id { get; set; }
         public int idComanda { get; set; }
+        public int Mesa { get; set; }
+        public string NombreMesa { get; set; }
         public int idProducto { get; set; }
         public int cantidad { get; set; }
         public string estatus { get; set; }

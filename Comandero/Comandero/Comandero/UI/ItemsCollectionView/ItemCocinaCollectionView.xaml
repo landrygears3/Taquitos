@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Renderers ="clr-namespace:Comandero.UI.Renderers"   
+             BackgroundColor="{Binding BgColor}"
+             x:Class="Comandero.UI.ItemsCollectionView.ItemCocinaCollectionView">
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="2*"/>
+        <ColumnDefinition Width="2*"/>
+    </Grid.ColumnDefinitions>
+    <Renderers:LabelBase
+        Text="{Binding Nombre}"
+        Grid.Column="0"
+        Grid.Row="0"
+        Grid.ColumnSpan="2"
+        VerticalTextAlignment="Center"
+        VerticalOptions="FillAndExpand"
+        Style="{StaticResource LabelTitle}"/>
+    <Renderers:LabelBase
+        Text="{Binding cantidad}"
+        Grid.Column="0"
+        Grid.Row="1"
+        Grid.ColumnSpan="1"
+        VerticalTextAlignment="Center"
+        VerticalOptions="FillAndExpand"
+        Style="{StaticResource LabelTitle}"/>
+    <Renderers:LabelBase
+        Text="{Binding NombreMesa}"
+        Grid.Column="1"
+        Grid.Row="1"
+        Grid.ColumnSpan="1"
+        VerticalTextAlignment="Center"
+        VerticalOptions="FillAndExpand"
+        Style="{StaticResource LabelTitle}"/>
+</Grid>

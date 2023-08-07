@@ -121,6 +121,7 @@ namespace Comandero.ViewModels.Cobro
         }
         #endregion
 
+
         #region get
         private void llenaPlatos()
         {
@@ -191,6 +192,7 @@ namespace Comandero.ViewModels.Cobro
             });
         }
         #endregion
+
 
         #region events
         public async Task EnviarPlato(List<Models.Negociantes.PlatoModel> momdelosubida,string tipoE)

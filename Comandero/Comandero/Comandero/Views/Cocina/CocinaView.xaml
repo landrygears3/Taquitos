@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Renderers="clr-namespace:Comandero.UI.Renderers"
+             xmlns:Customs="clr-namespace:Comandero.UI.Customs"
+             xmlns:Items="clr-namespace:Comandero.UI.ItemsCollectionView"
+             x:Class="Comandero.Views.Cocina.CocinaView"
+             >
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <BoxView               
+                Grid.Row="0"
+                Grid.Column="0"
+                VerticalOptions="Start"
+                BackgroundColor="{DynamicResource PrimaryColor}"
+                HeightRequest="60"
+                ></BoxView>
+
+            <Renderers:IconAwesomeButtonBase
+                    Style="{StaticResource ButtonBack}"
+                    Command="{Binding BackToPreviousPageCommand}"
+                    Icon="Back"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="30"
+                    HeightRequest="60"
+                    Margin="0"
+                    Grid.Column="0"
+                    Grid.Row="0"/>
+            <CollectionView
+                Grid.Column="0"
+                Grid.Row="1"
+                Margin="20,0"
+                ItemsSource="{Binding Platos}"
+                >
+                <CollectionView.EmptyView>
+                    <Customs:EmptyTextCollectionView/>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Items:ItemCocinaCollectionView
+                    HeightRequest="90"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Customs:ModalCargandoCustom Grid.Column="0" Grid.Row="1" Grid.RowSpan="1" Margin="-70" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsLoading="{Binding IsLoading}" AbsoluteLayout.LayoutFlags="All"/>
+            <Image
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    VerticalOptions="Start"
+                    HorizontalOptions="Center"
+                    WidthRequest="120" 
+                    HeightRequest="120"
+                    Style="{DynamicResource IconBrand}" />
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
