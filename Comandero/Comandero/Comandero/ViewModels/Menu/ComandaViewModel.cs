@@ -16,6 +16,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -233,13 +234,22 @@ namespace Comandero.ViewModels.Menu
                         momdelosubida.Last().Estatus = "Enviado";
                     }
                 }
+                bool salir = false;
                 if (momdelosubida.Count() > 0)
                 {
                     EnviarPlato(momdelosubida);
-                    NavigationParameters param = new NavigationParameters { { "back", true } };
-                    IsLoading = false;
-                    await NavigationService.GoBackAsync(param);
+                    salir = true;
 
+                }
+                else
+                {
+                    salir = await App.Current.MainPage.DisplayAlert("Atención", "¿Deseas salir sin agregar Productos?", "Si", "Seguir agregando");
+
+                }
+                if (salir)
+                {
+                    NavigationParameters param = new NavigationParameters { { "back", true } };
+                    await NavigationService.GoBackAsync(param);
                 }
 
 
@@ -250,6 +260,7 @@ namespace Comandero.ViewModels.Menu
             }
             finally
             {
+                IsLoading = false;
                 StopAsync();
             }
 

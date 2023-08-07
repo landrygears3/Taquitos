@@ -5,8 +5,8 @@
              xmlns:Renderers ="clr-namespace:Comandero.UI.Renderers"   
              BackgroundColor="{Binding BgColor}">
     <Grid.RowDefinitions>
-        <RowDefinition Height="30" />
-        <RowDefinition Height="30" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="*" />
     </Grid.RowDefinitions>
     <Grid.ColumnDefinitions>
         <ColumnDefinition Width="70" />
@@ -20,34 +20,43 @@
                 Grid.RowSpan="2"
                 Icon="{Binding Icon}" 
                 TypeIcon="Solid" 
-        VerticalOptions="Center"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                HorizontalTextAlignment="Center"
+        VerticalTextAlignment="Center"
                 Style="{StaticResource IconAwesomeLabelPrimary}" />
     <Renderers:LabelBase
         Text="{Binding Name}"
+        Style="{StaticResource LabelTitle}"
         Grid.Column="1"
         Grid.Row="0"
         Grid.ColumnSpan="2"
-        VerticalTextAlignment="End"
-        Style="{StaticResource LabelTitle}"/>
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand"
+        VerticalTextAlignment="Center"
+        HorizontalTextAlignment="Start"
+/>
 
     <Renderers:LabelBase
         Text="{Binding subtotal , StringFormat='${0:F2}'}"
         Grid.Column="1"
         Grid.Row="1"
-        Grid.ColumnSpan="2"
-        VerticalTextAlignment="End"
-        VerticalOptions="Start"
-        HorizontalOptions="Start"
+        Grid.ColumnSpan="1"
+        VerticalTextAlignment="Center"
+        HorizontalTextAlignment="Start"
+        VerticalOptions="FillAndExpand"
+        HorizontalOptions="FillAndExpand"
         Style="{StaticResource LabelSubTitle}"/>
 
     <Renderers:LabelBase
         Text="{Binding cantidad , StringFormat='Items: {0:F0}'}"
-        Grid.Column="1"
+        Grid.Column="2"
         Grid.Row="1"
-        Grid.ColumnSpan="2"
-        VerticalOptions="End"
-        VerticalTextAlignment="End"
-        HorizontalOptions="End"
+        Grid.ColumnSpan="1"
+        VerticalTextAlignment="Center"
+        HorizontalTextAlignment="Start"
+        VerticalOptions="FillAndExpand"
+        HorizontalOptions="FillAndExpand"
         Style="{StaticResource LabelSubTitle}"/>
 
     <Renderers:IconAwesomeButtonBase

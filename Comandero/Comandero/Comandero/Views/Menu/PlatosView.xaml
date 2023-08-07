@@ -91,7 +91,7 @@
                     <DataTemplate>
                         <Items:ItemDishCollectionView
                             SelectedCommand ="{Binding SelectedItemCommand}"
-                    HeightRequest="90"/>
+                    HeightRequest="100"/>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

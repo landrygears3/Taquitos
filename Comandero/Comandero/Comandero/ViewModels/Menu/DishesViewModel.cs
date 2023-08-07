@@ -247,10 +247,15 @@ namespace Comandero.ViewModels.Menu
         }
         private async Task CobraCommandExecute()
         {
-
-            NavigationParameters param = new NavigationParameters { { "Tipo", "Mesa" }, { "IdMesa", mesa } };
-            await NavigationService.NavigateAsync("Cobro", param);
-
+            if(CurrentTotal != 0)
+            {
+                NavigationParameters param = new NavigationParameters { { "Tipo", "Mesa" }, { "IdMesa", mesa } };
+                await NavigationService.NavigateAsync("Cobro", param);
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Atención", "No hay montos por cobrar", "Aceptar");
+            }
 
         }
         #endregion

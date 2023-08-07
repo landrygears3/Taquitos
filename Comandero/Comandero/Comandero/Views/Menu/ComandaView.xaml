@@ -52,7 +52,7 @@
                         <Items:ItemProductosComandaView
                             MasCommand ="{Binding MasCommand}"
                             MenosCommand="{Binding MenosCommand}"
-                    HeightRequest="70"/>
+                    HeightRequest="90"/>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

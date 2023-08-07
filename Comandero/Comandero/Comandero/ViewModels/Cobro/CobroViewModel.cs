@@ -83,7 +83,7 @@ namespace Comandero.ViewModels.Cobro
                     httpClient = new HttpClient();
                     decimal auxCurrentTotal = 0;
                     // Realiza una solicitud GET al servicio web
-                    string query = SesionModel.Host + "/ResumenPlatos?sucursal=" + SesionModel.sucursal + "&mesa=" + mesa;
+                    string query = SesionModel.Host + "/ResumenCobro?sucursal=" + SesionModel.sucursal + "&mesa=" + mesa;
                     HttpResponseMessage response = await httpClient.GetAsync(query);
 
                     // Verifica si la solicitud fue exitosa
