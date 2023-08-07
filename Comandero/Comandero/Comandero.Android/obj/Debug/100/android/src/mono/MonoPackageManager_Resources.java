@@ -30,6 +30,8 @@ public class MonoPackageManager_Resources {
 		"Microsoft.Extensions.Options.dll",
 		"Microsoft.Extensions.Primitives.dll",
 		"Newtonsoft.Json.dll",
+		"Plugin.SimpleAudioPlayer.Abstractions.dll",
+		"Plugin.SimpleAudioPlayer.dll",
 		"Prism.dll",
 		"Prism.DryIoc.Forms.dll",
 		"Prism.Forms.dll",

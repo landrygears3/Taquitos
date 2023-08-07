@@ -9,8 +9,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Common;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -49,6 +51,11 @@ namespace Comandero.ViewModels.Cocina
             _connection.On<List<ResumenPlatoModel>>("RecibePlato", (list) =>
             {
                 llenaPlatos();
+                var assembly = typeof(App).GetTypeInfo().Assembly;
+                Stream audioStream = assembly.GetManifestResourceStream("Comandero.Recursos.UnTaco.mp3");
+                var audio = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                audio.Load(audioStream);
+                audio.Play();
             });
 
 

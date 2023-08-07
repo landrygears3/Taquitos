@@ -14,7 +14,7 @@ namespace Comandero.UI.Customs {
     
     
     [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("UI\\Customs\\ModalCargandoCustom.xaml")]
-    public partial class ModalCargandoCustom : global::Xamarin.Forms.ContentView {
+    public partial class ModalCargandoCustom : global::Xamarin.Forms.Grid {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {
