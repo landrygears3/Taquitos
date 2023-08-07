@@ -8,17 +8,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("Comandero.UI.Customs.ModalCargandoCustom.xaml", "UI/Customs/ModalCargandoCustom.xaml", typeof(global::Comandero.UI.Customs.ModalCargandoCustom))]
+[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("Comandero.Views.Cobro.CobroView.xaml", "Views/Cobro/CobroView.xaml", typeof(global::Comandero.Views.Cobro.CobroView))]
 
-namespace Comandero.UI.Customs {
+namespace Comandero.Views.Cobro {
     
     
-    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("UI\\Customs\\ModalCargandoCustom.xaml")]
-    public partial class ModalCargandoCustom : global::Xamarin.Forms.Grid {
+    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("Views\\Cobro\\CobroView.xaml")]
+    public partial class CobroView : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {
-            global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(ModalCargandoCustom));
+            global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(CobroView));
         }
     }
 }

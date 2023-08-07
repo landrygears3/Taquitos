@@ -30,24 +30,11 @@ namespace Comandero.ViewModels.Menu
 
         #region modal
         private bool _isLoading;
+
         public bool IsLoading
         {
-            get => _isLoading;
-            set
-            {
-                if (_isLoading != value)
-                {
-                    _isLoading = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get { return _isLoading; }
+            set { SetProperty(ref _isLoading, value); }
         }
 
         #endregion
@@ -59,6 +46,7 @@ namespace Comandero.ViewModels.Menu
 
         private string myTextProperty;
         public AsyncCommand AgregarNewDataCommand { get; set; }
+        public AsyncCommand CobraCommand { get; set; }
 
         public string MyTextProperty
         {
@@ -86,6 +74,7 @@ namespace Comandero.ViewModels.Menu
         public DishesViewModel(INavigationService navigationService) : base(navigationService)
         {
             AgregarNewDataCommand = new AsyncCommand(AgregarNewDataCommandExecute);
+            CobraCommand = new AsyncCommand(CobraCommandExecute);
             Title = "Comanda";
             httpClient = new HttpClient();
             Platos = new ObservableCollection<Models.Catalogs.PlatoModel>();
@@ -170,6 +159,7 @@ namespace Comandero.ViewModels.Menu
                 
                 try
                 {
+                    IsLoading = true;
                     httpClient = new HttpClient();
                     decimal auxCurrentTotal = 0;
                     // Realiza una solicitud GET al servicio web
@@ -252,6 +242,14 @@ namespace Comandero.ViewModels.Menu
 
             NavigationParameters param = new NavigationParameters { { "IdPlato", 0 }, { "IdMesa", mesa } };
             await NavigationService.NavigateAsync("Plato", param);
+
+
+        }
+        private async Task CobraCommandExecute()
+        {
+
+            NavigationParameters param = new NavigationParameters { { "Tipo", "Mesa" }, { "IdMesa", mesa } };
+            await NavigationService.NavigateAsync("Cobro", param);
 
 
         }

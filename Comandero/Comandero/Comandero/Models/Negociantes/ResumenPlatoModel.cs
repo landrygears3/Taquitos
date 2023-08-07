@@ -9,11 +9,11 @@ namespace Comandero.Models.Negociantes
         public long Id { get; set; }
         public int idComanda { get; set; }
         public int idProducto { get; set; }
-        public int cantidad { get; set; }
+        public int cantidad { get; set; } = 0;
         public int Sucursal { get; set; }
         public string estatus { get; set; } 
         public string Name { get; set; }
-        public string Icon { get; set; } 
-        public decimal subtotal { get; set; }
+        public string Icon { get; set; }
+        public decimal subtotal { get; set; } = decimal.Zero;
     }
 }

@@ -8,17 +8,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("Comandero.UI.Customs.ModalCargandoCustom.xaml", "UI/Customs/ModalCargandoCustom.xaml", typeof(global::Comandero.UI.Customs.ModalCargandoCustom))]
+[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("Comandero.UI.ItemsCollectionView.ItemCobroCollectionView.xaml", "UI/ItemsCollectionView/ItemCobroCollectionView.xaml", typeof(global::Comandero.UI.ItemsCollectionView.ItemCobroCollectionView))]
 
-namespace Comandero.UI.Customs {
+namespace Comandero.UI.ItemsCollectionView {
     
     
-    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("UI\\Customs\\ModalCargandoCustom.xaml")]
-    public partial class ModalCargandoCustom : global::Xamarin.Forms.Grid {
+    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("UI\\ItemsCollectionView\\ItemCobroCollectionView.xaml")]
+    public partial class ItemCobroCollectionView : global::Xamarin.Forms.Grid {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {
-            global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(ModalCargandoCustom));
+            global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(ItemCobroCollectionView));
         }
     }
 }

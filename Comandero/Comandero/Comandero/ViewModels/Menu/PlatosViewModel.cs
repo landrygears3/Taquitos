@@ -27,24 +27,11 @@ namespace Comandero.ViewModels.Menu
     {
         #region modal
         private bool _isLoading;
+
         public bool IsLoading
         {
-            get => _isLoading;
-            set
-            {
-                if (_isLoading != value)
-                {
-                    _isLoading = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get { return _isLoading; }
+            set { SetProperty(ref _isLoading, value); }
         }
 
         #endregion

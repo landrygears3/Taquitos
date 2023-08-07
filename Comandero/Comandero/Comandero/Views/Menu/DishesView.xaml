@@ -48,6 +48,7 @@
                 </Grid.RowDefinitions>
                 <Renderers:IconAwesomeButtonBase
                     BackgroundColor="{DynamicResource PrimaryColor}"
+                    Command="{Binding CobraCommand}"
                     Icon="Money"
                     CornerRadius="10"
                     FontFamily="fa-solid"

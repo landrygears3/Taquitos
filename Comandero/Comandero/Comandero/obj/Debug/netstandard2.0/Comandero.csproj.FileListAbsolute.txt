@@ -41,3 +41,5 @@ C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\XamlC.stamp
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Comandero.dll
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Comandero.pdb
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Views\Cobro\CobroView.xaml.g.cs
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\ItemsCollectionView\ItemCobroCollectionView.xaml.g.cs

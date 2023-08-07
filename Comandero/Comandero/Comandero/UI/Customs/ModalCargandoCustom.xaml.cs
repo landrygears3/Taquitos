@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace Comandero.UI.Customs
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ModalCargandoCustom : ContentView
+    public partial class ModalCargandoCustom : Grid
     {
         public ModalCargandoCustom()
         {

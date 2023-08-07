@@ -28,25 +28,13 @@ namespace Comandero.ViewModels.Menu
     {
         #region modal
         private bool _isLoading;
+
         public bool IsLoading
         {
-            get => _isLoading;
-            set
-            {
-                if (_isLoading != value)
-                {
-                    _isLoading = value;
-                    OnPropertyChanged();
-                }
-            }
+            get { return _isLoading; }
+            set { SetProperty(ref _isLoading, value); }
         }
 
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         #endregion
 
@@ -152,6 +140,7 @@ namespace Comandero.ViewModels.Menu
         #region get
         private void llenaProductos()
         {
+            IsLoading = true;
             Device.BeginInvokeOnMainThread(async () =>
             {
                 try
@@ -185,6 +174,7 @@ namespace Comandero.ViewModels.Menu
                 finally
                 {
                     colores();
+                    IsLoading = false;
                     await StartAsync();
                 }
                 
@@ -228,6 +218,7 @@ namespace Comandero.ViewModels.Menu
 
             try
             {
+                IsLoading = true;
                 // Realiza una solicitud GET al servicio web
                 List<Models.Negociantes.PlatoModel> momdelosubida = new List<Models.Negociantes.PlatoModel>();
                 foreach (var model in Productos)
@@ -246,6 +237,7 @@ namespace Comandero.ViewModels.Menu
                 {
                     EnviarPlato(momdelosubida);
                     NavigationParameters param = new NavigationParameters { { "back", true } };
+                    IsLoading = false;
                     await NavigationService.GoBackAsync(param);
 
                 }

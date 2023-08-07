@@ -5,17 +5,19 @@
              xmlns:Customs="clr-namespace:Comandero.UI.Customs"
              xmlns:Items="clr-namespace:Comandero.UI.ItemsCollectionView"
              BackgroundColor="{DynamicResource BGColor}"
-             x:Class="Comandero.Views.Menu.ComandaView">
+             x:Class="Comandero.Views.Cobro.CobroView">
     <ContentPage.Content>
         <Grid>
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="120"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="80"/>
+                <RowDefinition Height="200"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+
             <BoxView
                 Grid.Row="0"
                 Grid.Column="0"
@@ -23,7 +25,6 @@
                 BackgroundColor="{DynamicResource PrimaryColor}"
                 HeightRequest="60"
                 ></BoxView>
-
             <Renderers:IconAwesomeButtonBase
                     Style="{StaticResource ButtonBack}"
                     Command="{Binding BackToPreviousPageCommand}"
@@ -35,41 +36,64 @@
                     Margin="0"
                     Grid.Column="0"
                     Grid.Row="0"/>
-            <CollectionView
+
+            <Frame
                 Grid.Column="0"
                 Grid.Row="1"
-                Margin="20,0"
-                ItemsSource="{Binding Productos}"
-                >
-                <CollectionView.EmptyView>
-                    <Customs:EmptyTextCollectionView/>
-                </CollectionView.EmptyView>
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Items:ItemProductosComandaView
-                            MasCommand ="{Binding MasCommand}"
-                            MenosCommand="{Binding MenosCommand}"
-                    HeightRequest="70"/>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                CornerRadius="50"
+                Margin="50,50"
+                BorderColor="Black"
+                HasShadow="False">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <CollectionView
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Margin="20,0"
+                            ItemsSource="{Binding Productos}"
+                            >
+                        <CollectionView.EmptyView>
+                            <Customs:EmptyTextCollectionView/>
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Items:ItemCobroCollectionView
+                                    HeightRequest="80"/>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Renderers:LabelBase
+                            Text="{Binding CurrentTotal, StringFormat='Total:   ${0:F2}'}"
+                            Grid.Column="0"
+                            Grid.Row="1"
+                            FontSize="30"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="CenterAndExpand"
+                            Style="{StaticResource LabelTitle}"/>
+                </Grid>
+            </Frame>
             <Renderers:ButtonBase
                 Command="{Binding AgregarDataCommand}"
                 Grid.Row="2"
-                Grid.Column="0"
-                Text="Agregar"
+                Grid.Column="0"                
+                Text="Cobrar"
                 IsVisible="{Binding habilitado}"
-                Margin="30,20"
+                Margin="50,50"
                 Style="{StaticResource ButtonPrimary}"/>
             <Customs:ModalCargandoCustom Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Margin="-70" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsLoading="{Binding IsLoading}" AbsoluteLayout.LayoutFlags="All"/>
             <Image
                     Grid.Row="0"
                     Grid.Column="0"
                     VerticalOptions="Start"
-                    HorizontalOptions="Center"
                     WidthRequest="120" 
                     HeightRequest="120"
                     Style="{DynamicResource IconBrand}" />

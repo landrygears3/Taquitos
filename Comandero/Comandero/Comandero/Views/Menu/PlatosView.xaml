@@ -26,13 +26,7 @@
                 BackgroundColor="{DynamicResource PrimaryColor}"
                 HeightRequest="60"
                 ></BoxView>
-            <Image
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    VerticalOptions="Start"
-                    WidthRequest="120" 
-                    HeightRequest="120"
-                    Style="{DynamicResource IconBrand}" />
+
             <Renderers:IconAwesomeButtonBase
                     Style="{StaticResource ButtonBack}"
                     Command="{Binding BackToPreviousPageCommand}"
@@ -110,6 +104,15 @@
                 Command="{Binding AgregarPlato}"
                 Style="{StaticResource ButtonPrimary}"
                 />
+            <Customs:ModalCargandoCustom Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" Margin="-70" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsLoading="{Binding IsLoading}" AbsoluteLayout.LayoutFlags="All"/>
+            <Image
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    VerticalOptions="Start"
+                    HorizontalOptions="Center"
+                    WidthRequest="120" 
+                    HeightRequest="120"
+                    Style="{DynamicResource IconBrand}" />
         </Grid>
                 
 

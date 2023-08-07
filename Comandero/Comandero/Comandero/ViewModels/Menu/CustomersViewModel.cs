@@ -23,30 +23,18 @@ using Xamarin.Forms;
 
 namespace Comandero.ViewModels.Menu
 {
-    internal class CustomersViewModel : ViewModelBase, INotifyPropertyChanged
+    internal class CustomersViewModel : ViewModelBase
     {
 
         #region modal
         private bool _isLoading;
+
         public bool IsLoading
         {
-            get => _isLoading;
-            set
-            {
-                if (_isLoading != value)
-                {
-                    _isLoading = value;
-                    OnPropertyChanged();
-                }
-            }
+            get { return _isLoading; }
+            set { SetProperty(ref _isLoading, value); }
         }
 
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         #endregion
 
