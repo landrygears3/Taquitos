@@ -22,6 +22,7 @@ namespace Comandero.ViewModels.Sesion
         public LogInViewModel(INavigationService navigationService) : base(navigationService)
         {
             httpClient = new HttpClient();
+            
             LogInCommand = new AsyncCommand(LogInCommandExecute);
         }
 
@@ -30,7 +31,7 @@ namespace Comandero.ViewModels.Sesion
         {
             try
             {
-                    await NavigationService.NavigateAsync("Home");
+                    await NavigationService.NavigateAsync("Navigation/Home");
                 
             }
             catch (Exception ex)

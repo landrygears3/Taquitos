@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Comandero.Views.Sesion;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace Comandero.Models.Catalogs
 {

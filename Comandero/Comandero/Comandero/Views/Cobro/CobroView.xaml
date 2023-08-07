@@ -12,7 +12,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="120"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="200"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -41,13 +42,13 @@
                 Grid.Column="0"
                 Grid.Row="1"
                 CornerRadius="50"
-                Margin="50,50"
+                Margin="50,20"
                 BorderColor="Black"
                 HasShadow="False">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="90"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -81,15 +82,54 @@
                             Style="{StaticResource LabelTitle}"/>
                 </Grid>
             </Frame>
-            <Renderers:ButtonBase
-                Command="{Binding AgregarDataCommand}"
+            <Frame                
+                Grid.Column="0"
                 Grid.Row="2"
+                CornerRadius="30"
+                Margin="50,10"
+                BorderColor="Black"
+                HasShadow="False">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Renderers:LabelBase
+                            Text="Paga con:"
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            FontSize="20"
+                            HorizontalTextAlignment="Start"
+                        VerticalTextAlignment="Center"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            Style="{StaticResource LabelTitle}"/>
+                    <Entry
+                            Text="{Binding Pagorecibido}"
+                            HorizontalTextAlignment="Center"
+                            TextColor="Black"
+                            Keyboard="Numeric"
+                            Placeholder="Exacto"
+                            Grid.Column="1"
+                            Margin="0,0,20,0"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="End"
+                            Grid.Row="0"/>
+
+                </Grid>
+            </Frame>
+            <Renderers:ButtonBase
+                Command="{Binding CerrarCuentaCommand}"
+                Grid.Row="3"
                 Grid.Column="0"                
                 Text="Cobrar"
                 IsVisible="{Binding habilitado}"
-                Margin="50,50"
+                Margin="50,20"
                 Style="{StaticResource ButtonPrimary}"/>
-            <Customs:ModalCargandoCustom Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Margin="-70" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsLoading="{Binding IsLoading}" AbsoluteLayout.LayoutFlags="All"/>
+            <Customs:ModalCargandoCustom Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" Margin="-70" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsLoading="{Binding IsLoading}" AbsoluteLayout.LayoutFlags="All"/>
             <Image
                     Grid.Row="0"
                     Grid.Column="0"

@@ -10,10 +10,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Common;
+using System.Drawing;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Comandero.ViewModels.Cobro
@@ -37,6 +39,13 @@ namespace Comandero.ViewModels.Cobro
         {
             get { return currentTotal; }
             set { SetProperty(ref currentTotal, value); }
+        }        
+        private string pagorecibido;
+
+        public string Pagorecibido
+        {
+            get { return pagorecibido; }
+            set { SetProperty(ref pagorecibido, value); }
         }
 
 
@@ -55,12 +64,16 @@ namespace Comandero.ViewModels.Cobro
         public event EventHandler PageAppearing;
         public event EventHandler PageDisappearing;
         List<Models.Negociantes.PlatoModel> productos;
+        public AsyncCommand CerrarCuentaCommand { get; set; }
+
         private HttpClient httpClient;
         //Productos
         public ObservableCollection<CobroModel> Productos { get; set; }
         public CobroViewModel(INavigationService navigationService) : base(navigationService)
         {
+            CerrarCuentaCommand = new AsyncCommand(CerrarCuentaCommandExecute);
             Productos = new ObservableCollection<CobroModel>();
+            Pagorecibido = "";
             Title = "Cobro";
 
         }
@@ -142,6 +155,68 @@ namespace Comandero.ViewModels.Cobro
         #endregion
 
         #region events
+
+        private async Task CerrarCuentaCommandExecute()
+        {
+            string mensaje = "¿Desea cerrar la cuenta y cobrar productos?";
+            bool salir = false;
+            if (!Pagorecibido.Trim().Equals(string.Empty))
+            {   
+                try
+                {
+                    decimal pagoaux = decimal.Parse(Pagorecibido);
+                    if (pagoaux > currentTotal)
+                    {
+                        mensaje += "\nDeberá entregar un cambio de $" + (pagoaux - currentTotal).ToString("0.##"); ;
+                        salir = await App.Current.MainPage.DisplayAlert("Atención", mensaje, "No", "Si, cobrar");
+                    }
+                    else
+                    {
+                        mensaje = "El pago recibido es menor a la cantidad por cobrar";
+                        await App.Current.MainPage.DisplayAlert("Atención", mensaje, "Aceptar");
+                    }
+                    
+                }
+                catch
+                {
+                    mensaje = "El monto recibido no tiene un valor valido";
+                    await App.Current.MainPage.DisplayAlert("Atención", mensaje, "Aceptar");
+                }
+            }
+            else
+            {
+                salir = await App.Current.MainPage.DisplayAlert("Atención", mensaje, "No", "Si, cobrar");
+            }
+
+            if (!salir)
+            {
+                try
+                {
+                    IsLoading = true;
+                    if (productos == null)
+                    {
+                        productos = new List<Models.Negociantes.PlatoModel>();
+                    }
+                    var jsonData = JsonConvert.SerializeObject(productos);
+                    var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                    httpClient = new HttpClient();
+                    string query = "/Cobro?mesa=" + mesa + "&sucursal=" + SesionModel.sucursal + "&tipo=" + Tipo;
+                    HttpResponseMessage message = await httpClient.PostAsync(SesionModel.Host + query, content);
+                }
+                catch (Exception ex)
+                {
+                    await App.Current.MainPage.DisplayAlert("Atención", "Ocurrió un error con el cobro", "Aceptar");
+                }
+                finally
+                {
+                    IsLoading = false;
+                    await NavigationService.GoBackToRootAsync();
+                }
+               
+            }
+            
+
+        }
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             if (parameters.TryGetValue("Tipo", out string tipo))

@@ -23,13 +23,13 @@ namespace Comandero
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {
+            
         }
 
         protected override async void OnInitialized()
         {
             InitializeComponent();
-
-            await NavigationService.NavigateAsync("Navigation/LogIn");
+            await NavigationService.NavigateAsync("LogIn");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
