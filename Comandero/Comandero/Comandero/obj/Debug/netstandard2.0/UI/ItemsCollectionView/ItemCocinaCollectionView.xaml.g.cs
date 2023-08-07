@@ -14,7 +14,7 @@ namespace Comandero.UI.ItemsCollectionView {
     
     
     [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("UI\\ItemsCollectionView\\ItemCocinaCollectionView.xaml")]
-    public partial class ItemCocinaCollectionView : global::Xamarin.Forms.Grid {
+    public partial class ItemCocinaCollectionView : global::Xamarin.Forms.SwipeView {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {

@@ -4,12 +4,13 @@
              xmlns:Renderers="clr-namespace:Comandero.UI.Renderers"
              xmlns:Customs="clr-namespace:Comandero.UI.Customs"
              xmlns:Items="clr-namespace:Comandero.UI.ItemsCollectionView"
-             x:Class="Comandero.Views.Cocina.CocinaView"
+             x:Class="Comandero.Views.Cocina.CocinaView"             
+             BackgroundColor="{DynamicResource BGColor}"
              >
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="150"/>
+                <RowDefinition Height="120"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
