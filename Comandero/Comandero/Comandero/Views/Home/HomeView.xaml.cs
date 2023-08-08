@@ -1,4 +1,5 @@
 ﻿using Comandero.Models.Catalogs;
+using Comandero.Services.Api;
 using FFImageLoading.Args;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,6 @@ namespace Comandero.Views
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-            
         }
         protected override bool OnBackButtonPressed()
         {

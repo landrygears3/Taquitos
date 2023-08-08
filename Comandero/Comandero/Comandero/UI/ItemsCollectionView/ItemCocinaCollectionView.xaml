@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SwipeView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Renderers ="clr-namespace:Comandero.UI.Renderers"   
+             BackgroundColor="{Binding BgColor}"
+             x:Class="Comandero.UI.ItemsCollectionView.ItemCocinaCollectionView">
+    <SwipeView.LeftItems>
+        <SwipeItems>
+            <SwipeItemView Command="{Binding SelectedItemCommand}"
+                           BackgroundColor="{DynamicResource PrimaryColor}">
+                <Grid HeightRequest="100" WidthRequest="100">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+            <Renderers:IconAwesomeLabelBase                 
+                Grid.Column="0" 
+                Grid.Row="0" 
+                Grid.RowSpan="2"
+                Icon="SendArrow" 
+                TypeIcon="Solid" 
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"
+                Style="{StaticResource IconAwesomeLabelPrimary}"/>
+                </Grid>
+            </SwipeItemView>
+
+        </SwipeItems>
+    </SwipeView.LeftItems>
+    <Grid >
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="2*"/>
+        <ColumnDefinition Width="2*"/>
+    </Grid.ColumnDefinitions>
+    <Renderers:LabelBase
+        Margin="20,0"
+        Text="{Binding Nombre}"
+        Grid.Column="0"
+        Grid.Row="0"
+        Grid.ColumnSpan="2"
+        VerticalTextAlignment="Center"
+        VerticalOptions="FillAndExpand"
+        Style="{StaticResource LabelTitle}"/>
+    <Renderers:LabelBase        
+        Margin="20,0"
+        Text="{Binding cantidad}"
+        Grid.Column="0"
+        Grid.Row="1"
+        Grid.ColumnSpan="1"
+        VerticalTextAlignment="Center"
+        VerticalOptions="FillAndExpand"
+        Style="{StaticResource LabelTitle}"/>
+    <Renderers:LabelBase
+        Text="{Binding NombreMesa}"
+        Grid.Column="1"
+        Grid.Row="1"
+        Grid.ColumnSpan="1"
+        VerticalTextAlignment="Center"
+        VerticalOptions="FillAndExpand"
+        Style="{StaticResource LabelTitle}"/>
+    </Grid>
+</SwipeView>

@@ -5,7 +5,36 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Recursos\Menu_Agua.jpg" />
+    <None Remove="Recursos\Menu_Alambre.jpg" />
+    <None Remove="Recursos\Menu_QuekaGigante.jpg" />
+    <None Remove="Recursos\Menu_QuekaHarina.jpg" />
+    <None Remove="Recursos\Menu_QuekaMaiz.jpg" />
+    <None Remove="Recursos\Menu_Refresco.jpg" />
+    <None Remove="Recursos\Menu_Taco.jpg" />
+    <None Remove="Recursos\Menu_Tacolgando.jpg" />
+    <None Remove="Recursos\Menu_Tuetano.jpg" />
+    <None Remove="Recursos\UnTaco.mp3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Recursos\Menu_Agua.jpg" />
+    <EmbeddedResource Include="Recursos\Menu_Alambre.jpg" />
+    <EmbeddedResource Include="Recursos\Menu_QuekaGigante.jpg" />
+    <EmbeddedResource Include="Recursos\Menu_QuekaHarina.jpg" />
+    <EmbeddedResource Include="Recursos\Menu_QuekaMaiz.jpg" />
+    <EmbeddedResource Include="Recursos\Menu_Refresco.jpg" />
+    <EmbeddedResource Include="Recursos\Menu_Taco.jpg" />
+    <EmbeddedResource Include="Recursos\Menu_Tacolgando.jpg" />
+    <EmbeddedResource Include="Recursos\Menu_Tuetano.jpg" />
+    <EmbeddedResource Include="Recursos\UnTaco.mp3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.8" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.6.0" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2291" />
@@ -17,19 +46,52 @@
     <EmbeddedResource Update="UI\Customs\EmptyTextCollectionView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UI\ItemsCollectionView\ItemMenuCollectionView.xaml">
+    <EmbeddedResource Update="UI\Customs\ModalCargandoCustom.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\ItemsCollectionView\ItemCobroCollectionView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\ItemsCollectionView\ItemCocinaCollectionView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\ItemsCollectionView\ItemDishCollectionView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\ItemsCollectionView\ItemProductosComandaView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UI\ItemsCollectionView\ItemTableCollectionView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="UI\ItemsCollectionView\ItemTipoProductoCollectionView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="UI\Theme\Theme.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Cobro\CobroView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Cocina\CocinaView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Home\HomeView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\Menu\ComandaView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\Menu\CustomersView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Menu\DishesView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Menu\PlatosView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Menu\TipoMenuView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Sesion\LogInView.xaml">

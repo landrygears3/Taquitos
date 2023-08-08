@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\repos\\Comandero\\Comandero\\Comandero.Android\\Comandero.Android.csproj": {}
+    "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero.Android\\Comandero.Android.csproj": {}
   },
   "projects": {
-    "D:\\repos\\Comandero\\Comandero\\Comandero.Android\\Comandero.Android.csproj": {
+    "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero.Android\\Comandero.Android.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\repos\\Comandero\\Comandero\\Comandero.Android\\Comandero.Android.csproj",
+        "projectUniqueName": "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero.Android\\Comandero.Android.csproj",
         "projectName": "Comandero.Android",
-        "projectPath": "D:\\repos\\Comandero\\Comandero\\Comandero.Android\\Comandero.Android.csproj",
+        "projectPath": "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero.Android\\Comandero.Android.csproj",
         "packagesPath": "C:\\Users\\landr\\.nuget\\packages\\",
-        "outputPath": "D:\\repos\\Comandero\\Comandero\\Comandero.Android\\obj\\",
+        "outputPath": "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero.Android\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
@@ -32,8 +32,8 @@
         "frameworks": {
           "monoandroid10.0": {
             "projectReferences": {
-              "D:\\repos\\Comandero\\Comandero\\Comandero\\Comandero.csproj": {
-                "projectPath": "D:\\repos\\Comandero\\Comandero\\Comandero\\Comandero.csproj"
+              "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero\\Comandero.csproj": {
+                "projectPath": "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero\\Comandero.csproj"
               }
             }
           }
@@ -58,14 +58,14 @@
         }
       }
     },
-    "D:\\repos\\Comandero\\Comandero\\Comandero\\Comandero.csproj": {
+    "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero\\Comandero.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\repos\\Comandero\\Comandero\\Comandero\\Comandero.csproj",
+        "projectUniqueName": "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero\\Comandero.csproj",
         "projectName": "Comandero",
-        "projectPath": "D:\\repos\\Comandero\\Comandero\\Comandero\\Comandero.csproj",
+        "projectPath": "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero\\Comandero.csproj",
         "packagesPath": "C:\\Users\\landr\\.nuget\\packages\\",
-        "outputPath": "D:\\repos\\Comandero\\Comandero\\Comandero\\obj\\",
+        "outputPath": "C:\\Users\\landr\\OneDrive\\Documentos\\GitHub\\Taquitos\\Comandero\\Comandero\\Comandero\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -103,15 +103,27 @@
               "target": "Package",
               "version": "[4.1.0, )"
             },
+            "Microsoft.AspNetCore.SignalR.Client": {
+              "target": "Package",
+              "version": "[7.0.8, )"
+            },
             "NETStandard.Library": {
               "suppressParent": "All",
               "target": "Package",
               "version": "[2.0.3, )",
               "autoReferenced": true
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
             "Prism.DryIoc.Forms": {
               "target": "Package",
               "version": "[8.1.97, )"
+            },
+            "Xam.Plugin.SimpleAudioPlayer": {
+              "target": "Package",
+              "version": "[1.6.0, )"
             },
             "Xamarin.Essentials.Interfaces": {
               "target": "Package",

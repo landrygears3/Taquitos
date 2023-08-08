@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Renderers ="clr-namespace:Comandero.UI.Renderers"   
+             BackgroundColor="{Binding BgColor}"
+             x:Class="Comandero.UI.ItemsCollectionView.ItemTipoProductoCollectionView">
+
+    <Frame
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand"
+        CornerRadius="30"
+        Margin="5"
+        BorderColor="Black">
+        <Grid 
+            HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="20"/>
+    </Grid.RowDefinitions>
+    <Frame
+        Grid.Column="0"
+        Grid.Row="0"
+        CornerRadius="20"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand"
+        >
+        <Image
+            Margin="-20"
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"                  
+            Source="{Binding Imagen}" />
+    </Frame>
+    <Renderers:LabelBase
+        Text="{Binding Nombre}"
+        Grid.Column="0"
+        Grid.Row="1"
+        VerticalTextAlignment="Center"
+        HorizontalTextAlignment="Center"
+        Style="{StaticResource LabelTitle}"/>
+    <Grid.GestureRecognizers>
+        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+    </Grid.GestureRecognizers>
+        </Grid>
+    </Frame>
+</Grid>

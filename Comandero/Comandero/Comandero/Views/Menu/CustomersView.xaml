@@ -17,7 +17,6 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
             <BoxView
                 Grid.Row="0"
                 Grid.Column="0"
@@ -25,14 +24,7 @@
                 BackgroundColor="{DynamicResource PrimaryColor}"
                 HeightRequest="60"
                 ></BoxView>
-            <Image
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    VerticalOptions="Start"
-                    HorizontalOptions="Center"
-                    WidthRequest="120" 
-                    HeightRequest="120"
-                    Source="http://www.coatltest.somee.com/resources/Blogin.png" />
+
             <Renderers:IconAwesomeButtonBase
                     Style="{StaticResource ButtonBack}"
                     Command="{Binding BackToPreviousPageCommand}"
@@ -63,7 +55,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Renderers:ButtonBase
-                    Command="{Binding QuickCommand}"
+                    Command="{Binding LlevarCommand}"
                     Style="{StaticResource ButtonPrimary}"
                     Grid.Column="0"
                     Grid.Row="0"
@@ -72,18 +64,19 @@
                     Text="Para llevar"/>
                 <Renderers:ButtonBase
                     x:Name="NewTableButton"
-                    Command="{Binding TableCommand}"
-                    Style="{StaticResource ButtonPrimary}"                    
+                    Command="{Binding NuevaMesaCommand}"
+                    Style="{StaticResource ButtonPrimary}"  
                     Grid.Column="1"
                     Grid.Row="0"
                     WidthRequest="100"
-                    Text="Nueva mesa"/>
+                    Text="Nueva comanda"/>
             </Grid>
             <CollectionView
                 Grid.Column="0"
                 Grid.Row="1"
                 Margin="20,43,20,5"
-                ItemsSource="{Binding Tables}">
+                ItemsSource="{Binding Tables}"
+                >
                 <CollectionView.EmptyView>
                     <Customs:EmptyTextCollectionView/>
                 </CollectionView.EmptyView>
@@ -93,10 +86,21 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Items:ItemTableCollectionView
+                            SelectedCommand ="{Binding SelectedItemCommand}"
                     HeightRequest="70"/>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <Customs:ModalCargandoCustom Grid.Column="0" Grid.Row="1" Grid.RowSpan="1" Margin="-70" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsLoading="{Binding IsLoading}" AbsoluteLayout.LayoutFlags="All"/>
+            <Image
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    VerticalOptions="Start"
+                    HorizontalOptions="Center"
+                    WidthRequest="120" 
+                    HeightRequest="120"
+                    Style="{DynamicResource IconBrand}" />
         </Grid>
+        
     </ContentPage.Content>
 </ContentPage>

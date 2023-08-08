@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Renderers ="clr-namespace:Comandero.UI.Renderers"   
+             BackgroundColor="{Binding BgColor}"
+             x:Class="Comandero.UI.ItemsCollectionView.ItemProductosComandaView">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="230"/>
+        <ColumnDefinition Width="100"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <Renderers:LabelBase
+        Text="{Binding NombreProducto}"
+        Grid.Column="0"
+        Grid.Row="0"
+        Grid.ColumnSpan="1"
+        VerticalTextAlignment="Center"
+        VerticalOptions="FillAndExpand"
+        Style="{StaticResource LabelTitle}"/>
+    <Renderers:LabelBase
+        Text="{Binding Costo, StringFormat='${0:F2}'}"
+        Grid.Column="0"
+        Grid.Row="1"
+        Grid.ColumnSpan="2"
+        VerticalTextAlignment="Center"
+        VerticalOptions="FillAndExpand"
+        Style="{StaticResource LabelSubTitle}"/>
+
+    <Grid
+        Grid.Row="0"
+        Grid.Column="1"
+        Grid.RowSpan="2">
+        <Renderers:IconAwesomeButtonBase   
+        Pressed="Menos"
+        Grid.Row="0"
+        Grid.Column="0"
+        TypeIcon="Regular"
+        Icon="SquareMinus"
+        FontSize="Large"
+        Style="{StaticResource ButtonUser}"/>
+        <Entry
+            x:Name="Cantidad"
+            Text="{Binding Cantidad}"
+            TextColor="Black"
+            Keyboard="Numeric"
+            Placeholder="0"
+            Grid.Column="1"
+            HorizontalTextAlignment="Center"
+            Grid.Row="0"/>
+
+        <Renderers:IconAwesomeButtonBase  
+         Pressed="Mas"
+        Grid.Row="0"
+        Grid.Column="2"
+        TypeIcon="Regular"
+        Icon="SquarePlus"
+        FontSize="Large"
+        Style="{StaticResource ButtonUser}"/>
+    </Grid>
+
+</Grid>

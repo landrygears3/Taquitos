@@ -14,7 +14,7 @@ namespace Comandero.UI.IconsApp
             Icons.Add(new Icon("Ticket", '\uf3ff'));
             Icons.Add(new Icon("Bell", '\uf0f3'));
             Icons.Add(new Icon("Minus", '\uf068'));
-            Icons.Add(new Icon("Plus", '\uf067'));
+            Icons.Add(new Icon("Plus", '\ue494'));
             Icons.Add(new Icon("Times", '\uf00d'));
             Icons.Add(new Icon("Bars", '\uf0c9'));
             Icons.Add(new Icon("ChevronLeft", '\uf053'));
@@ -27,13 +27,21 @@ namespace Comandero.UI.IconsApp
             Icons.Add(new Icon("User", '\uf007'));
             Icons.Add(new Icon("CutBox", '\uf53d'));
             Icons.Add(new Icon("Delete", '\uf2ed'));
-            Icons.Add(new Icon("Edit", '\uf044'));
             Icons.Add(new Icon("Back",'\uf053'));
             Icons.Add(new Icon("Camera", '\uf030'));
             Icons.Add(new Icon("Dolar", '\uf155'));
             Icons.Add(new Icon("Food", '\ue4c6'));
             Icons.Add(new Icon("CirclePlus", '\uf055'));
             Icons.Add(new Icon("NextArrow", '\uf101'));
+            Icons.Add(new Icon("cookie", '\uf563'));
+            Icons.Add(new Icon("Money", '\uf0d6'));
+            Icons.Add(new Icon("user", '\uf007'));
+            Icons.Add(new Icon("SquarePlus", '\uf0fe'));
+            Icons.Add(new Icon("SquareMinus", '\uf146'));
+            Icons.Add(new Icon("Kitchen", '\ue4f1'));
+            Icons.Add(new Icon("SendArrow", '\uf08e'));
+            Icons.Add(new Icon("Trash", '\uf1f8'));
+            Icons.Add(new Icon("Edit", '\uf044'));
 
         }
 
