@@ -48,8 +48,9 @@
                 </Grid.RowDefinitions>
                 <Renderers:IconAwesomeButtonBase
                     BackgroundColor="{DynamicResource PrimaryColor}"
+                    TextColor="{DynamicResource BGColor}"
                     Command="{Binding CobraCommand}"
-                    Icon="Money"
+                    Icon="Dollar"
                     CornerRadius="10"
                     FontFamily="fa-solid"
                     HorizontalOptions="Start"
@@ -66,8 +67,8 @@
                        CornerRadius="10">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -77,16 +78,21 @@
                             Text="{Binding MyTextProperty}"
                             Grid.Column="0"
                             Grid.Row="0"
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalOptions="CenterAndExpand"
                             Style="{StaticResource LabelTitle}"/>
                         <Renderers:LabelBase
                             Text="{Binding CurrentTotal, StringFormat='${0:F2}'}"
                             Grid.Column="1"
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalOptions="CenterAndExpand"
                             Grid.Row="0"
                             Style="{StaticResource LabelTitle}"/>
                     </Grid>
                 </Frame>
                 <Renderers:IconAwesomeButtonBase
                     BackgroundColor="{DynamicResource PrimaryColor}"
+                    TextColor="{DynamicResource BGColor}"
                     Command="{Binding AgregarNewDataCommand}"
                     Icon="Plus"
                     CornerRadius="10"

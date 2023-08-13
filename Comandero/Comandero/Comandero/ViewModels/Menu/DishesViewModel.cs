@@ -178,8 +178,8 @@ namespace Comandero.ViewModels.Menu
                         foreach (var items in data)
                         {
                             items.SelectedItemCommand = new Command(async (item) => await SelectedItemCommandExecute(items));
-                            items.Name = "Comensal " + items.Id;
-                            items.esVisible = false;
+                            items.Name = "Comanda " + items.Id;
+                            items.esVisible = true;
                             Platos.Add(items);
                             auxCurrentTotal += items.subtotal;
                         }
@@ -241,8 +241,8 @@ namespace Comandero.ViewModels.Menu
         private async Task AgregarNewDataCommandExecute()
         {
 
-            NavigationParameters param = new NavigationParameters { { "IdPlato", 0 }, { "IdMesa", mesa } };
-            await NavigationService.NavigateAsync("Plato", param);
+            NavigationParameters param = new NavigationParameters { { "IdMesa", mesa }, { "idPlato", 0 } };
+            await NavigationService.NavigateAsync("TipoMenu", param);
 
 
         }

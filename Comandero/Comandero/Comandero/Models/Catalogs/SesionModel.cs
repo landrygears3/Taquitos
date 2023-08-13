@@ -14,11 +14,15 @@ namespace Comandero.Models.Catalogs
 
         public static string NombreUser = "";
 
-        //public static string Host = "http://coatltest.somee.com";
-
-        //public static string Host = "https://www.tacosdeasada.com.mx";
-
+        #region dev
         public static string Host = "http://74.208.61.201:80/TacosAsadaApp";
+        #endregion
+
+        #region prod
+        //public static string Host = "http://74.208.61.201:81/TacosAsadaApp";
+        #endregion
+
+
 
         public static bool typeUser = true;
 

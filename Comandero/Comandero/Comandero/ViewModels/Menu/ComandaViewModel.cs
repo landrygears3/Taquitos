@@ -276,7 +276,7 @@ namespace Comandero.ViewModels.Menu
                 }
                 if (salir)
                 {
-                    NavigationParameters param = new NavigationParameters { { "back", true } };
+                    NavigationParameters param = new NavigationParameters { { "back", false } };
                     await NavigationService.GoBackAsync(param);
                 }
 
@@ -327,7 +327,7 @@ namespace Comandero.ViewModels.Menu
                 }
                 if (salir)
                 {
-                    NavigationParameters param = new NavigationParameters { { "back", true } };
+                    NavigationParameters param = new NavigationParameters { { "back", false } };
                     await NavigationService.GoBackAsync(param);
                 }
 

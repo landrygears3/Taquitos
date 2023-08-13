@@ -42,6 +42,7 @@ namespace Comandero.UI.IconsApp
             Icons.Add(new Icon("SendArrow", '\uf08e'));
             Icons.Add(new Icon("Trash", '\uf1f8'));
             Icons.Add(new Icon("Edit", '\uf044'));
+            Icons.Add(new Icon("Dollar", '\uf571'));
 
         }
 

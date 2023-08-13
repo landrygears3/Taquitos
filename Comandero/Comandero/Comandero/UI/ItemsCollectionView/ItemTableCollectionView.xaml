@@ -10,10 +10,9 @@
         <RowDefinition Height="30" />
     </Grid.RowDefinitions>
     <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="70" />
-        <ColumnDefinition Width="100" />
-        <ColumnDefinition Width="100" />
-        <ColumnDefinition Width="70" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
     </Grid.ColumnDefinitions>
         <Renderers:IconAwesomeLabelBase                 
                 Grid.Column="0" 
@@ -42,7 +41,9 @@
         Pressed="TapGestureRecognizer_Tapped"
         Grid.Row="0"
         Grid.RowSpan="2"
-        Grid.Column="3"
+        Grid.Column="2"
+        HorizontalOptions="End"
+        VerticalOptions="Center"
         TypeIcon="Solid"
         Icon="NextArrow"
         FontSize="Large"
