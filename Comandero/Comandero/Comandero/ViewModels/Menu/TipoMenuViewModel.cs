@@ -96,8 +96,15 @@ namespace Comandero.ViewModels.Menu
         {
             if (item is TipoMenuItemModel itemMenu)
             {
-                NavigationParameters param = new NavigationParameters { { "IdMesa", mesa }, { "idPlato", idPlato }, { "TipoProducto", itemMenu.Id }, { "Tipo", Tipo } };
-                await NavigationService.NavigateAsync("Comandero", param);
+                if(itemMenu.Tipo == "Item")
+                {
+                    NavigationParameters param = new NavigationParameters { { "IdMesa", mesa }, { "idPlato", idPlato }, { "TipoProducto", itemMenu.Id }, { "Tipo", Tipo } };
+                    await NavigationService.NavigateAsync("Comandero", param);
+                }
+                if (itemMenu.Tipo == "Platillo")
+                {
+
+                }
             }
 
 
