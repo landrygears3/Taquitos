@@ -13,10 +13,16 @@ namespace Comandero.Models.Catalogs
         public int IdSabor { get; set; }
         public decimal Costo { get; set; }
         public string NombreProducto { get; set; }
+        public string Descripcion { get; set; }
+        public string adicionales { get; set; } = "Correcto";
+        public int idc { get; set; }
         public Color BgColor { get; set; }
         public int Cantidad { get; set; }
+        public bool Combinado { get; set; } 
+        public bool Normal { get; set; } 
 
         public ICommand MasCommand { get; set; }
         public ICommand MenosCommand { get; set; }
+        public ICommand CombinadoCommand { get; set; }
     }
 }

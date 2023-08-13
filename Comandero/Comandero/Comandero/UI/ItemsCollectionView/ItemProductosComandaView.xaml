@@ -30,7 +30,20 @@
         VerticalOptions="FillAndExpand"
         Style="{StaticResource LabelSubTitle}"/>
 
+    <Renderers:IconAwesomeButtonBase
+        IsVisible="{Binding Combinado}"
+        Command="{Binding CombinadoCommand}"
+        Grid.Row="0"
+        Grid.Column="1"
+        Grid.RowSpan="2"
+        HorizontalOptions="End"
+        VerticalOptions="Center"
+        TypeIcon="Solid"
+        Icon="NextArrow"
+        FontSize="Large"
+        Style="{StaticResource ButtonUser}"/>
     <Grid
+        IsVisible="{Binding Normal}"
         HorizontalOptions="End"
         VerticalOptions="CenterAndExpand"
         Grid.Row="0"

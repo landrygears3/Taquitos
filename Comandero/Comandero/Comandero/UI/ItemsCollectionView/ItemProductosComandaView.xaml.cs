@@ -22,7 +22,16 @@ namespace Comandero.UI.ItemsCollectionView
         }
 
         public static BindableProperty MasCommandProperty =
-            BindableProperty.Create(nameof(MasCommand), typeof(ICommand), typeof(ItemTableCollectionView), null);
+            BindableProperty.Create(nameof(MasCommand), typeof(ICommand), typeof(ItemTableCollectionView), null);       
+        
+        public ICommand CombinadoCommand
+        {
+            get => (ICommand)GetValue(CombinadoCommandProperty);
+            set => SetValue(CombinadoCommandProperty, value);
+        }
+
+        public static BindableProperty CombinadoCommandProperty =
+            BindableProperty.Create(nameof(CombinadoCommand), typeof(ICommand), typeof(ItemTableCollectionView), null);
 
         public ICommand MenosCommand
         {

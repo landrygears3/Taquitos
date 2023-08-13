@@ -161,8 +161,20 @@ namespace Comandero.ViewModels.Menu
                         Productos.Clear();
                         foreach (var items in data)
                         {
-                            items.MasCommand = new Command(async (item) => await MasCommandExecute(item));
-                            items.MenosCommand = new Command(async (item) => await MenosCommandExecute(item));
+                            items.MasCommand = new Command(async (item) => await MasCommandExecute(items));
+                            items.MenosCommand = new Command(async (item) => await MenosCommandExecute(items));
+                            items.CombinadoCommand = new Command(async (item) => await CombinadoCommandExecute(items));
+                            if(items.NombreProducto == "Combinado")
+                            {
+                                items.NombreProducto = items.NombreProducto + " " + items.Descripcion;
+                                items.Combinado = true;
+                                items.Normal = false;
+                            }
+                            else
+                            {
+                                items.Combinado = false;
+                                items.Normal = true;
+                            }
                             Productos.Add(items);
                         }
                         // Utiliza los datos recibidos como desees
@@ -361,6 +373,14 @@ namespace Comandero.ViewModels.Menu
                 {
 
                 }
+            }
+        }
+
+        private async Task CombinadoCommandExecute(object item)
+        {
+            if (item is ProductoModel itemMenu)
+            {
+               
             }
         }
 
