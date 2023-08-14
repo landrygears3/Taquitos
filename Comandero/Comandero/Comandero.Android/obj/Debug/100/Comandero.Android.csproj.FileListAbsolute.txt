@@ -715,6 +715,15 @@ D:\repos\Comandero\Comandero\Comandero.Android\obj\Debug\100\stamp\_ConvertResou
 D:\repos\Comandero\Comandero\Comandero.Android\obj\Debug\100\stamp\_GenerateJavaStubs.stamp
 D:\repos\Comandero\Comandero\Comandero.Android\obj\Debug\100\stamp\_GeneratePackageManagerJava.stamp
 D:\repos\Comandero\Comandero\Comandero.Android\obj\Debug\100\stamp\_ResolveLibraryProjectImports.stamp
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\bin\Debug\Comandero.Android.dll
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\bin\Debug\Comandero.Android.pdb
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\bin\Debug\com.companyname.appname.apk
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\bin\Debug\com.companyname.appname.aab
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\bin\Debug\com.companyname.appname-Signed.aab
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\bin\Debug\com.companyname.appname-Signed.apk
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\bin\Debug\com.companyname.appname-Signed.apk.idsig
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\bin\Debug\Comandero.dll
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\bin\Debug\Comandero.pdb
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\MonoAndroid,Version=v10.0.AssemblyAttributes.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\build.props
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\adb.props
@@ -751,15 +760,6 @@ C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\R.txt
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\R.cs.flag
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\Comandero.Android.csproj.CoreCompileInputs.cache
-C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\bin\Debug\Comandero.Android.dll
-C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\bin\Debug\Comandero.Android.pdb
-C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\bin\Debug\com.companyname.appname.apk
-C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\bin\Debug\com.companyname.appname.aab
-C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\bin\Debug\com.companyname.appname-Signed.aab
-C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\bin\Debug\com.companyname.appname-Signed.apk
-C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\bin\Debug\com.companyname.appname-Signed.apk.idsig
-C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\bin\Debug\Comandero.dll
-C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\bin\Debug\Comandero.pdb
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\Comandero.Android.csproj.CopyComplete
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\Comandero.Android.dll
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\Comandero.Android.pdb
@@ -808,6 +808,8 @@ C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\res\drawable-hdpi\menu_taco.jpg
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\res\drawable-hdpi\menu_tacolgando.jpg
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\res\drawable-hdpi\menu_tuetano.jpg
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\res\drawable-hdpi\volcan.jpg
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\res\drawable-hdpi\queso_fundido.jpg
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\uploadflags.txt
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\resolvedassemblies.hash
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\android\assets\Comandero.Android.dll
@@ -1481,5 +1483,3 @@ C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\stamp\_GenerateJavaStubs.stamp
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\stamp\_ResolveLibraryProjectImports.stamp
-C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\res\drawable-hdpi\volcan.jpg
-C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\res\drawable-hdpi\queso_fundido.jpg

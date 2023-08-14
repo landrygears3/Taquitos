@@ -46,7 +46,7 @@ namespace Comandero.ViewModels.Menu
         private int TipoProducto;
         private string Tipo = "";
         public AsyncCommand AgregarDataCommand { get; set; }
-
+        List<Models.Negociantes.PlatoModel> momdelosubida = new List<Models.Negociantes.PlatoModel>();
         public bool habilitado = true;
 
         public event EventHandler PageAppearing;
@@ -220,6 +220,19 @@ namespace Comandero.ViewModels.Menu
             if (parameters.TryGetValue("TipoProducto", out int tipoProducto))
             {
                 TipoProducto = tipoProducto;
+            }           
+            
+            if (parameters.TryGetValue("TipoSabor", out ProductoModel platoseleccionado))
+            {
+                momdelosubida.Add(new Models.Negociantes.PlatoModel());
+                momdelosubida.Last().Id = idplato;
+                momdelosubida.Last().IdMesa = mesa;
+                momdelosubida.Last().idProducto = platoseleccionado.Id;
+                momdelosubida.Last().Cantidad = platoseleccionado.Cantidad;
+                momdelosubida.Last().Estatus = "Enviado";
+                momdelosubida.Last().Costo = platoseleccionado.Costo;
+                momdelosubida.Last().Nombre = platoseleccionado.NombreProducto;
+                momdelosubida.Last().Adicionales = platoseleccionado.adicionales;
             }
         }
 
@@ -259,7 +272,7 @@ namespace Comandero.ViewModels.Menu
             {
                 IsLoading = true;
                 // Realiza una solicitud GET al servicio web
-                List<Models.Negociantes.PlatoModel> momdelosubida = new List<Models.Negociantes.PlatoModel>();
+                
                 foreach (var model in Productos)
                 {
                     if (model.Cantidad > 0)
@@ -312,7 +325,7 @@ namespace Comandero.ViewModels.Menu
             {
                 IsLoading = true;
                 // Realiza una solicitud GET al servicio web
-                List<Models.Negociantes.PlatoModel> momdelosubida = new List<Models.Negociantes.PlatoModel>();
+
                 foreach (var model in Productos)
                 {
                     if (model.Cantidad > 0)
@@ -380,7 +393,8 @@ namespace Comandero.ViewModels.Menu
         {
             if (item is ProductoModel itemMenu)
             {
-               
+                NavigationParameters param = new NavigationParameters { { "TipoSabor", itemMenu } };
+                await NavigationService.NavigateAsync ("Sabores", param);
             }
         }
 

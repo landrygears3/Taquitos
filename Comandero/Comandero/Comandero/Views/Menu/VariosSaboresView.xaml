@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Renderers="clr-namespace:Comandero.UI.Renderers"
+             xmlns:Customs="clr-namespace:Comandero.UI.Customs"
+             xmlns:Items="clr-namespace:Comandero.UI.ItemsCollectionView"
+             BackgroundColor="{DynamicResource BGColor}"
+             x:Class="Comandero.Views.Menu.VariosSaboresView">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <BoxView
+                Grid.Row="0"
+                Grid.Column="0"
+                VerticalOptions="Start"
+                BackgroundColor="{DynamicResource PrimaryColor}"
+                HeightRequest="60"
+                ></BoxView>
+            <Renderers:IconAwesomeButtonBase
+                    Style="{StaticResource ButtonBack}"
+                    Command="{Binding BackToPreviousPageCommand}"
+                    Icon="Back"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="30"
+                    HeightRequest="60"
+                    Margin="0"
+                    Grid.Column="0"
+                    Grid.Row="0"/>
+            <CollectionView
+                Grid.Column="0"
+                Grid.Row="1"
+                Margin="20,0"
+                ItemsSource="{Binding Sabores}"
+                >
+                <CollectionView.EmptyView>
+                    <Customs:EmptyTextCollectionView/>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Items:ItemSaborCollectionView
+                    HeightRequest="80"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Grid
+        HorizontalOptions="CenterAndExpand"
+        VerticalOptions="CenterAndExpand"                
+        Grid.Row="2"
+        Grid.Column="0">
+                <Renderers:IconAwesomeButtonBase   
+                    Command="{Binding MenosCommand}"
+        Grid.Row="0"
+        Grid.Column="0"
+        TypeIcon="Regular"
+        Icon="SquareMinus"
+        FontSize="Large"
+        Style="{StaticResource ButtonUser}"/>
+                <Entry
+            x:Name="Cantidad"
+            Text="{Binding Cantidad}"
+            TextColor="Black"
+            Keyboard="Numeric"
+            Placeholder="0"
+            Grid.Column="1"
+            HorizontalTextAlignment="Center"
+            Grid.Row="0"/>
+
+                <Renderers:IconAwesomeButtonBase  
+                    Command="{Binding MasCommand}"
+        Grid.Row="0"
+        Grid.Column="2"
+        TypeIcon="Regular"
+        Icon="SquarePlus"
+        FontSize="Large"
+        Style="{StaticResource ButtonUser}"/>
+            </Grid>
+
+            <Renderers:ButtonBase
+                Command="{Binding AgregarDataCommand}"
+                Grid.Row="3"
+                Grid.Column="0"
+                Text="Agregar"
+                Margin="30,20"
+                Style="{StaticResource ButtonPrimary}"/>
+
+            <Customs:ModalCargandoCustom Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" Margin="-70" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsLoading="{Binding IsLoading}" AbsoluteLayout.LayoutFlags="All"/>
+            <Image
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    VerticalOptions="Start"
+                    HorizontalOptions="Center"
+                    WidthRequest="120" 
+                    HeightRequest="120"
+                    Style="{DynamicResource IconBrand}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

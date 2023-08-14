@@ -173,7 +173,8 @@ namespace Comandero.ViewModels.Cocina
                             plato.cantidad = items.cantidad;                               
                             plato.estatus = items.estatus;                               
                             plato.Nombre = items.Name;                                   
-                            plato.NombreMesa = items.Namemesa;                               
+                            plato.NombreMesa = items.Namemesa;
+                            plato.idc = items.idc;
                             plato.SelectedItemCommand = new Command(async (item) => await SelectedItemCommandExecute(plato));
                         Platos.Add(plato);
                         auxCurrentTotal += items.subtotal;
@@ -219,7 +220,7 @@ namespace Comandero.ViewModels.Cocina
                 {
                     IsLoading = true;
                     httpClient = new HttpClient();
-                    string query = "/Cocina?Id="+itemMenu.Id + "&comanda="+itemMenu.idComanda+"&producto="+itemMenu.idProducto;
+                    string query = "/Cocina?Id="+itemMenu.Id + "&comanda="+itemMenu.idComanda+"&producto="+itemMenu.idProducto+ "&idc="+itemMenu.idc;
                     HttpResponseMessage message = await httpClient.PostAsync(SesionModel.Host + query,null);
                     llenaPlatos();
                 }

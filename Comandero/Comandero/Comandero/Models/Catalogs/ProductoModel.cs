@@ -14,7 +14,7 @@ namespace Comandero.Models.Catalogs
         public decimal Costo { get; set; }
         public string NombreProducto { get; set; }
         public string Descripcion { get; set; }
-        public string adicionales { get; set; } = "Correcto";
+        public string adicionales { get; set; } = "";
         public int idc { get; set; }
         public Color BgColor { get; set; }
         public int Cantidad { get; set; }

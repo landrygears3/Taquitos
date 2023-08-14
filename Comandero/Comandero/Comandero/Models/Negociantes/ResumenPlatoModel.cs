@@ -15,6 +15,7 @@ namespace Comandero.Models.Negociantes
         public string Name { get; set; }
         public string Namemesa { get; set; }
         public string Icon { get; set; }
+        public int idc { get; set; }
         public decimal subtotal { get; set; } = decimal.Zero;
     }
 }

@@ -51,6 +51,7 @@ namespace Comandero
             containerRegistry.RegisterForNavigation<PlatosView, PlatosViewModel>("Plato");
             containerRegistry.RegisterForNavigation<ComandaView, ComandaViewModel>("Comandero");
             containerRegistry.RegisterForNavigation<TipoMenuView, TipoMenuViewModel>("TipoMenu");
+            containerRegistry.RegisterForNavigation<VariosSaboresView, VariosSaboresViewModel>("Sabores");
             #endregion
 
             #region Cobro

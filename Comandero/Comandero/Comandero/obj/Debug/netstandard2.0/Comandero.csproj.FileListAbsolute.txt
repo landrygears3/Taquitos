@@ -17,11 +17,11 @@ D:\repos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Comandero.csproj
 D:\repos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\XamlC.stamp
 D:\repos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Comandero.dll
 D:\repos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Comandero.pdb
-C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Comandero.csproj.AssemblyReference.cache
-C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Comandero.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\bin\Debug\netstandard2.0\Comandero.deps.json
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\bin\Debug\netstandard2.0\Comandero.dll
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\bin\Debug\netstandard2.0\Comandero.pdb
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Comandero.csproj.AssemblyReference.cache
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Comandero.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\App.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\Customs\EmptyTextCollectionView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\Customs\ModalCargandoCustom.xaml.g.cs
@@ -29,6 +29,7 @@ C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\ItemsCollectionView\ItemCocinaCollectionView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\ItemsCollectionView\ItemDishCollectionView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\ItemsCollectionView\ItemProductosComandaView.xaml.g.cs
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\ItemsCollectionView\ItemSaborCollectionView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\ItemsCollectionView\ItemTableCollectionView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\ItemsCollectionView\ItemTipoProductoCollectionView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\Theme\Theme.xaml.g.cs
@@ -40,6 +41,7 @@ C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Views\Menu\DishesView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Views\Menu\PlatosView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Views\Menu\TipoMenuView.xaml.g.cs
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Views\Menu\VariosSaboresView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Views\Sesion\LogInView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Comandero.AssemblyInfoInputs.cache
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Comandero.AssemblyInfo.cs

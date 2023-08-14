@@ -31,7 +31,13 @@ namespace Comandero.ViewModels.Sesion
         {
             try
             {
+                await SesionModel.validaCredenciales();
+
+                if (SesionModel.status)
+                {
                     await NavigationService.NavigateAsync("Navigation/Home");
+                }
+
                 
             }
             catch (Exception ex)

@@ -18,7 +18,6 @@ namespace Comandero.Views.Menu
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-            NewTableButton.IsVisible = SesionModel.typeUser;
         }
         protected override void OnAppearing()
         {

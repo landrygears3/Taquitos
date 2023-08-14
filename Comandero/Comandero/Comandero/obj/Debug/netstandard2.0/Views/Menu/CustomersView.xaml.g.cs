@@ -17,12 +17,8 @@ namespace Comandero.Views.Menu {
     public partial class CustomersView : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
-        private global::Comandero.UI.Renderers.ButtonBase NewTableButton;
-        
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {
             global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(CustomersView));
-            NewTableButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Comandero.UI.Renderers.ButtonBase>(this, "NewTableButton");
         }
     }
 }

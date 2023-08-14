@@ -1,8 +1,10 @@
 ﻿using Comandero.Models.Catalogs;
 using Comandero.Utils.Commands;
+using Newtonsoft.Json;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +14,7 @@ namespace Comandero.ViewModels.Home
     {
         public AsyncCommand MenuCommand { get; set; }
         public AsyncCommand KitchenCommand { get; set; }
+        private HttpClient httpClient;
         public HomeViewModel(INavigationService navigationService) : base(navigationService)
         {
            Title = "Home";
@@ -20,14 +23,32 @@ namespace Comandero.ViewModels.Home
         }
         private async Task MenuCommandExecute()
         {
-            //Customers
-            await NavigationService.NavigateAsync("Customers");
+             await SesionModel.validaCredenciales();
+
+            if (SesionModel.status)
+            {
+                await NavigationService.NavigateAsync("Customers");
+            }
+            else
+            {
+                await NavigationService.GoBackAsync();
+            }
+                
         }        
         
         private async Task KitchenCommandExecute()
         {
-            //Customers
-            await NavigationService.NavigateAsync("Cocina");
+            await SesionModel.validaCredenciales();
+
+            if (SesionModel.status)
+            {
+                //Customers
+                await NavigationService.NavigateAsync("Cocina");
+            }
+            else
+            {
+                await NavigationService.GoBackAsync();
+            }
         }
 
 

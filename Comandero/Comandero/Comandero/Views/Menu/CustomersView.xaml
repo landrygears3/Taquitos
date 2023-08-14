@@ -63,7 +63,7 @@
                     WidthRequest="100"
                     Text="Para llevar"/>
                 <Renderers:ButtonBase
-                    x:Name="NewTableButton"
+                    IsVisible="{Binding IsAdmin}"
                     Command="{Binding NuevaMesaCommand}"
                     Style="{StaticResource ButtonPrimary}"  
                     Grid.Column="1"

@@ -103,7 +103,28 @@ namespace Comandero.ViewModels.Menu
                 }
                 if (itemMenu.Tipo == "Platillo")
                 {
+                    ProductoModel model  = new ProductoModel();
+                    HttpResponseMessage response = await httpClient.GetAsync(SesionModel.Host + "/Productos?TipoProducto=" + itemMenu.Id);
 
+                    // Verifica si la solicitud fue exitosa
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Lee la respuesta como una cadena JSON
+                        string json = await response.Content.ReadAsStringAsync();
+
+                        // Deserializa la cadena JSON en un objeto o modelo
+                        var data = JsonConvert.DeserializeObject<List<ProductoModel>>(json);
+
+                        foreach (var items in data)
+                        {
+                            model = items;
+                        }
+                        // Utiliza los datos recibidos como desees
+                        // ...
+                    }
+
+                    NavigationParameters param = new NavigationParameters { { "TipoSabor", model },{ "Entrada" , "Platillo"}, { "IdMesa", mesa }, { "idPlato", idPlato } };
+                    await NavigationService.NavigateAsync("Sabores", param);
                 }
             }
 

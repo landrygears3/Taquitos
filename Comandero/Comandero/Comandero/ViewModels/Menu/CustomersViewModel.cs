@@ -36,7 +36,13 @@ namespace Comandero.ViewModels.Menu
             set { SetProperty(ref _isLoading, value); }
         }
 
+        private bool _isadmin;
 
+        public bool IsAdmin
+        {
+            get { return _isadmin; }
+            set { SetProperty(ref _isadmin, value); }
+        }
         #endregion
 
 
@@ -76,6 +82,7 @@ namespace Comandero.ViewModels.Menu
             {
                 llenaMesas();
             });
+            IsAdmin = SesionModel.tipeUser == 1;
             NuevaMesaCommand = new AsyncCommand(NuevaMesaCommandExecute);
             LlevarCommand = new AsyncCommand(LlevarCommandExecute);
             
