@@ -164,6 +164,7 @@ namespace Comandero.ViewModels.Menu
         
         private async Task LlevarCommandExecute()
         {
+            SesionModel.ParaLlevar = new List<Models.Negociantes.PlatoModel>();
             NavigationParameters param = new NavigationParameters { { "Tipo", "Llevar" } };
             await NavigationService.NavigateAsync("TipoMenu", param);
 

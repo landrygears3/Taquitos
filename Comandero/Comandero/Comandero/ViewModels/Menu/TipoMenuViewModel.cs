@@ -27,6 +27,14 @@ namespace Comandero.ViewModels.Menu
         {
             get { return _isLoading; }
             set { SetProperty(ref _isLoading, value); }
+        }        
+        
+        private bool _habilitado;
+
+        public bool habilitado
+        {
+            get { return _habilitado; }
+            set { SetProperty(ref _habilitado, value); }
         }
 
         #endregion
@@ -39,12 +47,15 @@ namespace Comandero.ViewModels.Menu
         private int tipoMenu;
         public event EventHandler PageAppearing;
         public event EventHandler PageDisappearing;
+        public AsyncCommand AgregarDataCommand { get; set; }
+
+        //AgregarDataCommand
         public ObservableCollection<TipoMenuItemModel> Platos { get; set; }
         public TipoMenuViewModel(INavigationService navigationService) : base(navigationService)
         {
             Platos = new ObservableCollection<TipoMenuItemModel>();
             Title = "TipoMenu";
-
+            AgregarDataCommand = new AsyncCommand(AgregarDataCommandExecute);
 
         }
 
@@ -91,6 +102,22 @@ namespace Comandero.ViewModels.Menu
         #endregion
 
         #region events
+        private async Task AgregarDataCommandExecute()
+        {
+            if (Tipo == "Llevar")
+            {
+                if (SesionModel.ParaLlevar.Count>=1)
+                {
+                    NavigationParameters param = new NavigationParameters { { "Tipo", "Llevar" }, { "IdMesa", -1 }, { "Productos", SesionModel.ParaLlevar } };
+                    await NavigationService.NavigateAsync("Cobro", param);
+                }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("Atención", "No hay productos por cobrar", "Aceptar");
+                }
+            }
+            
+        }
 
         private async Task NavegaPlatoExecute(object item)
         {
@@ -123,7 +150,7 @@ namespace Comandero.ViewModels.Menu
                         // ...
                     }
 
-                    NavigationParameters param = new NavigationParameters { { "TipoSabor", model },{ "Entrada" , "Platillo"}, { "IdMesa", mesa }, { "idPlato", idPlato } };
+                    NavigationParameters param = new NavigationParameters { { "TipoSabor", model },{ "Entrada" , "Platillo"}, { "IdMesa", mesa }, { "idPlato", idPlato },{ "Tipo",Tipo } };
                     await NavigationService.NavigateAsync("Sabores", param);
                 }
             }
@@ -133,6 +160,7 @@ namespace Comandero.ViewModels.Menu
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
+            habilitado = false;
             if (parameters.TryGetValue("IdMesa", out int idMesa))
             {
                 mesa = idMesa;
@@ -156,6 +184,10 @@ namespace Comandero.ViewModels.Menu
                         await NavigationService.GoBackAsync(param);
                     });
                 }
+            }
+            if(Tipo == "Llevar")
+            {
+                habilitado = true;
             }
         }
 

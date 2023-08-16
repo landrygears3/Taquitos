@@ -11,6 +11,9 @@ namespace Comandero.Models.Catalogs
 {
     public class SesionModel
     {
+
+        public static List<Negociantes.PlatoModel> ParaLlevar;
+
         public static bool status = false;
 
         public static int sucursal = 1;

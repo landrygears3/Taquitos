@@ -279,7 +279,7 @@ namespace Comandero.ViewModels.Menu
                     {
                         momdelosubida.Add(new Models.Negociantes.PlatoModel());
                         momdelosubida.Last().Id = idplato;
-                        momdelosubida.Last().IdMesa = mesa;
+                        momdelosubida.Last().IdMesa = -1;
                         momdelosubida.Last().idProducto = model.Id;
                         momdelosubida.Last().Cantidad = model.Cantidad;
                         momdelosubida.Last().Estatus = "Enviado";
@@ -290,8 +290,9 @@ namespace Comandero.ViewModels.Menu
                 bool salir = false;
                 if (momdelosubida.Count() > 0)
                 {
-                    NavigationParameters param = new NavigationParameters { { "Tipo", "Llevar" }, { "IdMesa", 0 }, { "Productos", momdelosubida } };
-                    await NavigationService.NavigateAsync("Cobro", param);
+                    SesionModel.ParaLlevar.AddRange(momdelosubida);
+                    NavigationParameters param = new NavigationParameters { { "back", false } };
+                    await NavigationService.GoBackAsync(param);
 
                 }
                 else

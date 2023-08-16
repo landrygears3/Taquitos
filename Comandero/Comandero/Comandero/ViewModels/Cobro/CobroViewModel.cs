@@ -248,10 +248,7 @@ namespace Comandero.ViewModels.Cobro
                     string query = "/Cobro?mesa=" + mesa + "&sucursal=" + SesionModel.sucursal + "&tipo=" + Tipo;
                     HttpResponseMessage message = await httpClient.PostAsync(SesionModel.Host + query, content);
 
-                    if(Tipo != "Llevar")
-                    {
-                        await EnviarPlato(productos,"Tick");
-                    }
+                    await EnviarPlato(productos,"Tick");
                     
                 }
                 catch (Exception ex)
@@ -281,6 +278,7 @@ namespace Comandero.ViewModels.Cobro
             if (parameters.TryGetValue("Productos", out List<Models.Negociantes.PlatoModel> productos))
             {
                 Productos.Clear();
+                this.productos = productos;
                 Dictionary<int, ResumenPlatoModel> resumenPlatos = new Dictionary<int, ResumenPlatoModel>();
                 foreach (var items in productos)
                 {
@@ -316,16 +314,14 @@ namespace Comandero.ViewModels.Cobro
             if(Tipo != "Llevar")
             {
                 llenaPlatos();
-                StartAsync();
             }
-
-            
+            StartAsync();
             PageAppearing?.Invoke(this, EventArgs.Empty);
         }
 
         public virtual void OnPageDisappearing()
         {
-            StartAsync();
+            StopAsync();
             PageDisappearing?.Invoke(this, EventArgs.Empty);
         }
         #endregion

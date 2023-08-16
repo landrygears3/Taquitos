@@ -43,6 +43,7 @@ namespace Comandero.ViewModels.Menu
         public event EventHandler PageAppearing;
         public event EventHandler PageDisappearing;
         private string tipoplato = "";
+        private string Tipo = "";
         private int mesa;
         private int idPlato;
         public AsyncCommand MasCommand { get; set; }
@@ -154,7 +155,16 @@ namespace Comandero.ViewModels.Menu
             momdelosubida.Last().Costo = PlatoSeleccionado.Costo;
             momdelosubida.Last().Nombre = PlatoSeleccionado.NombreProducto;
             momdelosubida.Last().Adicionales = PlatoSeleccionado.adicionales;
-            await _connection.InvokeAsync("EnviarPlato", momdelosubida, SesionModel.sucursal, "");
+
+            if(Tipo == "Llevar")
+            {
+                SesionModel.ParaLlevar.AddRange( momdelosubida );
+            }
+            else
+            {
+                await _connection.InvokeAsync("EnviarPlato", momdelosubida, SesionModel.sucursal, "");
+            }
+
             await NavigationService.GoBackAsync();
 
         }
@@ -264,6 +274,10 @@ namespace Comandero.ViewModels.Menu
             if (parameters.TryGetValue("idPlato", out int idplato))
             {
                 idPlato = idplato;
+            }
+            if (parameters.TryGetValue("Tipo", out string tipo))
+            {
+                Tipo = tipo;
             }
 
         }

@@ -220,7 +220,8 @@ namespace Comandero.ViewModels.Cocina
                 {
                     IsLoading = true;
                     httpClient = new HttpClient();
-                    string query = "/Cocina?Id="+itemMenu.Id + "&comanda="+itemMenu.idComanda+"&producto="+itemMenu.idProducto+ "&idc="+itemMenu.idc;
+                    string tipoSalida = itemMenu.NombreMesa.Split(' ')[0];
+                    string query = "/Cocina?Id="+itemMenu.Id + "&comanda="+itemMenu.idComanda+"&producto="+itemMenu.idProducto+ "&idc="+itemMenu.idc+ "&tipo="+tipoSalida;
                     HttpResponseMessage message = await httpClient.PostAsync(SesionModel.Host + query,null);
                     llenaPlatos();
                 }

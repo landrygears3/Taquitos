@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Comandero.Models.Negociantes
 {
-    internal class PlatoModel
+    public class PlatoModel
     {
         public int Id { get; set; }
         public int IdMesa { get; set; }
