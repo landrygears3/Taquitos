@@ -1,5 +1,6 @@
 ﻿using Comandero.Models.Catalogs;
 using Comandero.Models.Negociantes;
+using Comandero.Services.Printers;
 using Comandero.Utils.Commands;
 using DryIoc;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -11,6 +12,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Common;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
@@ -63,6 +65,7 @@ namespace Comandero.ViewModels.Cobro
         int mesa;
         public event EventHandler PageAppearing;
         public event EventHandler PageDisappearing;
+        Print prn = new Print();
         List<Models.Negociantes.PlatoModel> productos;
         private readonly HubConnection _connection;
         public AsyncCommand CerrarCuentaCommand { get; set; }
@@ -75,6 +78,7 @@ namespace Comandero.ViewModels.Cobro
             CerrarCuentaCommand = new AsyncCommand(CerrarCuentaCommandExecute);
             Productos = new ObservableCollection<CobroModel>();
             Pagorecibido = "";
+            prn.GetDeviceList();
             Title = "Cobro";
             _connection = new HubConnectionBuilder()
                 .WithUrl(SesionModel.Host + "/platoHub")
@@ -85,7 +89,12 @@ namespace Comandero.ViewModels.Cobro
 
 
         #region methods
+        private void imprime()
+        {
+            string text = "\n\n\n\n";
+            prn.Imprime(text);
 
+        }
         public async Task StartAsync()
         {
             try
@@ -203,67 +212,67 @@ namespace Comandero.ViewModels.Cobro
         }
         private async Task CerrarCuentaCommandExecute()
         {
-            string mensaje = "¿Desea cerrar la cuenta y cobrar productos?";
-            bool salir = true;
-            if (!Pagorecibido.Trim().Equals(string.Empty))
-            {   
-                try
-                {
-                    decimal pagoaux = decimal.Parse(Pagorecibido);
-                    if (pagoaux > currentTotal)
-                    {
-                        mensaje += "\nDeberá entregar un cambio de $" + (pagoaux - currentTotal).ToString("0.##"); ;
-                        salir = await App.Current.MainPage.DisplayAlert("Atención", mensaje, "No", "Si, cobrar");
-                    }
-                    else
-                    {
-                        mensaje = "El pago recibido es menor a la cantidad por cobrar";
-                        await App.Current.MainPage.DisplayAlert("Atención", mensaje, "Aceptar");
-                    }
-                    
-                }
-                catch
-                {
-                    mensaje = "El monto recibido no tiene un valor valido";
-                    await App.Current.MainPage.DisplayAlert("Atención", mensaje, "Aceptar");
-                }
-            }
-            else
-            {
-                salir = await App.Current.MainPage.DisplayAlert("Atención", mensaje, "No", "Si, cobrar");
-            }
+            //string mensaje = "¿Desea cerrar la cuenta y cobrar productos?";
+            //bool salir = true;
+            //if (!Pagorecibido.Trim().Equals(string.Empty))
+            //{   
+            //    try
+            //    {
+            //        decimal pagoaux = decimal.Parse(Pagorecibido);
+            //        if (pagoaux > currentTotal)
+            //        {
+            //            mensaje += "\nDeberá entregar un cambio de $" + (pagoaux - currentTotal).ToString("0.##"); ;
+            //            salir = await App.Current.MainPage.DisplayAlert("Atención", mensaje, "No", "Si, cobrar");
+            //        }
+            //        else
+            //        {
+            //            mensaje = "El pago recibido es menor a la cantidad por cobrar";
+            //            await App.Current.MainPage.DisplayAlert("Atención", mensaje, "Aceptar");
+            //        }
 
-            if (!salir)
-            {
-                try
-                {
-                    IsLoading = true;
-                    if (productos == null)
-                    {
-                        productos = new List<Models.Negociantes.PlatoModel>();
-                    }
-                    var jsonData = JsonConvert.SerializeObject(productos);
-                    var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                    httpClient = new HttpClient();
-                    string query = "/Cobro?mesa=" + mesa + "&sucursal=" + SesionModel.sucursal + "&tipo=" + Tipo;
-                    HttpResponseMessage message = await httpClient.PostAsync(SesionModel.Host + query, content);
+            //    }
+            //    catch
+            //    {
+            //        mensaje = "El monto recibido no tiene un valor valido";
+            //        await App.Current.MainPage.DisplayAlert("Atención", mensaje, "Aceptar");
+            //    }
+            //}
+            //else
+            //{
+            //    salir = await App.Current.MainPage.DisplayAlert("Atención", mensaje, "No", "Si, cobrar");
+            //}
 
-                    await EnviarPlato(productos,"Tick");
-                    
-                }
-                catch (Exception ex)
-                {
-                    await App.Current.MainPage.DisplayAlert("Atención", "Ocurrió un error con el cobro", "Aceptar");
-                }
-                finally
-                {
-                    IsLoading = false;
-                    await NavigationService.GoBackToRootAsync();
-                }
-               
-            }
-            
+            //if (!salir)
+            //{
+            //    try
+            //    {
+            //        IsLoading = true;
+            //        if (productos == null)
+            //        {
+            //            productos = new List<Models.Negociantes.PlatoModel>();
+            //        }
+            //        var jsonData = JsonConvert.SerializeObject(productos);
+            //        var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            //        httpClient = new HttpClient();
+            //        string query = "/Cobro?mesa=" + mesa + "&sucursal=" + SesionModel.sucursal + "&tipo=" + Tipo;
+            //        HttpResponseMessage message = await httpClient.PostAsync(SesionModel.Host + query, content);
 
+            //        await EnviarPlato(productos,"Tick");
+
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        await App.Current.MainPage.DisplayAlert("Atención", "Ocurrió un error con el cobro", "Aceptar");
+            //    }
+            //    finally
+            //    {
+            //        IsLoading = false;
+            //        await NavigationService.GoBackToRootAsync();
+            //    }
+
+            //}
+
+            imprime();
         }
         public override void OnNavigatedTo(INavigationParameters parameters)
         {

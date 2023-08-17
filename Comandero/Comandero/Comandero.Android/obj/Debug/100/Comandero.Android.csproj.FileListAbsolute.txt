@@ -1483,3 +1483,4 @@ C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\stamp\_GenerateJavaStubs.stamp
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\stamp\_ResolveLibraryProjectImports.stamp
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\res\drawable\ic_launcher.png
