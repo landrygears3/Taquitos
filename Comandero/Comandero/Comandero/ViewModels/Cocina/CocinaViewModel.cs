@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -49,10 +50,17 @@ namespace Comandero.ViewModels.Cocina
                 .WithUrl(SesionModel.Host + "/platoHub")
                 .Build();
 
-            _connection.On<List<ResumenPlatoModel>>("RecibePlato", (list) =>
+            _connection.On<List<ResumenPlatoModel>, string>("RecibePlato", (list,entrada) =>
             {
-                llenaPlatos();
-                Reproduceaudio();
+
+                string[] evita = { "Cobro","Cocina" };
+                if (!evita.Contains(entrada)) 
+                {
+                    llenaPlatos();
+                    Reproduceaudio();
+                }
+
+
             });
 
 
@@ -62,19 +70,24 @@ namespace Comandero.ViewModels.Cocina
 
 
         #region Methods
-
+        bool reproduciendo = false;
         public async Task Reproduceaudio()
         {
-            var assembly = typeof(App).GetTypeInfo().Assembly;
-            Stream audioStream = assembly.GetManifestResourceStream("Comandero.Recursos.UnTaco.mp3");
-            var audio = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
-            audio.Load(audioStream);
-            int timer = 0;
-            while (timer <= 2)
+            if (!reproduciendo)
             {
-                audio.Play();
-                Thread.Sleep(5000);
-                timer++;
+                var assembly = typeof(App).GetTypeInfo().Assembly;
+                Stream audioStream = assembly.GetManifestResourceStream("Comandero.Recursos.UnTaco.mp3");
+                var audio = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                audio.Load(audioStream);
+                int timer = 0;
+                while (timer <= 2)
+                {
+                    reproduciendo = true;
+                    audio.Play();
+                    Thread.Sleep(5000);
+                    timer++;
+                }
+                reproduciendo = false;
             }
 
         }
@@ -212,7 +225,7 @@ namespace Comandero.ViewModels.Cocina
         public async Task EnviarPlato(List<Models.Negociantes.PlatoModel> momdelosubida, string tipoE)
         {
             IsLoading = true;
-            await _connection.InvokeAsync("EnviarPlato", momdelosubida, SesionModel.sucursal, tipoE);
+            await _connection.InvokeAsync("EnviarPlato", momdelosubida, SesionModel.sucursal, tipoE,"Cocina");
 
         }
         private async Task SelectedItemCommandExecute(object item)
@@ -226,7 +239,7 @@ namespace Comandero.ViewModels.Cocina
                     string tipoSalida = itemMenu.NombreMesa.Split(' ')[0];
                     string query = "/Cocina?Id="+itemMenu.Id + "&comanda="+itemMenu.idComanda+"&producto="+itemMenu.idProducto+ "&idc="+itemMenu.idc+ "&tipo="+tipoSalida;
                     HttpResponseMessage message = await httpClient.PostAsync(SesionModel.Host + query,null);
-                    //llenaPlatos();
+                    llenaPlatos();
                     await EnviarPlato(new List<Models.Negociantes.PlatoModel>(), "Tick");
                 }
                 catch (Exception ex)

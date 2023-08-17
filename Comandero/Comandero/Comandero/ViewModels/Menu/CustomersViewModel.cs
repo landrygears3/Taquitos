@@ -78,7 +78,7 @@ namespace Comandero.ViewModels.Menu
             .WithUrl(SesionModel.Host + "/platoHub")
             .Build();
 
-            _connection1.On<List<ResumenPlatoModel>>("RecibePlato", (list) =>
+            _connection.On<List<ResumenPlatoModel>, string>("RecibePlato", (list, entrada) =>
             {
                 llenaMesas();
             });

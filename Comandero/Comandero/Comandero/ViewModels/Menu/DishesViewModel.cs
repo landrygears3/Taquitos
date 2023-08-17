@@ -84,7 +84,7 @@ namespace Comandero.ViewModels.Menu
             .WithUrl(SesionModel.Host + "/platoHub")
             .Build();
 
-            _connection.On<List<ResumenPlatoModel>>("RecibePlato", (list) =>
+            _connection.On<List<ResumenPlatoModel>, string>("RecibePlato", (list, entrada) =>
             {
                 llenaPlatos();
             });
@@ -213,7 +213,7 @@ namespace Comandero.ViewModels.Menu
         public async Task EnviarPlato(List<Models.Negociantes.PlatoModel> momdelosubida, string tipoE)
         {
             IsLoading = true;
-            await _connection.InvokeAsync("EnviarPlato", momdelosubida, SesionModel.sucursal, tipoE);
+            await _connection.InvokeAsync("EnviarPlato", momdelosubida, SesionModel.sucursal, tipoE,"Platos");
 
         }
         private async Task EliminaComensal(object item)

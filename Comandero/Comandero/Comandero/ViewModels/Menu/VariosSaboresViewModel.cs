@@ -162,7 +162,7 @@ namespace Comandero.ViewModels.Menu
             }
             else
             {
-                await _connection.InvokeAsync("EnviarPlato", momdelosubida, SesionModel.sucursal, "");
+                await _connection.InvokeAsync("EnviarPlato", momdelosubida, SesionModel.sucursal, "","Sabores");
             }
 
             await NavigationService.GoBackAsync();

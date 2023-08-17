@@ -133,7 +133,7 @@ namespace Comandero.ViewModels.Menu
         public async Task EnviarPlato(List<Models.Negociantes.PlatoModel> momdelosubida)
         {
             IsLoading = true;
-            await _connection.InvokeAsync("EnviarPlato", momdelosubida, SesionModel.sucursal,"");
+            await _connection.InvokeAsync("EnviarPlato", momdelosubida, SesionModel.sucursal,"","Comanda");
 
         }
         #endregion

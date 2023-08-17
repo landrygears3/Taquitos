@@ -242,7 +242,7 @@ namespace Comandero.ViewModels.Cobro
         public async Task EnviarPlato(List<Models.Negociantes.PlatoModel> momdelosubida,string tipoE)
         {
             IsLoading = true;
-            await _connection.InvokeAsync("EnviarPlato", momdelosubida, SesionModel.sucursal, tipoE);
+            await _connection.InvokeAsync("EnviarPlato", momdelosubida, SesionModel.sucursal, tipoE,"Cobro");
 
         }
         private async Task CerrarCuentaCommandExecute()
