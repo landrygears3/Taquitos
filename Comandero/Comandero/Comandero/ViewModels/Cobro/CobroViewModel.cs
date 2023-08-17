@@ -1,5 +1,6 @@
 ﻿using Comandero.Models.Catalogs;
 using Comandero.Models.Negociantes;
+using Comandero.Services.Printers;
 using Comandero.Utils.Commands;
 using DryIoc;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -11,11 +12,14 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Common;
 using System.Drawing;
+using System.IO;
+using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Comandero.ViewModels.Cobro
@@ -63,6 +67,7 @@ namespace Comandero.ViewModels.Cobro
         int mesa;
         public event EventHandler PageAppearing;
         public event EventHandler PageDisappearing;
+        Print prn = new Print();
         List<Models.Negociantes.PlatoModel> productos;
         private readonly HubConnection _connection;
         public AsyncCommand CerrarCuentaCommand { get; set; }
@@ -75,6 +80,7 @@ namespace Comandero.ViewModels.Cobro
             CerrarCuentaCommand = new AsyncCommand(CerrarCuentaCommandExecute);
             Productos = new ObservableCollection<CobroModel>();
             Pagorecibido = "";
+            prn.GetDeviceList();
             Title = "Cobro";
             _connection = new HubConnectionBuilder()
                 .WithUrl(SesionModel.Host + "/platoHub")
@@ -85,7 +91,45 @@ namespace Comandero.ViewModels.Cobro
 
 
         #region methods
+        private void imprime()
+        {
+            const string ESC = "\u001B";
+            const string GS = "\u001D";
+            const string InitializePrinter = ESC + "@";
+            const string BoldOn = ESC + "E" + "\u0001";
+            const string BoldOff = ESC + "E" + "\0";
+            const string DoubleOn = GS + "!" + "\u0011";  // 2x sized text (double-high + double-wide)
+            const string DoubleOff = GS + "!" + "\0";
+            string text = "---------Tacos de asada---------\n";
+            foreach (var model in Productos)
+            {
+               string texto = "";
+               string nombreaux = model.Name;
+               nombreaux = nombreaux.Replace("ñ", "n");
+               nombreaux = nombreaux.Replace("á", "a");
+               nombreaux = nombreaux.Replace("í", "i");
+               nombreaux = nombreaux.Replace("ó", "o");
+               nombreaux = nombreaux.Replace("ú", "u");
+               nombreaux = nombreaux.Replace("é", "e");
+               string cantidadaux = model.Cantidad.ToString();
+               string precioauz = model.Total.ToString("0.##");
 
+                int tama = 32 - (nombreaux + " " + cantidadaux + " " +  precioauz).Length;
+
+                for (int i = 0; i < tama; i++)
+                {
+                    texto += "-";
+                }
+                texto = cantidadaux + " " + nombreaux + texto + "$" +precioauz;
+                text += texto + "\n";
+            }
+            text += "\n\n";
+            string currentaux = CurrentTotal.ToString();
+            text += BoldOn + "Total:  " + currentaux + BoldOff;
+            text += "\n\n\n\n";
+            prn.Imprime(text);
+
+        }
         public async Task StartAsync()
         {
             try
@@ -206,7 +250,7 @@ namespace Comandero.ViewModels.Cobro
             string mensaje = "¿Desea cerrar la cuenta y cobrar productos?";
             bool salir = true;
             if (!Pagorecibido.Trim().Equals(string.Empty))
-            {   
+            {
                 try
                 {
                     decimal pagoaux = decimal.Parse(Pagorecibido);
@@ -220,7 +264,7 @@ namespace Comandero.ViewModels.Cobro
                         mensaje = "El pago recibido es menor a la cantidad por cobrar";
                         await App.Current.MainPage.DisplayAlert("Atención", mensaje, "Aceptar");
                     }
-                    
+
                 }
                 catch
                 {
@@ -248,8 +292,9 @@ namespace Comandero.ViewModels.Cobro
                     string query = "/Cobro?mesa=" + mesa + "&sucursal=" + SesionModel.sucursal + "&tipo=" + Tipo;
                     HttpResponseMessage message = await httpClient.PostAsync(SesionModel.Host + query, content);
 
-                    await EnviarPlato(productos,"Tick");
-                    
+                    await EnviarPlato(productos, "Tick");
+                    //imprime();
+
                 }
                 catch (Exception ex)
                 {
@@ -260,9 +305,9 @@ namespace Comandero.ViewModels.Cobro
                     IsLoading = false;
                     await NavigationService.GoBackToRootAsync();
                 }
-               
+
             }
-            
+
 
         }
         public override void OnNavigatedTo(INavigationParameters parameters)

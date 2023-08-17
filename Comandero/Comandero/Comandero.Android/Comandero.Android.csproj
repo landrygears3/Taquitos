@@ -77,6 +77,7 @@
     <Compile Include="Renderers\IconAwesomeButtonBaseAndroid.cs" />
     <Compile Include="Renderers\IconAwesomeLabelBaseAndroid.cs" />
     <Compile Include="Renderers\LabelBaseAndroid.cs" />
+    <Compile Include="Services\BluetoothServiceRenderer.cs" />
     <Compile Include="SplashActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <LinkDescription Include="LinkerSettings.xml" />
@@ -193,6 +194,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\Queso_Fundido.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_launcher.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>

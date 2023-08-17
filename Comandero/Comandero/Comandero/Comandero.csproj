@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Recursos\ic_launcher.png" />
     <None Remove="Recursos\Menu_Agua.jpg" />
     <None Remove="Recursos\Menu_Alambre.jpg" />
     <None Remove="Recursos\Menu_QuekaGigante.jpg" />
@@ -18,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Recursos\ic_launcher.png" />
     <EmbeddedResource Include="Recursos\Menu_Agua.jpg" />
     <EmbeddedResource Include="Recursos\Menu_Alambre.jpg" />
     <EmbeddedResource Include="Recursos\Menu_QuekaGigante.jpg" />

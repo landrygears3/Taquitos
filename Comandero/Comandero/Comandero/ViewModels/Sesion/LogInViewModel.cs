@@ -11,6 +11,7 @@ using System.Windows.Input;
 using static Xamarin.Essentials.Permissions;
 using Xamarin.Forms;
 using System.Threading;
+using Comandero.Services.Printers;
 
 namespace Comandero.ViewModels.Sesion
 {
@@ -18,11 +19,12 @@ namespace Comandero.ViewModels.Sesion
     {
         private HttpClient httpClient;
         public AsyncCommand LogInCommand { get; set; }
-       
+
+
         public LogInViewModel(INavigationService navigationService) : base(navigationService)
         {
             httpClient = new HttpClient();
-            
+
             LogInCommand = new AsyncCommand(LogInCommandExecute);
         }
 
@@ -38,14 +40,12 @@ namespace Comandero.ViewModels.Sesion
                     await NavigationService.NavigateAsync("Navigation/Home");
                 }
 
-                
+
             }
             catch (Exception ex)
             {
                 // Maneja cualquier error que pueda ocurrir
             }
-                        
-
         }
 
 

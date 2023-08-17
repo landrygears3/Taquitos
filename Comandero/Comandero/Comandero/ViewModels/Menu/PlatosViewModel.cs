@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -78,7 +79,15 @@ namespace Comandero.ViewModels.Menu
 
             _connection.On<List<ResumenPlatoModel>>("RecibePlato", (list) =>
             {
-                llenadoPlatosHub(list);
+                if (list.Count < 1)
+                {
+                    llenaPlatos();
+                }
+                else
+                {
+                    llenadoPlatosHub(list);
+                }
+
             });
 
         }
@@ -135,9 +144,10 @@ namespace Comandero.ViewModels.Menu
                 Platos.Last().Icon = items.Icon;
                 Platos.Last().subtotal = items.subtotal;
                 Platos.Last().Name = items.Name;
-                Platos.Last().esVisible = true;
+                Platos.Last().esVisible = false;
+                Platos.Last().idc = items.idc;
                 Platos.Last().SelectedItemCommand = new Command(async (item) => await SelectedItemCommandExecute(items));
-                Platos.Last().SelectedEliminaMesa = new Command(async (item) => await EliminaMesa(items));
+                Platos.Last().SelectedEliminaMesa = new Command(async (item) => await EliminaProducto(items));
                 CurrentTotal += items.subtotal;
                 //Tables.Add(items);                
             }
@@ -224,7 +234,7 @@ namespace Comandero.ViewModels.Menu
         public virtual void OnPageAppearing()
         {
             //timer.Start();
-
+            llenaPlatos();
             PageAppearing?.Invoke(this, EventArgs.Empty);
         }
 
@@ -233,7 +243,12 @@ namespace Comandero.ViewModels.Menu
             StopAsync();
             PageDisappearing?.Invoke(this, EventArgs.Empty);
         }
+        public async Task EnviarPlato(List<Models.Negociantes.PlatoModel> momdelosubida, string tipoE)
+        {
+            IsLoading = true;
+            await _connection.InvokeAsync("EnviarPlato", momdelosubida, SesionModel.sucursal, tipoE);
 
+        }
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             if (parameters.TryGetValue("IdMesa", out int idMesa))
@@ -271,14 +286,38 @@ namespace Comandero.ViewModels.Menu
 
             }
         }
-        private async Task EliminaMesa(object item)
+        private async Task EliminaProducto(object item)
         {
-            if (item is Models.Catalogs.PlatoModel itemMenu)
+            if (item is ResumenPlatoModel itemMenu)
             {
                 if (itemMenu.estatus.Equals("Enviado"))
                 {
-                    //NavigationParameters param = new NavigationParameters { { "IdPlato", itemMenu.Id }, { "IdMesa", mesa } };
-                    //await NavigationService.NavigateAsync("Plato", param);
+                    IsLoading = true;
+                    httpClient = new HttpClient();
+                    string query = "/Platos?idc=" + itemMenu.idc;
+                    HttpResponseMessage response = await httpClient.DeleteAsync(SesionModel.Host + query);
+                    //llenaPlatos();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await EnviarPlato(new List<Models.Negociantes.PlatoModel>(), "Tick");
+                    }
+                    else
+                    {
+                        if(response.StatusCode == HttpStatusCode.NotModified)
+                        {
+                            await App.Current.MainPage.DisplayAlert("Atención", "El plato ya fue preparado en cocina no puede ser eliminado", "Aceptar");
+                        }
+                        else
+                        {
+                            await App.Current.MainPage.DisplayAlert("Atención", "Ocurrió un error en el servidor al eliminar el plato", "Aceptar");
+                        }
+                    }
+                    IsLoading = false;
+
+                }
+                else
+                {
+                   await App.Current.MainPage.DisplayAlert("Atención", "El plato ya fue preparado en cocina no puede ser eliminado", "Aceptar");
                 }
 
             }

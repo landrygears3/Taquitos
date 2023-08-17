@@ -15,6 +15,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Common;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -178,6 +180,7 @@ namespace Comandero.ViewModels.Menu
                         foreach (var items in data)
                         {
                             items.SelectedItemCommand = new Command(async (item) => await SelectedItemCommandExecute(items));
+                            items.SelectedEliminaMesa = new Command(async (item) => await EliminaComensal(items));
                             items.Name = "Comanda " + items.Id;
                             items.esVisible = true;
                             Platos.Add(items);
@@ -206,7 +209,39 @@ namespace Comandero.ViewModels.Menu
 
 
         #region events
-        private async Task SelectedItemCommandExecute(object item)
+
+        public async Task EnviarPlato(List<Models.Negociantes.PlatoModel> momdelosubida, string tipoE)
+        {
+            IsLoading = true;
+            await _connection.InvokeAsync("EnviarPlato", momdelosubida, SesionModel.sucursal, tipoE);
+
+        }
+        private async Task EliminaComensal(object item)
+        {
+            if (item is Models.Catalogs.PlatoModel itemMenu)
+            {
+                IsLoading = true;
+                httpClient = new HttpClient();
+                string query = SesionModel.Host + "/ResumenPlatos?id=" + itemMenu.Id;
+                HttpResponseMessage response = await httpClient.DeleteAsync(query);
+                if (response.IsSuccessStatusCode)
+                {
+                    await EnviarPlato(new List<Models.Negociantes.PlatoModel>(), "Tick");
+                }
+                else
+                {
+                    if (response.StatusCode == HttpStatusCode.NotModified)
+                    {
+                        await App.Current.MainPage.DisplayAlert("Atención", "La comanda ya tiene platos preparados no puede ser eliminado", "Aceptar");
+                    }
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("Atención", "Ocurrió un error en el servidor al eliminar el plato", "Aceptar");
+                    }
+                }
+            }
+        }
+            private async Task SelectedItemCommandExecute(object item)
         {
             if (item is Models.Catalogs.PlatoModel itemMenu)
             {
