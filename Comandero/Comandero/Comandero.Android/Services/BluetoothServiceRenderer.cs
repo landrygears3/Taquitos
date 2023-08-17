@@ -48,6 +48,7 @@ namespace Comandero.Droid.Services
                         bluetoothSocket?.Connect();
                         byte[] buffer = Encoding.UTF8.GetBytes(text);
                         bluetoothSocket?.OutputStream.Write(buffer, 0, buffer.Length);
+                        bluetoothSocket.Dispose();
                         bluetoothSocket.Close();
                     }
                 }

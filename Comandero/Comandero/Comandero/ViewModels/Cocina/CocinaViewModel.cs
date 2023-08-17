@@ -53,8 +53,6 @@ namespace Comandero.ViewModels.Cocina
             {
                 llenaPlatos();
                 Reproduceaudio();
-
-
             });
 
 
@@ -211,7 +209,12 @@ namespace Comandero.ViewModels.Cocina
             StopAsync();
             Disappearing?.Invoke(this, EventArgs.Empty);
         }
+        public async Task EnviarPlato(List<Models.Negociantes.PlatoModel> momdelosubida, string tipoE)
+        {
+            IsLoading = true;
+            await _connection.InvokeAsync("EnviarPlato", momdelosubida, SesionModel.sucursal, tipoE);
 
+        }
         private async Task SelectedItemCommandExecute(object item)
         {
             if (item is Models.Catalogs.PlatoModel itemMenu)
@@ -223,7 +226,8 @@ namespace Comandero.ViewModels.Cocina
                     string tipoSalida = itemMenu.NombreMesa.Split(' ')[0];
                     string query = "/Cocina?Id="+itemMenu.Id + "&comanda="+itemMenu.idComanda+"&producto="+itemMenu.idProducto+ "&idc="+itemMenu.idc+ "&tipo="+tipoSalida;
                     HttpResponseMessage message = await httpClient.PostAsync(SesionModel.Host + query,null);
-                    llenaPlatos();
+                    //llenaPlatos();
+                    await EnviarPlato(new List<Models.Negociantes.PlatoModel>(), "Tick");
                 }
                 catch (Exception ex)
                 {

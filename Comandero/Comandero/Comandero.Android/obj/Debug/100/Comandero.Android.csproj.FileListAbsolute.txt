@@ -810,6 +810,7 @@ C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\res\drawable-hdpi\menu_tuetano.jpg
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\res\drawable-hdpi\volcan.jpg
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\res\drawable-hdpi\queso_fundido.jpg
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\res\drawable\ic_launcher.png
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\uploadflags.txt
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\resolvedassemblies.hash
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\android\assets\Comandero.Android.dll
@@ -1483,4 +1484,3 @@ C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\stamp\_GenerateJavaStubs.stamp
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\stamp\_ResolveLibraryProjectImports.stamp
-C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero.Android\obj\Debug\100\res\drawable\ic_launcher.png

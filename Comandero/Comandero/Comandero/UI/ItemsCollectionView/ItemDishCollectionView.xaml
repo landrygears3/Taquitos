@@ -6,7 +6,7 @@
              BackgroundColor="{Binding BgColor}">
     <SwipeView.LeftItems>
         <SwipeItems>
-            <SwipeItemView Command="{Binding SelectedItemCommand}"                           
+            <SwipeItemView IsVisible="{Binding esVisible}"  Command="{Binding SelectedItemCommand}"                           
                            BackgroundColor="Green">
                 <Grid HeightRequest="100" WidthRequest="100">
                     <Grid.RowDefinitions>
@@ -30,7 +30,7 @@
                 Style="{StaticResource IconAwesomeLabelPrimary}"/>
                 </Grid>
             </SwipeItemView>
-            <SwipeItemView IsVisible="{Binding esVisible}" Command="{Binding SelectedEliminaMesa}"
+            <SwipeItemView Command="{Binding SelectedEliminaMesa}"
                            BackgroundColor="Red">
                 <Grid  HeightRequest="100" WidthRequest="100">
                     <Grid.RowDefinitions>
