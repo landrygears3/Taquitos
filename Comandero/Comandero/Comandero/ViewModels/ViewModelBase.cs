@@ -39,6 +39,17 @@ namespace Comandero.ViewModels
             }
         }
 
+        public AsyncCommand GoToMainCommand
+        {
+            get
+            {
+                return new AsyncCommand(async () =>
+                {
+                    await NavigationService.GoBackToRootAsync();
+                });
+            }
+        }
+
         public virtual void Initialize(INavigationParameters parameters)
         {
 

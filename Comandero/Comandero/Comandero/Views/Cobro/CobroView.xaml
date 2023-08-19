@@ -114,6 +114,7 @@
                             Keyboard="Numeric"
                             Placeholder="Exacto"
                             Grid.Column="1"
+                            FontSize="Medium"
                             Margin="0,0,20,0"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="End"

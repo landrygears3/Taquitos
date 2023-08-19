@@ -83,7 +83,7 @@
                     />
 
                 <Renderers:IconAwesomeButtonBase
-                    Command="{Binding CutBoxCommand}"
+                    Command="{Binding CorteCommand}"
                     Style="{StaticResource ButtonSecondary}"
                     Margin="10,10,10,0"
                     Icon="CutBox"

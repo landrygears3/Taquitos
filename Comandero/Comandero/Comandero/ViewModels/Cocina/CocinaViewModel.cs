@@ -35,6 +35,7 @@ namespace Comandero.ViewModels.Cocina
         }
         #endregion
 
+
         #region inits
         private readonly HubConnection _connection;
         private HttpClient httpClient;
@@ -147,8 +148,10 @@ namespace Comandero.ViewModels.Cocina
         }
         #endregion
 
+
         #region Update
         #endregion
+
 
         #region get
         private async Task llenaPlatos()

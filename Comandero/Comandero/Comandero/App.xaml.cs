@@ -2,12 +2,14 @@ using Comandero.Models.Catalogs;
 using Comandero.ViewModels;
 using Comandero.ViewModels.Cobro;
 using Comandero.ViewModels.Cocina;
+using Comandero.ViewModels.Corte;
 using Comandero.ViewModels.Home;
 using Comandero.ViewModels.Menu;
 using Comandero.ViewModels.Sesion;
 using Comandero.Views;
 using Comandero.Views.Cobro;
 using Comandero.Views.Cocina;
+using Comandero.Views.Corte;
 using Comandero.Views.Menu;
 using Comandero.Views.Sesion;
 using Prism;
@@ -60,6 +62,13 @@ namespace Comandero
 
             #region cocina
             containerRegistry.RegisterForNavigation<CocinaView, CocinaViewModel>("Cocina");
+            #endregion
+
+            #region corte
+            containerRegistry.RegisterForNavigation<TabbedCorteView>("TabbedCorte");
+            containerRegistry.RegisterForNavigation<DiarioView, DiarioViewModel>("CorteDiario");
+            containerRegistry.RegisterForNavigation<MensualView, MensualViewModel>("CorteSemanal");
+            containerRegistry.RegisterForNavigation<SemanalView, MensualViewModel>("CorteMensual");
             #endregion
         }
     }

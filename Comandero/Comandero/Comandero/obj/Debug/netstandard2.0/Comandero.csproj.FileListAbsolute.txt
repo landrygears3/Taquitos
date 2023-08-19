@@ -29,12 +29,17 @@ C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\ItemsCollectionView\ItemCocinaCollectionView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\ItemsCollectionView\ItemDishCollectionView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\ItemsCollectionView\ItemProductosComandaView.xaml.g.cs
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\ItemsCollectionView\ItemResumenCollectionView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\ItemsCollectionView\ItemSaborCollectionView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\ItemsCollectionView\ItemTableCollectionView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\ItemsCollectionView\ItemTipoProductoCollectionView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\UI\Theme\Theme.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Views\Cobro\CobroView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Views\Cocina\CocinaView.xaml.g.cs
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Views\Corte\DiarioView.xaml.g.cs
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Views\Corte\MensualView.xaml.g.cs
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Views\Corte\SemanalView.xaml.g.cs
+C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Views\Corte\TabbedCorteView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Views\Home\HomeView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Views\Menu\ComandaView.xaml.g.cs
 C:\Users\landr\OneDrive\Documentos\GitHub\Taquitos\Comandero\Comandero\Comandero\obj\Debug\netstandard2.0\Views\Menu\CustomersView.xaml.g.cs

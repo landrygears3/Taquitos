@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Renderers="clr-namespace:Comandero.UI.Renderers"
+             xmlns:Items="clr-namespace:Comandero.UI.ItemsCollectionView"
+             xmlns:Customs="clr-namespace:Comandero.UI.Customs"
+             BackgroundColor="{DynamicResource BGColor}"
+             x:Class="Comandero.Views.Corte.DiarioView">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="85"/>
+                    <RowDefinition Height="500"/>
+                    <RowDefinition Height="85"/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Renderers:IconAwesomeButtonBase
+                    Style="{StaticResource ButtonBack}"
+                    TextColor="{DynamicResource PrimaryColor}"
+                    Command="{Binding GoToMainCommand}"
+                    Icon="Back"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    FontSize="30"
+                    HeightRequest="60"
+                    Margin="0"
+                    Grid.Column="0"
+                    Grid.Row="0"/>
+                <Renderers:LabelBase
+            Text="{Binding TotalGanado,StringFormat='Total hoy ${0:F2}'}"
+            Grid.Column="0"
+            Grid.Row="0"
+            FontSize="30"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            Style="{StaticResource LabelTitle}"/>
+                <Frame
+                    CornerRadius="30"
+                    BorderColor="Black"
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Margin="20,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Renderers:LabelBase
+                            Text="Caja chica"
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            FontSize="20"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="CenterAndExpand"
+                            Style="{StaticResource LabelTitle}"/>
+                        <Entry
+                            Text="{Binding CajaChica}"
+                            HorizontalTextAlignment="Center"
+                            TextColor="Black"
+                            Keyboard="Numeric"
+                            FontSize="20"
+                            Placeholder="0"
+                            Grid.Column="1"
+                            Margin="0,0,20,0"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="End"
+                            Grid.Row="0"/>
+                    </Grid>
+                </Frame>
+                <CollectionView
+                            Grid.Column="0"
+                            Grid.Row="2"
+                            Margin="20,0"
+                            ItemsSource="{Binding Platos}"
+                            >
+                    <CollectionView.EmptyView>
+                        <Customs:EmptyTextCollectionView/>
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Items:ItemResumenCollectionView
+                                    HeightRequest="80"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Frame
+                    CornerRadius="30"
+                    BorderColor="Black"
+                    Grid.Column="0"
+                    Grid.Row="3"
+                    Margin="20,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Renderers:LabelBase
+                            Text="Sueldos"
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            FontSize="20"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="CenterAndExpand"
+                            Style="{StaticResource LabelTitle}"/>
+                        <Entry
+                            Text="{Binding Sueldos}"
+                            HorizontalTextAlignment="Center"
+                            TextColor="Black"
+                            Keyboard="Numeric"
+                            Placeholder="0"
+                            Grid.Column="1"
+                            FontSize="20"
+                            Margin="0,0,20,0"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="End"
+                            Grid.Row="0"/>
+                    </Grid>
+                </Frame>
+                <Button
+                    Style="{StaticResource ButtonPrimary}"
+                    Text="Calcular corte"
+                    Grid.Column="0"
+                    Grid.Row="4"
+                    Margin="20"
+                    Command="{Binding LogInCommand}"/>
+                <Customs:ModalCargandoCustom Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Margin="-70" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsLoading="{Binding IsLoading}" AbsoluteLayout.LayoutFlags="All"/>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

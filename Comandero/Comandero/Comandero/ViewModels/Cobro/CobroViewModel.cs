@@ -293,7 +293,7 @@ namespace Comandero.ViewModels.Cobro
                     HttpResponseMessage message = await httpClient.PostAsync(SesionModel.Host + query, content);
 
                     await EnviarPlato(productos, "Tick");
-                    //imprime();
+                    imprime();
 
                 }
                 catch (Exception ex)
