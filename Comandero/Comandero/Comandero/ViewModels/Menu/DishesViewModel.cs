@@ -181,7 +181,7 @@ namespace Comandero.ViewModels.Menu
                         {
                             items.SelectedItemCommand = new Command(async (item) => await SelectedItemCommandExecute(items));
                             items.SelectedEliminaMesa = new Command(async (item) => await EliminaComensal(items));
-                            items.Name = "Comanda " + items.Id;
+                            items.Name = "Plato " + items.Id;
                             items.esVisible = true;
                             Platos.Add(items);
                             auxCurrentTotal += items.subtotal;

@@ -38,15 +38,16 @@
         <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
     <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="2*"/>
-        <ColumnDefinition Width="2*"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
     </Grid.ColumnDefinitions>
     <Renderers:LabelBase
         Margin="20,0"
         Text="{Binding Nombre}"
         Grid.Column="0"
         Grid.Row="0"
-        Grid.ColumnSpan="2"
+        Grid.ColumnSpan="3"
         VerticalTextAlignment="Center"
         VerticalOptions="FillAndExpand"
         Style="{StaticResource LabelTitle}"/>
@@ -59,7 +60,7 @@
         VerticalTextAlignment="Center"
         VerticalOptions="FillAndExpand"
         Style="{StaticResource LabelTitle}"/>
-    <Renderers:LabelBase
+        <Renderers:LabelBase
         Text="{Binding NombreMesa}"
         Grid.Column="1"
         Grid.Row="1"
@@ -67,5 +68,14 @@
         VerticalTextAlignment="Center"
         VerticalOptions="FillAndExpand"
         Style="{StaticResource LabelTitle}"/>
+        <Renderers:LabelBase
+        Text="{Binding NombrePlato}"
+        Grid.Column="2"
+        Grid.Row="1"
+        Grid.ColumnSpan="1"
+        VerticalTextAlignment="Center"
+        VerticalOptions="FillAndExpand"
+        Style="{StaticResource LabelTitle}"/>
     </Grid>
+    
 </SwipeView>

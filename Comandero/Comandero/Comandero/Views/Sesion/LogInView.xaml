@@ -38,11 +38,13 @@
                     Text="Inicia sesión"/>
                 <Entry
                     Placeholder="Usuario"
+                    Text="{Binding User}"
                     Style="{StaticResource EntryPrimary}"
                     Grid.Column="0"
                     Grid.Row="2"/>
                 <Entry
                     IsPassword="True"
+                    Text="{Binding Pass}"
                     Placeholder="Contraseña"
                     Style="{StaticResource EntryPrimary}"
                     Grid.Column="0"
@@ -50,10 +52,19 @@
                 <Button
                     Style="{StaticResource ButtonPrimary}"
                     Text="Iniciar sesión"
+                    IsVisible="{Binding Boton}"
                     Grid.Column="0"
                     Grid.Row="4"
                     Command="{Binding LogInCommand}"/>
-            </Grid>
+            <StackLayout VerticalOptions="CenterAndExpand"                          
+                         Grid.Column="0"
+                         Grid.Row="4"
+                         IsVisible="{Binding IsLoading}"
+                         HorizontalOptions="CenterAndExpand">
+                <ActivityIndicator IsRunning="{Binding IsLoading}" Color="{DynamicResource PrimaryColor}" />
+                <Label Text="Iniciando Sesion" TextColor="{DynamicResource PrimaryColor}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+        </Grid>
         </ScrollView>
 
 </ContentPage>

@@ -16,6 +16,7 @@ using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -91,6 +92,17 @@ namespace Comandero.ViewModels.Cobro
 
 
         #region methods
+        public static byte[] GetImageBytes(string imageName)
+        {
+            Assembly assembly = typeof(App).GetTypeInfo().Assembly;
+            Stream stream = assembly.GetManifestResourceStream(imageName);
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                stream.CopyTo(ms);
+                return ms.ToArray();
+            }
+        }
         private void imprime()
         {
             const string ESC = "\u001B";
@@ -100,17 +112,21 @@ namespace Comandero.ViewModels.Cobro
             const string BoldOff = ESC + "E" + "\0";
             const string DoubleOn = GS + "!" + "\u0011";  // 2x sized text (double-high + double-wide)
             const string DoubleOff = GS + "!" + "\0";
-            string text = "---------Tacos de asada---------\n";
+            const string CentrarTexto = ESC + "\u0061\u0001";
+            const string Comienzaimagen = ESC + "E\u001b*\u0001";
+            const string terminaimagen = ESC + "E\u001b*\u0001";
+            string text = "";
+
+            text = CentrarTexto + BoldOn + DoubleOn + "Tacos\n" + BoldOff + DoubleOff;
+            text += CentrarTexto + "de\n";
+            text += CentrarTexto + BoldOn + DoubleOn + "Asada\n" + BoldOff + DoubleOff;
+            text += CentrarTexto + "Av. Olímpica 1502A,Paseos del \nMolino, 37290 León, Gto.\n\n\n";
+            text += "--------------------------------";
             foreach (var model in Productos)
             {
                string texto = "";
                string nombreaux = model.Name;
-               nombreaux = nombreaux.Replace("ñ", "n");
-               nombreaux = nombreaux.Replace("á", "a");
-               nombreaux = nombreaux.Replace("í", "i");
-               nombreaux = nombreaux.Replace("ó", "o");
-               nombreaux = nombreaux.Replace("ú", "u");
-               nombreaux = nombreaux.Replace("é", "e");
+
                string cantidadaux = model.Cantidad.ToString();
                string precioauz = model.Total.ToString("0.##");
 
@@ -122,11 +138,23 @@ namespace Comandero.ViewModels.Cobro
                 }
                 texto = cantidadaux + " " + nombreaux + texto + "$" +precioauz;
                 text += texto + "\n";
-            }
-            text += "\n\n";
+            }            
+            text += "--------------------------------";
+            text += "\n" + BoldOff;
+
             string currentaux = CurrentTotal.ToString();
-            text += BoldOn + "Total:  " + currentaux + BoldOff;
+            text += BoldOn + "Total:  " + currentaux + BoldOff + "\n";
+            text += "--------------------------------\n";
+            text += "Propina sugerida:\n";
+            text += "Buen trato(10%):" + (CurrentTotal*(decimal).10).ToString("0") + "\n";
+            text += "Excelente trato(15%):" + (CurrentTotal*(decimal).15).ToString("0") + "\n";
             text += "\n\n\n\n";
+            text = text.Replace("ñ", "n");
+            text = text.Replace("á", "a");
+            text = text.Replace("í", "i");
+            text = text.Replace("ó", "o");
+            text = text.Replace("ú", "u");
+            text = text.Replace("é", "e");
             prn.Imprime(text);
 
         }
@@ -293,7 +321,7 @@ namespace Comandero.ViewModels.Cobro
                     HttpResponseMessage message = await httpClient.PostAsync(SesionModel.Host + query, content);
 
                     await EnviarPlato(productos, "Tick");
-                    imprime();
+                    //imprime();
 
                 }
                 catch (Exception ex)

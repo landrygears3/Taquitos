@@ -54,7 +54,7 @@ namespace Comandero.ViewModels.Cocina
             _connection.On<List<ResumenPlatoModel>, string>("RecibePlato", (list,entrada) =>
             {
 
-                string[] evita = { "Cobro","Cocina" };
+                string[] evita = { "Cocina" };
                 if (!evita.Contains(entrada)) 
                 {
                     llenaPlatos();
@@ -188,6 +188,7 @@ namespace Comandero.ViewModels.Cocina
                             plato.estatus = items.estatus;                               
                             plato.Nombre = items.Name;                                   
                             plato.NombreMesa = items.Namemesa;
+                            plato.NombrePlato = "Plato " + items.Id;
                             plato.idc = items.idc;
                             plato.SelectedItemCommand = new Command(async (item) => await SelectedItemCommandExecute(plato));
                         Platos.Add(plato);
@@ -205,6 +206,7 @@ namespace Comandero.ViewModels.Cocina
                 finally
                 {
                     //httpClient.Dispose();
+                    Thread.Sleep(2000);
                     IsLoading = false;
                     colores();
                 }
@@ -242,7 +244,7 @@ namespace Comandero.ViewModels.Cocina
                     string tipoSalida = itemMenu.NombreMesa.Split(' ')[0];
                     string query = "/Cocina?Id="+itemMenu.Id + "&comanda="+itemMenu.idComanda+"&producto="+itemMenu.idProducto+ "&idc="+itemMenu.idc+ "&tipo="+tipoSalida;
                     HttpResponseMessage message = await httpClient.PostAsync(SesionModel.Host + query,null);
-                    llenaPlatos();
+                    await llenaPlatos();
                     await EnviarPlato(new List<Models.Negociantes.PlatoModel>(), "Tick");
                 }
                 catch (Exception ex)

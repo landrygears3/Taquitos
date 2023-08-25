@@ -14,14 +14,14 @@ namespace Comandero.ViewModels.Home
     {
         public AsyncCommand MenuCommand { get; set; }
         public AsyncCommand KitchenCommand { get; set; }
-        public AsyncCommand CorteCommand { get; set; }
+        //public AsyncCommand CorteCommand { get; set; }
         private HttpClient httpClient;
         public HomeViewModel(INavigationService navigationService) : base(navigationService)
         {
            Title = "Home";
             MenuCommand = new AsyncCommand(MenuCommandExecute);
             KitchenCommand = new AsyncCommand(KitchenCommandExecute);
-            CorteCommand = new AsyncCommand(CorteCommandExecute);
+            //CorteCommand = new AsyncCommand(CorteCommandExecute);
         }
         private async Task MenuCommandExecute()
         {
@@ -53,10 +53,10 @@ namespace Comandero.ViewModels.Home
             }
         }
 
-        private async Task CorteCommandExecute()
-        {
-            await NavigationService.NavigateAsync("TabbedCorte");
-        }
+        //private async Task CorteCommandExecute()
+        //{
+        //    await NavigationService.NavigateAsync("TabbedCorte");
+        //}
 
 
     }

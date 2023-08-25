@@ -67,6 +67,24 @@ namespace Comandero.ViewModels.Menu
             _connection = new HubConnectionBuilder()
            .WithUrl(SesionModel.Host + "/platoHub")
            .Build();
+            _connection.On<List<ResumenPlatoModel>, string>("RecibePlato", (list, entrada) =>
+            {
+                
+                if (entrada.Equals("Comanda"))
+                {
+                    if (list.Count > 0)
+                    {
+                        if (list[0].idMesa == mesa)
+                        {
+                            Device.BeginInvokeOnMainThread(async () =>
+                            {
+                                NavigationParameters param = new NavigationParameters { { "back", false }, { "idPlato", list[0].Id } };
+                                await NavigationService.GoBackAsync(param);
+                            });
+                        }
+                    }
+                }
+            });
         }
 
 
@@ -188,12 +206,7 @@ namespace Comandero.ViewModels.Menu
                 finally
                 {
                     colores();
-                    IsLoading = false;
-                    if(Tipo!="Llevar")
-                    {
-                        await StartAsync();
-                    }
-                    
+                    IsLoading = false;                    
                 }
                 
             });
@@ -240,6 +253,7 @@ namespace Comandero.ViewModels.Menu
         public virtual void OnPageAppearing()
         {
             PageAppearing?.Invoke(this, EventArgs.Empty);
+            StartAsync();
             llenaProductos();
         }
 
@@ -291,6 +305,7 @@ namespace Comandero.ViewModels.Menu
                 if (momdelosubida.Count() > 0)
                 {
                     SesionModel.ParaLlevar.AddRange(momdelosubida);
+
                     NavigationParameters param = new NavigationParameters { { "back", false } };
                     await NavigationService.GoBackAsync(param);
 
@@ -315,7 +330,6 @@ namespace Comandero.ViewModels.Menu
             finally
             {
                 IsLoading = false;
-                await StopAsync();
             }
 
         }
@@ -343,7 +357,6 @@ namespace Comandero.ViewModels.Menu
                 if (momdelosubida.Count() > 0)
                 {
                     EnviarPlato(momdelosubida);
-                    salir = true;
 
                 }
                 else
@@ -366,7 +379,6 @@ namespace Comandero.ViewModels.Menu
             finally
             {
                 IsLoading = false;
-                await StopAsync();
             }
         }
         private async Task MasCommandExecute(object item)
