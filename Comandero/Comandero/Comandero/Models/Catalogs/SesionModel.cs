@@ -16,6 +16,8 @@ namespace Comandero.Models.Catalogs
 
         public static bool status = false;
 
+        public static bool statusImpresion = false;
+
         public static int sucursal = 1;
 
         public static int tipeUser = 1;
@@ -57,6 +59,15 @@ namespace Comandero.Models.Catalogs
                     {
                         status = false;
                         await App.Current.MainPage.DisplayAlert("Atención", "Debe pagar la suscripción", "Aceptar");
+                    }
+
+                    if (data[1].Valor.Equals("True"))
+                    {
+                        statusImpresion = true;
+                    }
+                    else
+                    {
+                        statusImpresion = false;
                     }
                 }
                 // Utiliza los datos recibidos como desees

@@ -61,7 +61,7 @@
         VerticalOptions="FillAndExpand"
         Style="{StaticResource LabelTitle}"/>
         <Renderers:LabelBase
-        Text="{Binding NombreMesa}"
+        Text="{Binding NombreComensal}"
         Grid.Column="1"
         Grid.Row="1"
         Grid.ColumnSpan="1"

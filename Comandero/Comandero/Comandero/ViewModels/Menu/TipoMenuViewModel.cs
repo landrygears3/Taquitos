@@ -83,6 +83,7 @@ namespace Comandero.ViewModels.Menu
                         {
                             //item.Imagen = "Comandero." + item.Imagen;
                             items.SelectedItemCommand = new Command(async (item) => await NavegaPlatoExecute(items));
+                            items.Nombre = items.Nombre.Replace("Quesadilla","QK");
                             Platos.Add(items);
                         }
 

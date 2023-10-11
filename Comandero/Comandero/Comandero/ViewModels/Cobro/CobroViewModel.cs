@@ -37,6 +37,27 @@ namespace Comandero.ViewModels.Cobro
             set { SetProperty(ref _isLoading, value); }
         }
 
+        private bool _llevar;
+
+        public bool Llevar
+        {
+            get { return _llevar; }
+            set { SetProperty(ref _llevar, value); }
+        }
+        private int _rowi;
+
+        public int Rowi
+        {
+            get { return _rowi; }
+            set { SetProperty(ref _rowi, value); }
+        }
+        private int _span;
+
+        public int Epan
+        {
+            get { return _span; }
+            set { SetProperty(ref _span, value); }
+        }
 
         private decimal currentTotal;
 
@@ -44,13 +65,21 @@ namespace Comandero.ViewModels.Cobro
         {
             get { return currentTotal; }
             set { SetProperty(ref currentTotal, value); }
-        }        
+        }
         private string pagorecibido;
 
         public string Pagorecibido
         {
             get { return pagorecibido; }
             set { SetProperty(ref pagorecibido, value); }
+        }
+
+        private string nombreCliente;
+
+        public string NombreCliente
+        {
+            get { return nombreCliente; }
+            set { SetProperty(ref nombreCliente, value); }
         }
 
 
@@ -83,6 +112,9 @@ namespace Comandero.ViewModels.Cobro
             Pagorecibido = "";
             prn.GetDeviceList();
             Title = "Cobro";
+            Rowi = 1;
+            Epan = 2;
+            NombreCliente = "";
             _connection = new HubConnectionBuilder()
                 .WithUrl(SesionModel.Host + "/platoHub")
                 .Build();
@@ -314,6 +346,13 @@ namespace Comandero.ViewModels.Cobro
                     {
                         productos = new List<Models.Negociantes.PlatoModel>();
                     }
+                    else
+                    {
+                        for (int i = 0; i < productos.Count; i++)
+                        {
+                            productos[i].Nombre = NombreCliente;
+                        }
+                    }
                     var jsonData = JsonConvert.SerializeObject(productos);
                     var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
                     httpClient = new HttpClient();
@@ -321,7 +360,16 @@ namespace Comandero.ViewModels.Cobro
                     HttpResponseMessage message = await httpClient.PostAsync(SesionModel.Host + query, content);
 
                     await EnviarPlato(productos, "Tick");
-                    //imprime();
+                    if (SesionModel.statusImpresion)
+                    {
+                       bool resp = await App.Current.MainPage.DisplayAlert("Atención", "¿Desea imprimir el ticket para esta cuenta?", "Si","No");
+                        if (resp)
+                        {
+                            imprime();
+                        }
+
+                    }
+
 
                 }
                 catch (Exception ex)
@@ -386,7 +434,17 @@ namespace Comandero.ViewModels.Cobro
         {
             if(Tipo != "Llevar")
             {
+                Llevar = false;
+                Rowi = 1;
+                Epan = 2; 
                 llenaPlatos();
+            }
+            else
+            {
+                Rowi = 2;
+                Epan = 1;
+                Llevar = true;
+
             }
             StartAsync();
             PageAppearing?.Invoke(this, EventArgs.Empty);

@@ -19,6 +19,7 @@ namespace Comandero.Models.Catalogs
         public decimal subtotal { get; set; }
         public string Nombre { get; set; }
         public string NombrePlato { get; set; }
+        public string NombreComensal { get; set; }
         public int idc { get; set; }
         public Color BgColor { get; set; }
 

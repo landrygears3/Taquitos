@@ -185,8 +185,18 @@ namespace Comandero.ViewModels.Cocina
                             plato.idComanda = items.idComanda;                               
                             plato.idProducto = items.idProducto;                               
                             plato.cantidad = items.cantidad;                               
-                            plato.estatus = items.estatus;                               
-                            plato.Nombre = items.Name;                                   
+                            plato.estatus = items.estatus;
+                            string tipoSalida = items.Namemesa.Split(' ')[0];
+                        if (tipoSalida.Equals("Llevar"))
+                        {
+                            plato.NombreComensal = items.NombreComensal;
+                        }
+                        else
+                        {
+                            plato.NombreComensal = items.Namemesa;
+                        }
+
+                        plato.Nombre = items.Name;                           
                             plato.NombreMesa = items.Namemesa;
                             plato.NombrePlato = "Plato " + items.Id;
                             plato.idc = items.idc;
@@ -206,7 +216,7 @@ namespace Comandero.ViewModels.Cocina
                 finally
                 {
                     //httpClient.Dispose();
-                    Thread.Sleep(2000);
+                    Thread.Sleep(1000);
                     IsLoading = false;
                     colores();
                 }

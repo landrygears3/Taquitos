@@ -104,6 +104,7 @@ namespace Comandero.ViewModels.Menu
                 //Tables.Add(items);                
             }            
             colores();
+            Thread.Sleep(1000);
             IsLoading = false;
         }
         #endregion
